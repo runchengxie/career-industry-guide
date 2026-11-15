@@ -2,6 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import ClaimList from "../../components/ClaimList.astro";
 import MetricList from "../../components/MetricList.astro";
+import Section from "../../components/Section.astro";
 import { verificationLabel } from "../../lib/labels.ts";
 import { loadDataset } from "../../lib/load.ts";
 import { claimBlocks } from "../../lib/support.ts";
@@ -34,16 +35,13 @@ const base = import.meta.env.BASE_URL;
   <h1>{industry.name}</h1>
   <p>{data.meta.sampleNote}</p>
 
-  <section class="section">
-    <h2>定义与口径</h2>
+  <Section id="definition" title="定义与口径">
     <ClaimList claims={industry.definition} sources={data.sources} />
-  </section>
-  <section class="section">
-    <h2>需求证据</h2>
+  </Section>
+  <Section id="demand" title="需求证据">
     <ClaimList claims={industry.demand} sources={data.sources} />
-  </section>
-  <section class="section">
-    <h2>适合岗位</h2>
+  </Section>
+  <Section id="roles" title="适合岗位">
     <ul>
       {
         roles.map((role) => (
@@ -56,55 +54,49 @@ const base = import.meta.env.BASE_URL;
       }
     </ul>
     <p>护理、康复和医疗技术岗位如果出现在招聘材料里，只视为相邻工作，不列入上面的文科岗位。</p>
-  </section>
-  <section class="section">
-    <h2>日常工作概况</h2>
+  </Section>
+  <Section id="daily-work" title="日常工作概况">
     <ClaimList claims={industry.dailyWork} sources={data.sources} />
-  </section>
-  <section class="section">
-    <h2>入口门槛</h2>
+  </Section>
+  <Section id="thresholds" title="入口门槛">
     <ClaimList claims={industry.thresholds} sources={data.sources} />
-  </section>
-  <section class="section">
-    <h2>可做的小作品或技能准备</h2>
+  </Section>
+  <Section id="portfolio" title="可做的小作品或技能准备">
     <ul class="plain">
       {industry.portfolio.map((item) => <li>{item}</li>)}
     </ul>
     <p>这些是练习方向，不是雇主公布的录用条件。</p>
-  </section>
-  <section class="section">
-    <h2>地域与资历限制</h2>
+  </Section>
+  <Section id="geography" title="地域与资历限制">
     <ClaimList claims={industry.geographyLimits} sources={data.sources} />
-  </section>
-  <section class="section">
-    <h2>盈利与稳定性</h2>
+  </Section>
+  <Section id="profit" title="盈利与稳定性">
     <ClaimList claims={industry.profit} sources={data.sources} />
-  </section>
-  <section class="section">
-    <h2>风险</h2>
+  </Section>
+  <Section id="risks" title="风险">
     <ClaimList claims={industry.risks} sources={data.sources} />
-  </section>
-  <section class="section">
-    <h2>尚未证实的问题</h2>
+  </Section>
+  <Section id="questions" title="尚未证实的问题">
     <ul class="plain">
       {industry.openQuestions.map((item) => <li>{item}</li>)}
     </ul>
-  </section>
-  <section class="section">
-    <h2>已录入指标</h2>
+  </Section>
+  <Section id="metrics" title="已录入指标">
     <MetricList metrics={metrics} sources={data.sources} />
-  </section>
-  <section class="section">
-    <h2>来源列表</h2>
+  </Section>
+  <Section id="sources" title="来源列表">
     <ul>
       {
         industrySources.map((source) => (
-            <li>
-              <a href={source.url}>{source.author}：{source.title}</a>
-              <span class="scope">访问日期 {source.accessed}{source.published ? `，公布或发布日期 ${source.published}` : "，材料页没有可靠发布日期"}</span>
-            </li>
-          ))
+          <li>
+            <a href={source.url}>{source.author}：{source.title}</a>
+            <span class="scope">
+              访问日期 {source.accessed}
+              {source.published ? `，公布或发布日期 ${source.published}` : "，材料页没有可靠发布日期"}
+            </span>
+          </li>
+        ))
       }
     </ul>
-  </section>
+  </Section>
 </Base>

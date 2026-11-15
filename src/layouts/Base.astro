@@ -22,7 +22,7 @@ const pageTitle = title === meta.title ? title : `${title} · ${meta.title}`;
     <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.svg`} type="image/svg+xml" />
     <title>{pageTitle}</title>
   </head>
-  <body>
+  <body id="top">
     <a class="skip" href="#content">跳到正文</a>
     <p class="banner">
       <span class="wrap">{meta.disclaimer}网站{meta.publicationStatus}。{meta.verificationLimit}</span>

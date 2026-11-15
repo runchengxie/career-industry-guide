@@ -97,6 +97,7 @@ export interface Industry {
 export interface DirectionOption {
   id: DirectionId;
   label: string;
+  detail: string | null;
 }
 
 export interface Meta {
