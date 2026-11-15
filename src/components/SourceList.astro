@@ -1,0 +1,26 @@
+---
+import type { Source } from "../lib/types";
+
+interface Props {
+  sources: Source[];
+}
+
+const { sources } = Astro.props;
+---
+
+<ul class="source-list">
+  {
+    sources.map((source) => (
+      <li>
+        <p>
+          <a href={source.url}>{source.title}</a>
+        </p>
+        <p class="meta">
+          {source.organization} · {source.date}
+        </p>
+        <p>用于：{source.supports.join("；")}</p>
+        {source.note && <p>{source.note}</p>}
+      </li>
+    ))
+  }
+</ul>

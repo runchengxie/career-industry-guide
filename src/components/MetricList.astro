@@ -1,0 +1,49 @@
+---
+import { metricsByIds, sourcesByIds } from "../lib/catalog";
+import { formatDisplayedValue, natureLabel } from "../lib/format";
+import type { Catalog } from "../lib/types";
+
+interface Props {
+  catalog: Catalog;
+  ids: string[];
+}
+
+const { catalog, ids } = Astro.props;
+const metrics = metricsByIds(catalog, ids);
+---
+
+{
+  metrics.length > 0 && (
+    <ul class="metrics">
+      {metrics.map((metric) => {
+        const sources = sourcesByIds(catalog, metric.sourceIds);
+        const shown = formatDisplayedValue(metric);
+        return (
+          <li class="metric">
+            <p class="metric-name">{metric.name}</p>
+            <p class="metric-value" data-status={metric.status}>
+              {shown}
+              {metric.status === "value" && metric.unit ? metric.unit : ""}
+            </p>
+            {metric.status === "value" && metric.nature && (
+              <p class="meta">
+                {metric.year} · {metric.geography} · {metric.scope} · {natureLabel[metric.nature]}
+              </p>
+            )}
+            {metric.formula && <p>测算：{metric.formula}</p>}
+            {metric.note && <p>{metric.note}</p>}
+            {sources.length > 0 && (
+              <ul>
+                {sources.map((source) => (
+                  <li>
+                    <a href={source.url}>{source.organization}：{source.title}</a>（{source.date}）
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  )
+}

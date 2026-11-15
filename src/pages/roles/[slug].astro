@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SourceList from "../../components/SourceList.astro";
+import { getCatalog, sourcesByIds } from "../../lib/catalog";
+import { verificationLabel } from "../../lib/format";
+import { withBase } from "../../lib/paths";
+
+export function getStaticPaths() {
+  return getCatalog().roles.map((role) => ({ params: { slug: role.slug } }));
+}
+
+const catalog = getCatalog();
+const role = catalog.roles.find((item) => item.slug === Astro.params.slug);
+if (!role) throw new Error(`缺少岗位 ${Astro.params.slug}`);
+const industries = role.industryIds
+  .map((id) => catalog.industries.find((industry) => industry.id === id))
+  .filter((industry) => Boolean(industry));
+const sources = sourcesByIds(catalog, role.sourceIds);
+const verification = role.verification;
+const base = import.meta.env.BASE_URL;
+const linkLabel =
+  verification.status === "verified-posting"
+    ? "已核验的职位链接"
+    : verification.status === "materials-only"
+      ? "材料链接"
+      : "已看到的入口，不是已核验职位";
+---
+
+<BaseLayout title={role.name} description={`${role.name}的工作、准备材料和核验状态。`}>
+  <p class="kicker">岗位 · {verificationLabel[verification.status]}</p>
+  <h1>{role.name}</h1>
+  <p>{role.summary}</p>
+
+  <section class="status">
+    <h2>核验状态</h2>
+    <p>{verificationLabel[verification.status]}</p>
+    {verification.materialNature && <p>材料性质：{verification.materialNature}</p>}
+    <p>{verification.limitation}</p>
+    {verification.employer && <p>材料中的雇主：{verification.employer}</p>}
+    {verification.postingTitle && <p>材料中的标题：{verification.postingTitle}</p>}
+    {verification.verifiedOn && <p>核验日期：{verification.verifiedOn}</p>}
+    {
+      verification.url && (
+        <p>
+          <a href={verification.url}>{linkLabel}</a>
+        </p>
+      )
+    }
+  </section>
+
+  <section>
+    <h2>这个岗位做什么</h2>
+    <ul>
+      {role.dailyWork.map((item) => <li>{item}</li>)}
+    </ul>
+  </section>
+  <section>
+    <h2>常见准备材料</h2>
+    <ul>
+      {role.preparation.map((item) => <li>{item}</li>)}
+    </ul>
+  </section>
+  <section>
+    <h2>出现在哪些样本</h2>
+    <ul>
+      {
+        industries.map((industry) => (
+          <li>
+            <a href={withBase(base, `industries/${industry!.slug}/`)}>{industry!.name}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+  <section>
+    <h2>来源</h2>
+    <SourceList sources={sources} />
+  </section>
+</BaseLayout>

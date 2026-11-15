@@ -1,0 +1,19 @@
+---
+import type { Meta } from "../lib/types";
+import { withBase } from "../lib/paths";
+
+interface Props {
+  meta: Meta;
+}
+
+const { meta } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>研究版本日期：{meta.researchVersionDate}（{meta.timezone}）。尚未正式上线。</p>
+    <p>这是初步研究，不是就业保证，也不是行业排名。公开招聘岗位的活页核验尚未完整。</p>
+    <p><a href={withBase(base, "methods/")}>查看来源、口径和未核实清单</a></p>
+  </div>
+</footer>

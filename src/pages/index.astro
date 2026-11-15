@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Comparison from "../components/Comparison.astro";
+import { getCatalog } from "../lib/catalog";
+
+const catalog = getCatalog();
+---
+
+<BaseLayout
+  title="三个样本对照"
+  description="对照广告营销服务、养老服务和国内旅游服务的需求、岗位入口、风险和证据缺口。这不是行业排名。"
+>
+  <h1>三个样本，放在同一套结构里看</h1>
+  {catalog.meta.intro.map((paragraph) => <p class="lede">{paragraph}</p>)}
+  <Comparison catalog={catalog} />
+</BaseLayout>

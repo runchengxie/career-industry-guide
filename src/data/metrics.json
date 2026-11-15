@@ -1,0 +1,931 @@
+[
+  {
+    "subjectType": "industry",
+    "value": 15464.1,
+    "unit": "亿元",
+    "year": "2024",
+    "geography": "中国大陆",
+    "scope": "全国广告业事业单位和规模以上企业的广告业务收入",
+    "nature": "official",
+    "sourceIds": [
+      "s-samr-2024"
+    ],
+    "formula": null,
+    "note": "不是全体广告主的支出，也不是代理公司利润。",
+    "id": "m-ad-2024-revenue",
+    "subjectId": "advertising",
+    "name": "广告业务收入",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": 17.9,
+    "unit": "%",
+    "year": "2024",
+    "geography": "中国大陆",
+    "scope": "上述事业单位和规模以上企业广告业务收入的同比增速",
+    "nature": "official",
+    "sourceIds": [
+      "s-samr-2024"
+    ],
+    "formula": null,
+    "note": "收入增速不是岗位增速。",
+    "id": "m-ad-2024-growth",
+    "subjectId": "advertising",
+    "name": "广告业务收入较上年增长",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": 86.5,
+    "unit": "%",
+    "year": "2024",
+    "geography": "中国大陆",
+    "scope": "互联网广告发布收入占发布环节总收入的比重",
+    "nature": "official",
+    "sourceIds": [
+      "s-samr-2024"
+    ],
+    "formula": null,
+    "note": "这是发布环节内部结构，不是全行业市场份额。",
+    "id": "m-ad-2024-internet",
+    "subjectId": "advertising",
+    "name": "互联网广告发布收入占发布环节比重",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": 67.6,
+    "unit": "%",
+    "year": "2024",
+    "geography": "中国大陆",
+    "scope": "发布会所述从业人员中本科及以上学历人员占比",
+    "nature": "official",
+    "sourceIds": [
+      "s-samr-2024"
+    ],
+    "formula": null,
+    "note": "这是学历结构，不是从业人员人数，也不能代替文科岗位占比。",
+    "id": "m-ad-2024-degree",
+    "subjectId": "advertising",
+    "name": "本科及以上学历人员占比",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": 20502.1,
+    "unit": "亿元",
+    "year": "2025",
+    "geography": "中国大陆",
+    "scope": "《中国广告业发展指数报告（2026）》新闻稿所称全年广告业务收入",
+    "nature": "official",
+    "sourceIds": [
+      "s-xinhua-2025-ad"
+    ],
+    "formula": null,
+    "note": "新华社稿写的是全年广告业务收入和 32.6% 的增长，没有在同一句重复“事业单位和规模以上企业”。不把 2024 与 2025 写成未经说明的同一句口径。",
+    "id": "m-ad-2025-revenue",
+    "subjectId": "advertising",
+    "name": "广告业务收入",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": 32.6,
+    "unit": "%",
+    "year": "2025",
+    "geography": "中国大陆",
+    "scope": "同一则新闻稿所称全年广告业务收入的同比增速",
+    "nature": "official",
+    "sourceIds": [
+      "s-xinhua-2025-ad"
+    ],
+    "formula": null,
+    "note": "与 2024 年已公布的 15464.1 亿元相比，增幅和 32.6% 相符，但口径限定没有在这则新闻稿里重复。",
+    "id": "m-ad-2025-growth",
+    "subjectId": "advertising",
+    "name": "广告业务收入同比增长",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": "68692672430.48",
+    "unit": "元",
+    "year": "2025",
+    "geography": "蓝色光标合并报表",
+    "scope": "年度报告主要会计数据中的营业收入",
+    "nature": "company-disclosure",
+    "sourceIds": [
+      "s-bluefocus-2025"
+    ],
+    "formula": null,
+    "note": "约 686.93 亿元。其中出海广告投放占营业收入 82.25%，不能当成代理业务的利润规模。",
+    "id": "m-bf-revenue",
+    "subjectId": "advertising",
+    "name": "蓝色光标营业收入",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": "224665777.93",
+    "unit": "元",
+    "year": "2025",
+    "geography": "蓝色光标合并报表",
+    "scope": "归属于上市公司股东的净利润",
+    "nature": "company-disclosure",
+    "sourceIds": [
+      "s-bluefocus-2025"
+    ],
+    "formula": null,
+    "note": "约 2.25 亿元。这是利润表结果，不是广告业务收入。",
+    "id": "m-bf-profit",
+    "subjectId": "advertising",
+    "name": "蓝色光标归母净利润",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": null,
+    "unit": "%",
+    "year": "2025",
+    "geography": "蓝色光标合并报表",
+    "scope": "归母净利润除以营业收入，不是年报单列的净利率",
+    "nature": "self-calculated",
+    "sourceIds": [
+      "s-bluefocus-2025"
+    ],
+    "formula": "归属于上市公司股东的净利润 224,665,777.93 元 ÷ 营业收入 68,692,672,430.48 元",
+    "note": "约 0.327%。收入大部分来自毛利率 1.56% 的出海广告投放，所以这个比率不能写成广告代理业的利润率。",
+    "id": "m-bf-margin",
+    "subjectId": "advertising",
+    "name": "蓝色光标归母净利率",
+    "status": "value",
+    "computed": {
+      "op": "ratio-percent",
+      "numerator": 224665777.93,
+      "denominator": 68692672430.48,
+      "digits": 3
+    }
+  },
+  {
+    "subjectType": "industry",
+    "value": "8658342151.80",
+    "unit": "元",
+    "year": "2025",
+    "geography": "蓝色光标合并报表",
+    "scope": "营业收入构成中的全案推广服务",
+    "nature": "company-disclosure",
+    "sourceIds": [
+      "s-bluefocus-2025"
+    ],
+    "formula": null,
+    "note": "年报写明该业务包括数字营销、公共关系和活动管理。占营业收入比重 12.60%，毛利率 7.55%。",
+    "id": "m-bf-promo-revenue",
+    "subjectId": "advertising",
+    "name": "蓝色光标全案推广服务收入",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": 7.55,
+    "unit": "%",
+    "year": "2025",
+    "geography": "蓝色光标合并报表",
+    "scope": "全案推广服务的毛利率",
+    "nature": "company-disclosure",
+    "sourceIds": [
+      "s-bluefocus-2025"
+    ],
+    "formula": null,
+    "note": null,
+    "id": "m-bf-promo-margin",
+    "subjectId": "advertising",
+    "name": "蓝色光标全案推广服务毛利率",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": "3538651888.66",
+    "unit": "元",
+    "year": "2025",
+    "geography": "蓝色光标合并报表",
+    "scope": "营业收入构成中的全案广告代理",
+    "nature": "company-disclosure",
+    "sourceIds": [
+      "s-bluefocus-2025"
+    ],
+    "formula": null,
+    "note": "占营业收入比重 5.15%，毛利率 7.79%。",
+    "id": "m-bf-agency-revenue",
+    "subjectId": "advertising",
+    "name": "蓝色光标全案广告代理收入",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": 7.79,
+    "unit": "%",
+    "year": "2025",
+    "geography": "蓝色光标合并报表",
+    "scope": "全案广告代理的毛利率",
+    "nature": "company-disclosure",
+    "sourceIds": [
+      "s-bluefocus-2025"
+    ],
+    "formula": null,
+    "note": null,
+    "id": "m-bf-agency-margin",
+    "subjectId": "advertising",
+    "name": "蓝色光标全案广告代理毛利率",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": "56495678390.02",
+    "unit": "元",
+    "year": "2025",
+    "geography": "蓝色光标合并报表",
+    "scope": "营业收入构成中的出海广告投放",
+    "nature": "company-disclosure",
+    "sourceIds": [
+      "s-bluefocus-2025"
+    ],
+    "formula": null,
+    "note": "占营业收入比重 82.25%，毛利率 1.56%。投放收入权重大、毛利薄。",
+    "id": "m-bf-overseas-revenue",
+    "subjectId": "advertising",
+    "name": "蓝色光标出海广告投放收入",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": 1.56,
+    "unit": "%",
+    "year": "2025",
+    "geography": "蓝色光标合并报表",
+    "scope": "出海广告投放的毛利率",
+    "nature": "company-disclosure",
+    "sourceIds": [
+      "s-bluefocus-2025"
+    ],
+    "formula": null,
+    "note": null,
+    "id": "m-bf-overseas-margin",
+    "subjectId": "advertising",
+    "name": "蓝色光标出海广告投放毛利率",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": null,
+    "unit": null,
+    "year": null,
+    "geography": null,
+    "scope": null,
+    "nature": null,
+    "sourceIds": [],
+    "formula": null,
+    "note": "没有找到可公开复核的广告营销岗位薪资口径。",
+    "id": "m-ad-salary",
+    "subjectId": "advertising",
+    "name": "可靠薪资",
+    "status": "unavailable"
+  },
+  {
+    "subjectType": "industry",
+    "value": null,
+    "unit": null,
+    "year": null,
+    "geography": null,
+    "scope": null,
+    "nature": null,
+    "sourceIds": [],
+    "formula": null,
+    "note": "没有可靠的 CR 或 HHI 口径，因此不写集中度数字。",
+    "id": "m-ad-concentration",
+    "subjectId": "advertising",
+    "name": "官方集中度",
+    "status": "unavailable"
+  },
+  {
+    "subjectType": "industry",
+    "value": null,
+    "unit": null,
+    "year": null,
+    "geography": null,
+    "scope": null,
+    "nature": null,
+    "sourceIds": [],
+    "formula": null,
+    "note": "发布会有学历占比和园区就业的个别表述，但没有本站可以连续引用的全行业从业人数时序。",
+    "id": "m-ad-employment-series",
+    "subjectId": "advertising",
+    "name": "从业人员完整时序",
+    "status": "unavailable"
+  },
+  {
+    "subjectType": "industry",
+    "value": 32338,
+    "unit": "万人",
+    "year": "2025",
+    "geography": "全国",
+    "scope": "2025年末60周岁及以上人口",
+    "nature": "official",
+    "sourceIds": [
+      "s-nbs-2025"
+    ],
+    "formula": null,
+    "note": "人口规模不是岗位数量，也不是养老服务营业收入。",
+    "id": "m-pop-2025",
+    "subjectId": "elderly-care",
+    "name": "60周岁及以上人口",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": "23.0",
+    "unit": "%",
+    "year": "2025",
+    "geography": "全国",
+    "scope": "60周岁及以上人口占全国人口的比重。公报表中为 23.0",
+    "nature": "official",
+    "sourceIds": [
+      "s-nbs-2025"
+    ],
+    "formula": null,
+    "note": null,
+    "id": "m-pop-share-2025",
+    "subjectId": "elderly-care",
+    "name": "60周岁及以上人口比重",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": 3.9,
+    "unit": "万个",
+    "year": "2025",
+    "geography": "全国",
+    "scope": "各类提供住宿的民政服务机构中的养老机构",
+    "nature": "official",
+    "sourceIds": [
+      "s-nbs-2025"
+    ],
+    "formula": null,
+    "note": "不是社区养老服务设施的合计数。",
+    "id": "m-inst-2025",
+    "subjectId": "elderly-care",
+    "name": "提供住宿的养老机构",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": "768.0",
+    "unit": "万张",
+    "year": "2025",
+    "geography": "全国",
+    "scope": "民政服务床位中的养老服务床位。公报为 768.0 万张",
+    "nature": "official",
+    "sourceIds": [
+      "s-nbs-2025"
+    ],
+    "formula": null,
+    "note": null,
+    "id": "m-beds-2025",
+    "subjectId": "elderly-care",
+    "name": "养老服务床位",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": "4.0",
+    "unit": "万个",
+    "year": "2024",
+    "geography": "全国",
+    "scope": "各类提供住宿的民政服务机构中的养老机构。公报为 4.0 万个",
+    "nature": "official",
+    "sourceIds": [
+      "s-nbs-2024"
+    ],
+    "formula": null,
+    "note": null,
+    "id": "m-inst-2024",
+    "subjectId": "elderly-care",
+    "name": "提供住宿的养老机构",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": 799.1,
+    "unit": "万张",
+    "year": "2024",
+    "geography": "全国",
+    "scope": "民政服务床位中的养老服务床位",
+    "nature": "official",
+    "sourceIds": [
+      "s-nbs-2024"
+    ],
+    "formula": null,
+    "note": null,
+    "id": "m-beds-2024",
+    "subjectId": "elderly-care",
+    "name": "养老服务床位",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": null,
+    "unit": "万张",
+    "year": "2024-2025",
+    "geography": "全国",
+    "scope": "两年统计公报中养老服务床位的差",
+    "nature": "self-calculated",
+    "sourceIds": [
+      "s-nbs-2024",
+      "s-nbs-2025"
+    ],
+    "formula": "2025年768.0万张 − 2024年799.1万张",
+    "note": "负号表示减少。机构数从 4.0 万个变为 3.9 万个，原数只公布到 0.1 万，本版不再换算成精确百分比。减少原因尚未证实。",
+    "id": "m-beds-diff",
+    "subjectId": "elderly-care",
+    "name": "养老服务床位较上年变化",
+    "status": "value",
+    "computed": {
+      "op": "subtract-tenths",
+      "a": 7680,
+      "b": 7991
+    }
+  },
+  {
+    "subjectType": "industry",
+    "value": null,
+    "unit": null,
+    "year": null,
+    "geography": null,
+    "scope": null,
+    "nature": null,
+    "sourceIds": [],
+    "formula": null,
+    "note": "没有采用未经官方公布的全行业营业收入。",
+    "id": "m-elder-revenue",
+    "subjectId": "elderly-care",
+    "name": "全国养老服务营业收入",
+    "status": "unavailable"
+  },
+  {
+    "subjectType": "industry",
+    "value": null,
+    "unit": null,
+    "year": null,
+    "geography": null,
+    "scope": null,
+    "nature": null,
+    "sourceIds": [],
+    "formula": null,
+    "note": "校园招聘材料只写有竞争力的薪酬，没有可复核的工资金额。",
+    "id": "m-elder-salary",
+    "subjectId": "elderly-care",
+    "name": "可靠薪资",
+    "status": "unavailable"
+  },
+  {
+    "subjectType": "industry",
+    "value": null,
+    "unit": null,
+    "year": null,
+    "geography": null,
+    "scope": null,
+    "nature": null,
+    "sourceIds": [],
+    "formula": null,
+    "note": "没有把服务人数近似为在住人数，因此不展示使用率。",
+    "id": "m-elder-occupancy",
+    "subjectId": "elderly-care",
+    "name": "床位使用率",
+    "status": "unavailable"
+  },
+  {
+    "subjectType": "industry",
+    "value": null,
+    "unit": null,
+    "year": null,
+    "geography": null,
+    "scope": null,
+    "nature": null,
+    "sourceIds": [],
+    "formula": null,
+    "note": "两年公报可以对照数量，不能从数量本身推出原因。",
+    "id": "m-elder-decline-reason",
+    "subjectId": "elderly-care",
+    "name": "机构和床位减少的原因",
+    "status": "unverified"
+  },
+  {
+    "subjectType": "industry",
+    "value": null,
+    "unit": null,
+    "year": null,
+    "geography": null,
+    "scope": null,
+    "nature": null,
+    "sourceIds": [],
+    "formula": null,
+    "note": "没有可靠的集中度口径。",
+    "id": "m-elder-concentration",
+    "subjectId": "elderly-care",
+    "name": "官方集中度",
+    "status": "unavailable"
+  },
+  {
+    "subjectType": "industry",
+    "value": 56.15,
+    "unit": "亿人次",
+    "year": "2024",
+    "geography": "中国大陆",
+    "scope": "国内旅游抽样调查中的国内出游人次",
+    "nature": "official",
+    "sourceIds": [
+      "s-mct-2024"
+    ],
+    "formula": null,
+    "note": null,
+    "id": "m-mct-2024-visits",
+    "subjectId": "domestic-tourism",
+    "name": "国内出游人次",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": 5.75,
+    "unit": "万亿元",
+    "year": "2024",
+    "geography": "中国大陆",
+    "scope": "国内游客出游总花费",
+    "nature": "official",
+    "sourceIds": [
+      "s-mct-2024"
+    ],
+    "formula": null,
+    "note": "不是旅行社收入，也不是景区收入。",
+    "id": "m-mct-2024-spend",
+    "subjectId": "domestic-tourism",
+    "name": "国内游客出游总花费",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": 65.22,
+    "unit": "亿人次",
+    "year": "2025",
+    "geography": "中国大陆",
+    "scope": "国内居民出游抽样调查中的出游人次",
+    "nature": "official",
+    "sourceIds": [
+      "s-mct-2025"
+    ],
+    "formula": null,
+    "note": null,
+    "id": "m-mct-2025-visits",
+    "subjectId": "domestic-tourism",
+    "name": "国内居民出游人次",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": "6.30",
+    "unit": "万亿元",
+    "year": "2025",
+    "geography": "中国大陆",
+    "scope": "国内居民出游花费。发布页写 6.30 万亿元",
+    "nature": "official",
+    "sourceIds": [
+      "s-mct-2025"
+    ],
+    "formula": null,
+    "note": "不是旅行社或景区收入。",
+    "id": "m-mct-2025-spend",
+    "subjectId": "domestic-tourism",
+    "name": "国内居民出游花费",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": 65.2,
+    "unit": "亿人次",
+    "year": "2025",
+    "geography": "全国",
+    "scope": "国民经济和社会发展统计公报中的国内出游人次",
+    "nature": "official",
+    "sourceIds": [
+      "s-nbs-2025"
+    ],
+    "formula": null,
+    "note": "与文旅部 65.22 亿人次并列，不平均。",
+    "id": "m-nbs-2025-visits",
+    "subjectId": "domestic-tourism",
+    "name": "国内出游人次（统计公报）",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": 63003,
+    "unit": "亿元",
+    "year": "2025",
+    "geography": "全国",
+    "scope": "统计公报中的国内游客出游总花费",
+    "nature": "official",
+    "sourceIds": [
+      "s-nbs-2025"
+    ],
+    "formula": null,
+    "note": "与文旅部 6.30 万亿元的发布并列。6.30 万亿元等于 63000 亿元，公报为 63003 亿元。",
+    "id": "m-nbs-2025-spend",
+    "subjectId": "domestic-tourism",
+    "name": "国内游客出游总花费（统计公报）",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": null,
+    "unit": "元/人次",
+    "year": "2024",
+    "geography": "中国大陆",
+    "scope": "文旅部2024年出游总花费除以出游人次",
+    "nature": "self-calculated",
+    "sourceIds": [
+      "s-mct-2024"
+    ],
+    "formula": "5.75万亿元 = 57500亿元；57500亿 ÷ 56.15亿人次",
+    "note": "不是官方公布的人均指标。",
+    "id": "m-per-trip-2024",
+    "subjectId": "domestic-tourism",
+    "name": "国内旅游人均单次花费",
+    "status": "value",
+    "computed": {
+      "op": "divide",
+      "numerator": 57500,
+      "denominator": 56.15,
+      "digits": 2
+    }
+  },
+  {
+    "subjectType": "industry",
+    "value": null,
+    "unit": "元/人次",
+    "year": "2025",
+    "geography": "中国大陆",
+    "scope": "文旅部2025年出游花费除以出游人次",
+    "nature": "self-calculated",
+    "sourceIds": [
+      "s-mct-2025"
+    ],
+    "formula": "6.30万亿元 = 63000亿元；63000亿 ÷ 65.22亿人次",
+    "note": "不是官方公布的人均指标。不使用统计公报的四舍五入数做这道除法。",
+    "id": "m-per-trip-2025",
+    "subjectId": "domestic-tourism",
+    "name": "国内旅游人均单次花费",
+    "status": "value",
+    "computed": {
+      "op": "divide",
+      "numerator": 63000,
+      "denominator": 65.22,
+      "digits": 2
+    }
+  },
+  {
+    "subjectType": "industry",
+    "value": null,
+    "unit": "%",
+    "year": "2024-2025",
+    "geography": "中国大陆",
+    "scope": "上述两个自行测算的人均单次花费之间的变化",
+    "nature": "self-calculated",
+    "sourceIds": [
+      "s-mct-2024",
+      "s-mct-2025"
+    ],
+    "formula": "（2025年人均单次花费 − 2024年人均单次花费）÷ 2024年人均单次花费。两年人均都由文旅部对应发布的花费除以人次得到",
+    "note": "下降不是官方直接公布的结论。游客总花费上升，与单次花费下降可以同时成立。",
+    "id": "m-per-trip-change",
+    "subjectId": "domestic-tourism",
+    "name": "人均单次花费变化",
+    "status": "value",
+    "computed": {
+      "op": "percent-change-of-quotients",
+      "numerator": 63000,
+      "denominator": 65.22,
+      "previousNumerator": 57500,
+      "previousDenominator": 56.15,
+      "digits": 2
+    }
+  },
+  {
+    "subjectType": "industry",
+    "value": "2257598020.98",
+    "unit": "元",
+    "year": "2025",
+    "geography": "宋城演艺合并报表",
+    "scope": "年度报告主要会计数据中的营业收入",
+    "nature": "company-disclosure",
+    "sourceIds": [
+      "s-songcheng-2025"
+    ],
+    "formula": null,
+    "note": "约 22.58 亿元。年报列明比上年减少 6.61%。这不是全行业收入。",
+    "id": "m-song-revenue",
+    "subjectId": "domestic-tourism",
+    "name": "宋城演艺营业收入",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": -6.61,
+    "unit": "%",
+    "year": "2025",
+    "geography": "宋城演艺合并报表",
+    "scope": "营业收入本年比上年增减",
+    "nature": "company-disclosure",
+    "sourceIds": [
+      "s-songcheng-2025"
+    ],
+    "formula": null,
+    "note": null,
+    "id": "m-song-growth",
+    "subjectId": "domestic-tourism",
+    "name": "宋城演艺营业收入同比",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": "6822470326.84",
+    "unit": "元",
+    "year": "2025",
+    "geography": "众信旅游合并报表",
+    "scope": "年度报告主要会计数据中的营业收入",
+    "nature": "company-disclosure",
+    "sourceIds": [
+      "s-utour-2025"
+    ],
+    "formula": null,
+    "note": "约 68.22 亿元，年报列明同比增长 5.69%。",
+    "id": "m-utour-revenue",
+    "subjectId": "domestic-tourism",
+    "name": "众信旅游营业收入",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": 5.69,
+    "unit": "%",
+    "year": "2025",
+    "geography": "众信旅游合并报表",
+    "scope": "营业收入本年比上年增减",
+    "nature": "company-disclosure",
+    "sourceIds": [
+      "s-utour-2025"
+    ],
+    "formula": null,
+    "note": null,
+    "id": "m-utour-growth",
+    "subjectId": "domestic-tourism",
+    "name": "众信旅游营业收入同比",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": "7058705.16",
+    "unit": "元",
+    "year": "2025",
+    "geography": "众信旅游合并报表",
+    "scope": "归属于上市公司股东的净利润",
+    "nature": "company-disclosure",
+    "sourceIds": [
+      "s-utour-2025"
+    ],
+    "formula": null,
+    "note": "约 705.87 万元。年报列明同比减少 93.34%。",
+    "id": "m-utour-profit",
+    "subjectId": "domestic-tourism",
+    "name": "众信旅游归母净利润",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": -93.34,
+    "unit": "%",
+    "year": "2025",
+    "geography": "众信旅游合并报表",
+    "scope": "归属于上市公司股东的净利润本年比上年增减",
+    "nature": "company-disclosure",
+    "sourceIds": [
+      "s-utour-2025"
+    ],
+    "formula": null,
+    "note": "一家旅行社的利润下降不能写成国内旅游全行业利润下降。",
+    "id": "m-utour-profit-growth",
+    "subjectId": "domestic-tourism",
+    "name": "众信旅游归母净利润同比",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": 624,
+    "unit": "亿元人民币",
+    "year": "2025",
+    "geography": "携程集团",
+    "scope": "2025年全年净营业收入。业绩公告以亿元计，并写明未经审计",
+    "nature": "company-disclosure",
+    "sourceIds": [
+      "s-trip-2025"
+    ],
+    "formula": null,
+    "note": "公告同时写同比上升 17%。这不是国内游客花费，也不是旅行社全行业收入。",
+    "id": "m-trip-net-revenue",
+    "subjectId": "domestic-tourism",
+    "name": "携程净营业收入",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": 17,
+    "unit": "%",
+    "year": "2025",
+    "geography": "携程集团",
+    "scope": "全年净营业收入同比上升幅度，业绩公告以整数百分比写出",
+    "nature": "company-disclosure",
+    "sourceIds": [
+      "s-trip-2025"
+    ],
+    "formula": null,
+    "note": null,
+    "id": "m-trip-growth",
+    "subjectId": "domestic-tourism",
+    "name": "携程净营业收入同比",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": 199,
+    "unit": "亿元人民币",
+    "year": "2025",
+    "geography": "携程集团",
+    "scope": "全年包含在其他（支出）/收入中的投资利得",
+    "nature": "company-disclosure",
+    "sourceIds": [
+      "s-trip-2025"
+    ],
+    "formula": null,
+    "note": "公告用这笔利得说明净利润同比增加。净利润增加不等于主业经营利润同幅度增加。公告未经审计。",
+    "id": "m-trip-invest-gain",
+    "subjectId": "domestic-tourism",
+    "name": "携程投资利得",
+    "status": "value"
+  },
+  {
+    "subjectType": "industry",
+    "value": null,
+    "unit": null,
+    "year": null,
+    "geography": null,
+    "scope": null,
+    "nature": null,
+    "sourceIds": [],
+    "formula": null,
+    "note": "没有找到可公开复核的旅游岗位薪资口径。",
+    "id": "m-tour-salary",
+    "subjectId": "domestic-tourism",
+    "name": "可靠薪资",
+    "status": "unavailable"
+  },
+  {
+    "subjectType": "industry",
+    "value": null,
+    "unit": null,
+    "year": null,
+    "geography": null,
+    "scope": null,
+    "nature": null,
+    "sourceIds": [],
+    "formula": null,
+    "note": "没有可靠的全国旅行社或景区岗位人数结构。",
+    "id": "m-tour-employment",
+    "subjectId": "domestic-tourism",
+    "name": "旅行社与景区用工结构",
+    "status": "unavailable"
+  },
+  {
+    "subjectType": "industry",
+    "value": null,
+    "unit": null,
+    "year": null,
+    "geography": null,
+    "scope": null,
+    "nature": null,
+    "sourceIds": [],
+    "formula": null,
+    "note": "没有可靠的集中度口径。",
+    "id": "m-tour-concentration",
+    "subjectId": "domestic-tourism",
+    "name": "官方集中度",
+    "status": "unavailable"
+  }
+]

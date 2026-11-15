@@ -1,0 +1,32 @@
+{
+  "researchVersionDate": "2026-11-15",
+  "timezone": "Asia/Shanghai",
+  "locale": "zh-CN",
+  "siteName": "职业行业研究指南",
+  "intro": [
+    "这里把广告营销服务、养老服务、国内旅游服务放在同一套结构里对照。三个样本用来看需求从哪里来、文科背景可能从哪进、钱和稳定性靠什么，以及证据停在哪一步。",
+    "这不是最佳行业名单，也不是十个行业中的前三名。行业收入在增长，不能直接写成更好找工作。本站不打分，不排名，也不保证录用。"
+  ],
+  "directions": [
+    {
+      "id": "all",
+      "label": "全部",
+      "description": "显示已录入的三个样本"
+    },
+    {
+      "id": "marketing",
+      "label": "营销传播",
+      "description": "客户执行、策略、公关、活动、内容、品牌宣传等"
+    },
+    {
+      "id": "social-service",
+      "label": "社会服务与社区活动",
+      "description": "社工、文娱活动、生活管家、社区运营等"
+    },
+    {
+      "id": "destination",
+      "label": "目的地与旅游产品",
+      "description": "目的地运营、旅游产品策划、景区营销、旅游内容等"
+    }
+  ]
+}

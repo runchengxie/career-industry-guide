@@ -1,0 +1,35 @@
+---
+import "../styles/global.css";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import NoticeBanner from "../components/NoticeBanner.astro";
+import { getCatalog } from "../lib/catalog";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const { meta } = getCatalog();
+const base = import.meta.env.BASE_URL;
+---
+
+<html lang={meta.locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} · {meta.siteName}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="skip" href="#main">跳到主要内容</a>
+    <SiteHeader siteName={meta.siteName} />
+    <NoticeBanner />
+    <main id="main" class="wrap">
+      <slot />
+    </main>
+    <SiteFooter meta={meta} />
+  </body>
+</html>

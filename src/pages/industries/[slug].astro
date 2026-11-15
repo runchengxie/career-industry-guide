@@ -1,0 +1,117 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import MetricList from "../../components/MetricList.astro";
+import Prose from "../../components/Prose.astro";
+import SourceList from "../../components/SourceList.astro";
+import { getCatalog, rolesForIndustry, sourcesForIndustry } from "../../lib/catalog";
+import { withBase } from "../../lib/paths";
+
+export function getStaticPaths() {
+  return getCatalog().industries.map((industry) => ({ params: { slug: industry.slug } }));
+}
+
+const catalog = getCatalog();
+const industry = catalog.industries.find((item) => item.slug === Astro.params.slug);
+if (!industry) throw new Error(`缺少行业 ${Astro.params.slug}`);
+const roles = rolesForIndustry(catalog, industry.id);
+const sources = sourcesForIndustry(catalog, industry);
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title={industry.name} description={`${industry.name}的定义、需求证据、岗位入口、风险和来源。`}>
+  <p class="kicker">行业样本 · 不是排名</p>
+  <h1>{industry.name}</h1>
+
+  <section>
+    <h2>定义与口径</h2>
+    <Prose paragraphs={industry.definition} />
+  </section>
+  <section>
+    <h2>需求证据</h2>
+    <Prose paragraphs={industry.demand} />
+    <MetricList catalog={catalog} ids={industry.metricIds.demand} />
+  </section>
+  <section>
+    <h2>适合岗位</h2>
+    <ul>
+      {
+        roles.map((role) => (
+          <li>
+            <a href={withBase(base, `roles/${role.slug}/`)}>{role.name}</a>
+            <span class="meta"> · {role.summary}</span>
+          </li>
+        ))
+      }
+    </ul>
+    {
+      industry.adjacentRoles.length > 0 && (
+        <>
+          <h3>相邻而非对口</h3>
+          {industry.adjacentRoles.map((role) => (
+            <p>
+              <strong>{role.name}。</strong>
+              {role.note}
+            </p>
+          ))}
+        </>
+      )
+    }
+  </section>
+  <section>
+    <h2>日常工作概况</h2>
+    <Prose paragraphs={industry.dailyWork} />
+  </section>
+  <section>
+    <h2>入口门槛</h2>
+    <Prose paragraphs={industry.entry} />
+    <MetricList catalog={catalog} ids={industry.metricIds.entry} />
+  </section>
+  <section>
+    <h2>可做的小作品或技能准备</h2>
+    <Prose paragraphs={industry.portfolio} />
+  </section>
+  <section>
+    <h2>地域与资历限制</h2>
+    <Prose paragraphs={industry.geographyLimits} />
+  </section>
+  <section>
+    <h2>盈利与稳定性</h2>
+    <Prose paragraphs={industry.profitability} />
+    <MetricList catalog={catalog} ids={industry.metricIds.profit} />
+  </section>
+  <section>
+    <h2>证据和判断分开写</h2>
+    {
+      industry.inferences.map((inference) => (
+        <article class="split">
+          <div class="evidence">
+            <h3>证据 · {inference.topic}</h3>
+            <p>{inference.evidence}</p>
+          </div>
+          <div class="judgment">
+            <h3>判断</h3>
+            <p>{inference.judgment}</p>
+          </div>
+        </article>
+      ))
+    }
+  </section>
+  <section>
+    <h2>风险</h2>
+    <ul>
+      {industry.risks.map((risk) => <li>{risk}</li>)}
+    </ul>
+  </section>
+  <section>
+    <h2>尚未证实的问题</h2>
+    <ul>
+      {industry.openQuestions.map((question) => <li>{question}</li>)}
+    </ul>
+    <MetricList catalog={catalog} ids={industry.metricIds.gaps} />
+  </section>
+  <section>
+    <h2>来源列表</h2>
+    <p>下面只列本页用到的来源，并写明它支持什么。</p>
+    <SourceList sources={sources} />
+  </section>
+</BaseLayout>

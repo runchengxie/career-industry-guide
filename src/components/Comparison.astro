@@ -1,0 +1,171 @@
+---
+import MetricList from "./MetricList.astro";
+import { directionsForIndustry, rolesForIndustry } from "../lib/catalog";
+import { withBase } from "../lib/paths";
+import type { Catalog } from "../lib/types";
+
+interface Props {
+  catalog: Catalog;
+}
+
+const { catalog } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const rows = [
+  { key: "definition", label: "行业定义" },
+  { key: "demand", label: "需求证据" },
+  { key: "roles", label: "适合的文科岗位" },
+  { key: "entry", label: "入口与地域限制" },
+  { key: "profit", label: "盈利与稳定性" },
+  { key: "risks", label: "主要风险" },
+  { key: "gaps", label: "证据缺口" },
+] as const;
+
+function directions(industryId: string): string {
+  return directionsForIndustry(catalog, industryId);
+}
+---
+
+<div data-comparison>
+  <form data-direction-filter>
+    <fieldset>
+      <legend>按岗位方向筛选</legend>
+      <div class="choices">
+        {
+          catalog.meta.directions.map((direction) => (
+            <label>
+              <input
+                type="radio"
+                name="direction"
+                value={direction.id}
+                checked={direction.id === "all"}
+              />
+              <span>
+                <span class="choice-label">{direction.label}</span>
+                <span class="meta"> {direction.description}</span>
+              </span>
+            </label>
+          ))
+        }
+      </div>
+    </fieldset>
+  </form>
+  <p class="script-note">未启用脚本时，下面显示全部三个样本。筛选只隐藏没有该方向岗位的行业，不会补写岗位。</p>
+  <p data-empty-state hidden>
+    当前方向在已录入的三个样本中没有匹配岗位。
+    <button type="button" data-reset-direction>恢复全部</button>
+  </p>
+
+  <div class="table-wrap" data-board>
+    <table>
+      <caption>三个样本对照。从左到右是录入顺序，不是名次，也没有总分。</caption>
+      <thead>
+        <tr>
+          <th scope="col">维度</th>
+          {
+            catalog.industries.map((industry) => (
+              <th scope="col" data-industry={industry.id} data-directions={directions(industry.id)}>
+                <a href={withBase(base, `industries/${industry.slug}/`)}>{industry.name}</a>
+              </th>
+            ))
+          }
+        </tr>
+      </thead>
+      <tbody>
+        {
+          rows.map((row) => (
+            <tr>
+              <th scope="row">{row.label}</th>
+              {catalog.industries.map((industry) => (
+                <td data-industry={industry.id} data-directions={directions(industry.id)}>
+                  {row.key === "roles" ? (
+                    <ul class="plain-list">
+                      {rolesForIndustry(catalog, industry.id).map((role) => (
+                        <li>
+                          <a
+                            data-role
+                            data-direction={role.directionId}
+                            data-industry={industry.id}
+                            href={withBase(base, `roles/${role.slug}/`)}
+                          >
+                            {role.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>{industry.comparison[row.key]}</p>
+                  )}
+                  {row.key === "demand" && <MetricList catalog={catalog} ids={industry.metricIds.demand} />}
+                  {row.key === "profit" && <MetricList catalog={catalog} ids={industry.metricIds.profit} />}
+                  {row.key === "gaps" && <MetricList catalog={catalog} ids={industry.metricIds.gaps} />}
+                </td>
+              ))}
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cards" data-board>
+    {
+      catalog.industries.map((industry) => (
+        <article class="card" data-industry={industry.id} data-directions={directions(industry.id)}>
+          <h2>
+            <a href={withBase(base, `industries/${industry.slug}/`)}>{industry.name}</a>
+          </h2>
+          <dl>
+            {rows.map((row) => (
+              <>
+                <dt>{row.label}</dt>
+                <dd>
+                  {row.key === "roles" ? (
+                    <ul class="plain-list">
+                      {rolesForIndustry(catalog, industry.id).map((role) => (
+                        <li>
+                          <a
+                            data-role
+                            data-direction={role.directionId}
+                            data-industry={industry.id}
+                            href={withBase(base, `roles/${role.slug}/`)}
+                          >
+                            {role.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>{industry.comparison[row.key]}</p>
+                  )}
+                  {row.key === "demand" && <MetricList catalog={catalog} ids={industry.metricIds.demand} />}
+                  {row.key === "profit" && <MetricList catalog={catalog} ids={industry.metricIds.profit} />}
+                  {row.key === "gaps" && <MetricList catalog={catalog} ids={industry.metricIds.gaps} />}
+                </dd>
+              </>
+            ))}
+          </dl>
+        </article>
+      ))
+    }
+  </div>
+
+  <section data-match-list hidden>
+    <h2>这个方向下已录入的岗位</h2>
+    <ul>
+      {
+        catalog.roles.map((role) => (
+          <li>
+            <a data-role data-direction={role.directionId} href={withBase(base, `roles/${role.slug}/`)}>
+              {role.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</div>
+
+<script>
+  import { initDirectionFilter } from "../scripts/filter-client";
+  initDirectionFilter();
+</script>

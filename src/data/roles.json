@@ -1,0 +1,345 @@
+[
+  {
+    "id": "client-execution",
+    "slug": "client-execution",
+    "name": "客户执行",
+    "directionId": "marketing",
+    "industryIds": ["advertising"],
+    "summary": "对接客户需求，把策略、内容和投放安排推进到可交付的项目。蓝色光标年报把全案广告代理和出海广告投放写成公司业务，没有列出正在招聘的客户执行职位。",
+    "dailyWork": [
+      "理解客户简报，整理目标、预算和限制。",
+      "协调创意、媒介和数据同事，跟踪排期与修改。",
+      "用案例说明项目做了什么、改了什么，而不是只报行业增长。"
+    ],
+    "preparation": [
+      "一份能看懂目标受众的活动或传播案例，写清角色和结果来源。",
+      "实习或课程项目中的简报、排期和复盘。没有结果数据时就写明没有。"
+    ],
+    "sourceIds": ["s-bluefocus-2025"],
+    "verification": {
+      "status": "materials-only",
+      "materialNature": "上市公司2025年年度报告中的业务构成，不是在招职位活页。",
+      "limitation": "年报说明公司提供全案广告代理和广告投放服务，不能写成蓝色光标正在招聘客户执行，也没有雇主、职位原文和核验日期。",
+      "employer": null,
+      "postingTitle": null,
+      "url": "https://pdf.dfcfw.com/pdf/H2_AN202604151821244424_1.pdf",
+      "verifiedOn": null
+    }
+  },
+  {
+    "id": "strategy",
+    "slug": "strategy",
+    "name": "策略",
+    "directionId": "marketing",
+    "industryIds": ["advertising"],
+    "summary": "把消费者洞察转成可执行的传播或投放策略。年报描述了洞察、策略制定和营销分析服务，没有核验到具体策略岗位的招聘页。",
+    "dailyWork": [
+      "阅读简报和现有材料，区分事实、假设和待核实问题。",
+      "提出受众、信息和渠道上的选择，并说明取舍。",
+      "把策略交给执行、创意或媒介同事，而不是停在口号。"
+    ],
+    "preparation": [
+      "一篇短策略备忘录：对象是谁、要改变什么、证据从哪来、缺什么数据。",
+      "避免把行业规模直接写成客户一定增加预算。"
+    ],
+    "sourceIds": ["s-bluefocus-2025"],
+    "verification": {
+      "status": "materials-only",
+      "materialNature": "上市公司年报对洞察、策略和营销分析的业务描述。",
+      "limitation": "业务描述不是职位广告。截至 2026-11-15，没有完成策略岗位的官网活页核验。",
+      "employer": null,
+      "postingTitle": null,
+      "url": "https://pdf.dfcfw.com/pdf/H2_AN202604151821244424_1.pdf",
+      "verifiedOn": null
+    }
+  },
+  {
+    "id": "public-relations",
+    "slug": "public-relations",
+    "name": "公共关系",
+    "directionId": "marketing",
+    "industryIds": ["advertising"],
+    "summary": "负责信息发布、媒体关系和声誉相关的传播。蓝色光标年报把公共关系列在全案推广服务里。",
+    "dailyWork": [
+      "根据事实准备可公开的信息，标清哪些话已经有来源。",
+      "维护媒体或合作方沟通记录，跟踪提问和更正。",
+      "把活动、内容和企业表态放回具体场景，不把曝光写成经营结果。"
+    ],
+    "preparation": [
+      "一则新闻稿或说明稿，并附来源列表。",
+      "一次校园或社团传播的复盘，写明做了什么、没有做什么。"
+    ],
+    "sourceIds": ["s-bluefocus-2025"],
+    "verification": {
+      "status": "materials-only",
+      "materialNature": "年报写明全案推广服务包括公共关系。",
+      "limitation": "这只证明公司把公共关系作为业务。没有核验到蓝色光标公关岗位的在招原文。",
+      "employer": null,
+      "postingTitle": null,
+      "url": "https://pdf.dfcfw.com/pdf/H2_AN202604151821244424_1.pdf",
+      "verifiedOn": null
+    }
+  },
+  {
+    "id": "event-management",
+    "slug": "event-management",
+    "name": "活动管理",
+    "directionId": "marketing",
+    "industryIds": ["advertising"],
+    "summary": "策划和执行发布、展览、路演或其他线下线上活动。年报把活动管理列在全案推广服务中。",
+    "dailyWork": [
+      "把活动目标写成可检查的事项：对象、流程、预算和风险。",
+      "协调场地、嘉宾、内容和现场记录。",
+      "活动后分开写执行情况和尚未证实的效果。"
+    ],
+    "preparation": [
+      "一份活动流程表，包含时间、负责人和备用方案。",
+      "若没有参与者数据，不要补写人数。"
+    ],
+    "sourceIds": ["s-bluefocus-2025"],
+    "verification": {
+      "status": "materials-only",
+      "materialNature": "年报业务范围中的活动管理。",
+      "limitation": "未见已核验的活动管理在招活页。不能把业务范围写成空缺职位。",
+      "employer": null,
+      "postingTitle": null,
+      "url": "https://pdf.dfcfw.com/pdf/H2_AN202604151821244424_1.pdf",
+      "verifiedOn": null
+    }
+  },
+  {
+    "id": "brand-content",
+    "slug": "brand-content",
+    "name": "内容与品牌传播",
+    "directionId": "marketing",
+    "industryIds": ["advertising"],
+    "summary": "为品牌写作、策划内容，或把内容放进传播方案。年报提到内容创意、营销文案和内容分析，不是一份职位说明。",
+    "dailyWork": [
+      "根据对象和渠道改写信息，保留事实边界。",
+      "整理素材来源，区分原创、改写和客户提供的材料。",
+      "用小样展示结构，而不是只给形容词。"
+    ],
+    "preparation": [
+      "两到三篇不同渠道的短内容，每篇注明对象和事实来源。",
+      "一次内容复盘：哪一句有依据，哪一句只是判断。"
+    ],
+    "sourceIds": ["s-bluefocus-2025"],
+    "verification": {
+      "status": "materials-only",
+      "materialNature": "年报对内容创意和营销内容服务的描述。",
+      "limitation": "没有完成内容或品牌岗位的招聘活页核验。",
+      "employer": null,
+      "postingTitle": null,
+      "url": "https://pdf.dfcfw.com/pdf/H2_AN202604151821244424_1.pdf",
+      "verifiedOn": null
+    }
+  },
+  {
+    "id": "social-work",
+    "slug": "social-work",
+    "name": "社工",
+    "directionId": "social-service",
+    "industryIds": ["elderly-care"],
+    "summary": "在养老社区里做社会工作支持。南开大学就业网的泰康之家2027届校园招聘材料把社工列在长寿社区岗位中。",
+    "dailyWork": [
+      "材料没有展开每日任务。公开文字只说明面向社工等相关专业，并把社工放在长寿社区岗位里。",
+      "因此本页不补写个案量、排班或薪资。"
+    ],
+    "preparation": [
+      "社会工作或相关专业的课程、实习和伦理训练记录。",
+      "一次社区活动或服务记录，隐去服务对象的身份信息。"
+    ],
+    "sourceIds": ["s-nankai-taikang"],
+    "verification": {
+      "status": "materials-only",
+      "materialNature": "高校就业网转载的2027届校园招聘宣讲材料。",
+      "limitation": "官方招聘门户当时没有完成抓取。这不是已完成活页核验，不能写成正在官网公开招聘的已核实职位。",
+      "employer": "泰康之家",
+      "postingTitle": "社工",
+      "url": "https://career.nankai.edu.cn/recruitment/content/type/2/id/6305.html",
+      "verifiedOn": null
+    }
+  },
+  {
+    "id": "recreation",
+    "slug": "recreation",
+    "name": "文娱活动师",
+    "directionId": "social-service",
+    "industryIds": ["elderly-care"],
+    "summary": "在长寿社区组织文娱活动。同一份南开大学就业网材料列出了文娱活动师。",
+    "dailyWork": [
+      "招聘材料没有提供岗位说明书。只能确认这个标题出现在长寿社区岗位列表里。",
+      "艺术、体育等相关专业在面向对象中被列为优先，但这不是录取条件的完整文本。"
+    ],
+    "preparation": [
+      "一次面向老年人或社区的活动方案，写明时长、人数假设和安全注意。人数若未发生就标明是方案不是实绩。",
+      "可展示主持、手工、音乐或体育活动经验，并说明自己的角色。"
+    ],
+    "sourceIds": ["s-nankai-taikang"],
+    "verification": {
+      "status": "materials-only",
+      "materialNature": "高校就业网的校园招聘材料，不是泰康之家官网活页。",
+      "limitation": "未见官网职位原文和核验日期。不得标成已完成活页核验。",
+      "employer": "泰康之家",
+      "postingTitle": "文娱活动师",
+      "url": "https://career.nankai.edu.cn/recruitment/content/type/2/id/6305.html",
+      "verifiedOn": null
+    }
+  },
+  {
+    "id": "house-butler",
+    "slug": "house-butler",
+    "name": "管家",
+    "directionId": "social-service",
+    "industryIds": ["elderly-care"],
+    "summary": "材料中的岗位名是“管家”，归在长寿社区。方向筛选把它放进社会服务里的生活管家一类，不另造一个材料里没有的职称。",
+    "dailyWork": [
+      "公开材料没有写管家的班次、服务户数或是否包含护理。",
+      "护理、康复等岗位在同一份材料的康复医院列表里，本站把它们标为相邻，不并入这个岗位。"
+    ],
+    "preparation": [
+      "服务流程或住户沟通的案例，隐藏个人身份。",
+      "说明自己理解的边界：生活协助、活动协调和照护技术不是同一件事。"
+    ],
+    "sourceIds": ["s-nankai-taikang"],
+    "verification": {
+      "status": "materials-only",
+      "materialNature": "高校就业网校园招聘材料中的岗位名称。",
+      "limitation": "没有官网活页，也没有核验日期。材料中的薪酬福利是概括用语，本站不把它写成具体薪资。",
+      "employer": "泰康之家",
+      "postingTitle": "管家",
+      "url": "https://career.nankai.edu.cn/recruitment/content/type/2/id/6305.html",
+      "verifiedOn": null
+    }
+  },
+  {
+    "id": "eldercare-marketing",
+    "slug": "eldercare-marketing",
+    "name": "市场营销与品牌宣传",
+    "directionId": "marketing",
+    "industryIds": ["elderly-care"],
+    "summary": "同一份泰康之家材料在总部和长寿社区都列出市场营销，总部和共享平台还列出品牌宣传。",
+    "dailyWork": [
+      "材料没有分开市场营销和品牌宣传的职责，所以本页不合写成两个已核实职位。",
+      "可以确认的是：这两个名称出现在2027届校园招聘名单中，工作地点写成全国多城布局，部分园区仍在筹建。"
+    ],
+    "preparation": [
+      "一份面向特定人群的传播小样，不要使用未注明来源的市场规模。",
+      "若写养老项目，分开写公开资料和自己的判断。"
+    ],
+    "sourceIds": ["s-nankai-taikang"],
+    "verification": {
+      "status": "materials-only",
+      "materialNature": "高校就业网转载的校园招聘岗位列表。",
+      "limitation": "官方招聘门户未完成抓取。列表中的城市和项目数量是材料原文中的布局描述，不是本站统计的空缺数。",
+      "employer": "泰康之家",
+      "postingTitle": "市场营销、品牌宣传",
+      "url": "https://career.nankai.edu.cn/recruitment/content/type/2/id/6305.html",
+      "verifiedOn": null
+    }
+  },
+  {
+    "id": "destination-operations",
+    "slug": "destination-operations",
+    "name": "目的地运营",
+    "directionId": "destination",
+    "industryIds": ["domestic-tourism"],
+    "summary": "比较结构保留了目的地运营这一入口。携程招聘官网可以打开，但具体目的地或产品职位的描述没有核验。",
+    "dailyWork": [
+      "在职位原文核验前，本页不描写某一家公司的日常班次或考核。",
+      "宋城年报描述景区演艺项目的现场产品和轻资产托管，那是公司业务，不是一份目的地运营招聘广告。"
+    ],
+    "preparation": [
+      "一份目的地或校园活动的运营备忘录：对象、流程、合作方和风险。",
+      "不要编造客流或转化率。"
+    ],
+    "sourceIds": ["s-ctrip-jobs", "s-songcheng-2025"],
+    "verification": {
+      "status": "unverified",
+      "materialNature": null,
+      "limitation": "官方招聘入口可见，具体职位活页未核验。不得写成携程或宋城正在招聘某个已核实的目的地运营职位。",
+      "employer": null,
+      "postingTitle": null,
+      "url": "https://job.ctrip.com/",
+      "verifiedOn": null
+    }
+  },
+  {
+    "id": "tourism-product",
+    "slug": "tourism-product",
+    "name": "旅游产品策划",
+    "directionId": "destination",
+    "industryIds": ["domestic-tourism"],
+    "summary": "众信旅游年报描述公司按需求采购交通、景点和酒店等资源，事先设计旅游产品，再通过批发或零售提供给游客。",
+    "dailyWork": [
+      "年报写的是业务，不是岗位说明书。可以合理对应的工作包括整理资源、设计行程和说明产品卖给谁。",
+      "具体加班、提成和在招人数都没有可靠公开职位页，因此不写。"
+    ],
+    "preparation": [
+      "一条三日以内的行程样本，列清交通、住宿和费用里哪些是假设。",
+      "注明资料日期。过期价格不要写成现价。"
+    ],
+    "sourceIds": ["s-utour-2025"],
+    "verification": {
+      "status": "materials-only",
+      "materialNature": "旅行社上市公司年报中的产品设计与批发零售描述。",
+      "limitation": "年报不能代替在招职位。众信的营业收入和利润变化也不等于这个岗位的待遇。",
+      "employer": null,
+      "postingTitle": null,
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-27/1225176921.PDF",
+      "verifiedOn": null
+    }
+  },
+  {
+    "id": "scenic-marketing",
+    "slug": "scenic-marketing",
+    "name": "景区营销",
+    "directionId": "destination",
+    "industryIds": ["domestic-tourism"],
+    "summary": "宋城演艺年报写明公司经营现场演艺和旅游服务，并对运营项目的门票、演出票做线上直销和分销。",
+    "dailyWork": [
+      "与景区营销相关、且年报实际写到的事项，是票务销售、品牌项目和轻资产输出中的品牌授权。",
+      "年报没有给出营销岗位的人数或招聘要求。"
+    ],
+    "preparation": [
+      "为一个已公开的景区或演出写一页传播提纲，事实句都链到来源。",
+      "区分游客花费、公司营业收入和票房，不要混用。"
+    ],
+    "sourceIds": ["s-songcheng-2025"],
+    "verification": {
+      "status": "materials-only",
+      "materialNature": "景区演艺公司年报中的票务、品牌和项目描述。",
+      "limitation": "这不是已核验的景区营销职位广告。公司营业收入下降只说明这家公司的收入，不是岗位需求。",
+      "employer": null,
+      "postingTitle": null,
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-24/1225164604.PDF",
+      "verifiedOn": null
+    }
+  },
+  {
+    "id": "tourism-content",
+    "slug": "tourism-content",
+    "name": "旅游内容",
+    "directionId": "destination",
+    "industryIds": ["domestic-tourism"],
+    "summary": "宋城年报把内容放在现场演艺和文旅产品里：以特定场景提供演艺、互动体验，并用“宋城”“千古情”等品牌做内容。",
+    "dailyWork": [
+      "年报没有把“旅游内容”写成一个招聘职位。这里对应的是内容创作和演出产品说明，不是已核实的编辑岗。",
+      "携程招聘官网可见，但内容职位的原文没有核验。"
+    ],
+    "preparation": [
+      "一篇目的地或演出介绍，分开写看得到的事实和想让读者感受的判断。",
+      "引用数据时写年份和口径。"
+    ],
+    "sourceIds": ["s-songcheng-2025", "s-ctrip-jobs"],
+    "verification": {
+      "status": "materials-only",
+      "materialNature": "年报对演艺内容和文旅产品的描述；招聘官网只证明入口存在。",
+      "limitation": "没有核验到具体内容岗位的在招活页。不得把品牌和演出数量写成岗位数量。",
+      "employer": null,
+      "postingTitle": null,
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-24/1225164604.PDF",
+      "verifiedOn": null
+    }
+  }
+]

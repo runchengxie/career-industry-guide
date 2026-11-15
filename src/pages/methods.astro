@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Prose from "../components/Prose.astro";
+import SourceList from "../components/SourceList.astro";
+import { getCatalog } from "../lib/catalog";
+
+const catalog = getCatalog();
+const methods = catalog.methods;
+const sections: Array<[string, string[]]> = [
+  ["研究目的", methods.purpose],
+  ["地理范围", methods.geography],
+  ["资料时点", methods.timing],
+  ["来源优先级", methods.priority],
+  ["口径规则", methods.rules],
+  ["更新方式", methods.update],
+];
+---
+
+<BaseLayout title="来源与方法" description="研究范围、来源优先级、口径规则和尚未核实的问题。">
+  <h1>来源与方法</h1>
+  <p class="lede">这一页概括研究怎么做。它不粘贴原始研究提示词。</p>
+  {
+    sections.map(([title, paragraphs]) => (
+      <section>
+        <h2>{title}</h2>
+        <Prose paragraphs={paragraphs} />
+      </section>
+    ))
+  }
+  <section>
+    <h2>当前未核实清单</h2>
+    <ul>
+      {methods.unverified.map((item) => <li>{item}</li>)}
+    </ul>
+  </section>
+  <section>
+    <h2>本版来源</h2>
+    <SourceList sources={catalog.sources} />
+  </section>
+</BaseLayout>

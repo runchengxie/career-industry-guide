@@ -1,0 +1,25 @@
+{
+  "name": "career-industry-guide",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev --host 127.0.0.1",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview --host 127.0.0.1",
+    "typecheck": "ASTRO_TELEMETRY_DISABLED=1 astro check",
+    "test": "vitest run",
+    "test:dist": "REQUIRE_DIST=1 vitest run tests/dist.test.ts",
+    "verify": "vitest run && astro check && astro build && REQUIRE_DIST=1 vitest run tests/dist.test.ts"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.12",
+    "astro": "^7.4.12",
+    "happy-dom": "^21.0.4",
+    "typescript": "^6.0.3",
+    "vitest": "^5.1.0"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.65.1"
+  }
+}
