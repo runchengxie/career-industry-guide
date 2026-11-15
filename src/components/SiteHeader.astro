@@ -3,17 +3,27 @@ import { loadDataset } from "../lib/load.ts";
 
 const data = loadDataset();
 const base = import.meta.env.BASE_URL;
+const path = Astro.url.pathname;
+
+function current(href: string): "page" | undefined {
+  return path === href ? "page" : undefined;
+}
 ---
 
 <header class="site-header">
   <div class="wrap nav">
     <a class="brand" href={base}>{data.meta.title}</a>
-    <a href={base}>比较</a>
+    <a href={base} aria-current={current(base)}>比较</a>
     {
-      data.industries.map((industry) => (
-        <a href={`${base}industries/${industry.slug}/`}>{industry.name}</a>
-      ))
+      data.industries.map((industry) => {
+        const href = `${base}industries/${industry.slug}/`;
+        return (
+          <a href={href} aria-current={current(href)}>
+            {industry.name}
+          </a>
+        );
+      })
     }
-    <a href={`${base}methods/`}>来源与方法</a>
+    <a href={`${base}methods/`} aria-current={current(`${base}methods/`)}>来源与方法</a>
   </div>
 </header>

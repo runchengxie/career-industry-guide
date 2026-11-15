@@ -111,6 +111,20 @@ legend { padding: 0 0.3rem; font-weight: 700; }
   font-weight: 700;
 }
 .scope, .note { display: block; color: var(--muted); font-size: 0.95rem; }
+
+/* 相邻链接之间加分隔符，避免读成一整句 */
+.links a + a::before,
+.cite a + a::before {
+  content: "·";
+  margin: 0 0.55rem;
+  color: var(--muted);
+}
+
+.cite {
+  margin: 0.35rem 0 0;
+  font-size: 0.95rem;
+}
+.cite a { display: inline; }
 .tag {
   display: inline-block;
   border: 1px solid var(--pine);

@@ -24,6 +24,8 @@ npm run build
 npm run preview
 ```
 
+`npm run verify` 依次跑数据校验、测试、类型检查、构建、产物检查（断链与必须出现/必须缺失的内容）和 HTML 规则检查（含无障碍），与 CI 的检查项一致。
+
 不设置 `BASE_PATH` 时，站点前缀是 `/`，适合本地预览。
 
 ## GitHub Pages

@@ -20,7 +20,7 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <Base title={role.name} description={`${role.name}的工作线索、准备材料和核验状态。`}>
-  <p>
+  <p class="links">
     {
       industries.map((industry) => (
         <a href={`${base}industries/${industry.slug}/`}>{industry.name}</a>
