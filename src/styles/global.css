@@ -421,6 +421,7 @@ details.meta summary:hover { color: var(--pine-dark); }
   font-size: var(--text-xs);
 }
 .state-tracked { color: var(--pine-dark); }
+.state-verified { color: var(--pine-dark); }
 .state-missing { color: var(--missing); }
 .state-not-tracked { color: var(--muted); }
 

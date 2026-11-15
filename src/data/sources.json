@@ -102,5 +102,29 @@
     "published": null,
     "accessed": "2026-11-15",
     "url": "https://job.ctrip.com/"
+  },
+  {
+    "id": "src-mct-2023",
+    "author": "文化和旅游部，中国政府网转发",
+    "title": "2023年国内旅游数据情况",
+    "published": "2024-02-10",
+    "accessed": "2026-11-15",
+    "url": "https://www.gov.cn/lianbo/bumen/202402/content_6931178.htm"
+  },
+  {
+    "id": "src-samr-2023",
+    "author": "国家市场监督管理总局",
+    "title": "2023年我国广告业实现快速增长",
+    "published": "2024-04-28",
+    "accessed": "2026-11-15",
+    "url": "https://www.samr.gov.cn/xw/zj/art/2024/art_96c406c98ad642548a766e8766d09e2a.html"
+  },
+  {
+    "id": "src-aging-2023-mca",
+    "author": "中国社会报，民政部网站转载",
+    "title": "《2023年度国家老龄事业发展公报》发布",
+    "published": "2024-10-12",
+    "accessed": "2026-11-15",
+    "url": "https://www.mca.gov.cn/n152/n166/c1662004999980001780/content.html"
   }
 ]

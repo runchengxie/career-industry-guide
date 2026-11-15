@@ -2,14 +2,15 @@
 import Base from "../layouts/Base.astro";
 import Section from "../components/Section.astro";
 import { formatMetric } from "../lib/format.ts";
-import { dataMatrix, labelMetrics, metricsByIndustry, summarize } from "../lib/explore.ts";
+import { comparisonGroups, dataMatrix, labelGroups, metricsByIndustry, summarize } from "../lib/explore.ts";
 import { metricCategories } from "../lib/types.ts";
-import { natureLabel } from "../lib/labels.ts";
+import { natureLabel, verificationLabel } from "../lib/labels.ts";
 import { loadDataset } from "../lib/load.ts";
 
 const data = loadDataset();
 const summary = summarize(data);
 const matrix = dataMatrix(data);
+const comparisonSets = comparisonGroups(data);
 const groups = metricsByIndustry(data);
 const base = import.meta.env.BASE_URL;
 const repo = "https://github.com/runchengxie/career-industry-guide";
@@ -66,10 +67,28 @@ const files = [
                   <td data-label={cell.industry.name}>
                     <span class={`state state-${cell.kind}`}>{stateLabel[cell.kind]}</span>
                     {cell.values.length > 0 ? (
-                      <span class="scope">{labelMetrics(cell.values).join("、")}</span>
+                      <span class="scope">
+                        {labelGroups(cell.values).map((group, index) => (
+                          <>
+                            {index > 0 ? "、" : ""}
+                            <a href={`${base}industries/${cell.industry.slug}/#${group.firstId}`}>
+                              {group.name}
+                              {group.years.length > 0 ? `（${group.years.join("、")}）` : ""}
+                            </a>
+                          </>
+                        ))}
+                      </span>
                     ) : null}
                     {cell.gaps.length > 0 ? (
-                      <span class="scope">缺口：{labelMetrics(cell.gaps).join("、")}</span>
+                      <span class="scope">
+                        缺口：
+                        {labelGroups(cell.gaps).map((group, index) => (
+                          <>
+                            {index > 0 ? "、" : ""}
+                            <a href={`${base}industries/${cell.industry.slug}/#${group.firstId}`}>{group.name}</a>
+                          </>
+                        ))}
+                      </span>
                     ) : null}
                   </td>
                 ))}
@@ -171,9 +190,84 @@ const files = [
     </p>
   </Section>
 
+  <Section id="roles" title="岗位">
+    <p>
+      {summary.roles} 个岗位里，完成官网活页核验的有 {summary.verifiedRoles} 个。核验状态沿用行业页的口径：招聘材料、年报业务词和招聘网站首页都不算已核验的职位。
+    </p>
+    <div class="table-scroll">
+      <table class="grid-table">
+        <caption>已录入岗位</caption>
+        <thead>
+          <tr>
+            <th scope="col">岗位</th>
+            <th scope="col">方向</th>
+            <th scope="col">样本</th>
+            <th scope="col">核验状态</th>
+            <th scope="col">材料中的雇主</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            data.roles.map((role) => (
+              <tr>
+                <th scope="row">
+                  <a href={`${base}roles/${role.slug}/`}>{role.name}</a>
+                </th>
+                <td data-label="方向">
+                  {data.meta.directions.find((direction) => direction.id === role.direction)?.label ??
+                    role.direction}
+                </td>
+                <td data-label="样本">
+                  {role.industryIds
+                    .map((id) => data.industries.find((industry) => industry.id === id)?.name ?? id)
+                    .join("、")}
+                </td>
+                <td data-label="核验状态">
+                  <span class={`state state-${role.verification}`}>
+                    {verificationLabel[role.verification]}
+                  </span>
+                </td>
+                <td data-label="材料中的雇主">{role.employer ?? "—"}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </Section>
+
+  <Section id="comparable" title="可比性">
+    <p>
+      数字放在一起看之前，先确认是不是同一个东西。下面每组是站内认为“同一个指标”的条目；标成不可比的，站点不把它们连成序列，也不计算变化幅度。
+    </p>
+    <ul class="plain">
+      {
+        comparisonSets.map((group) => (
+          <li>
+            <strong>{group.name}</strong>{" "}
+            <span class={`state ${group.comparable ? "state-tracked" : "state-missing"}`}>
+              {group.comparable ? "可比" : "不可比"}
+            </span>
+            <span class="scope">
+              {group.metrics.map((metric) => `${metric.name}（${metric.year ?? "—"}）`).join("、")}
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
   <Section id="files" title="数据文件">
     <p>站点数据是仓库里的结构化 JSON，页面由它构建，不是另一份拷贝。字段定义见 <a href={`${repo}/blob/main/src/lib/types.ts`}>src/lib/types.ts</a>。</p>
     <ul>
+      <li>
+        <a href={`${base}data/metrics.csv`}>metrics.csv</a>
+        <span class="scope">扁平表，{summary.total} 条指标，含数值、单位、口径与来源，可直接用表格软件打开</span>
+      </li>
+      <li>
+        <a href={`${base}data/roles.csv`}>roles.csv</a>
+        <span class="scope">扁平表，{summary.roles} 个岗位，含核验状态与材料性质</span>
+      </li>
       {
         files.map((file) => (
           <li>

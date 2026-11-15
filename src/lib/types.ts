@@ -57,6 +57,8 @@ export interface Metric {
   note: string | null;
   /** 指标分类，数据页的数据地图按它排列。 */
   category: MetricCategory;
+  /** 同一组指标才算“同一个东西”；comparable 为 false 表示站内明确不把它们连成序列。 */
+  comparison: { group: string; comparable: boolean } | null;
 }
 
 export interface Role {
