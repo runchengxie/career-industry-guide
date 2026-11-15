@@ -58,7 +58,12 @@ function base(overrides: Partial<Dataset> = {}): Dataset {
       publicationStatus: "尚未正式上线",
       verificationLimit: "截至 2026-11-15 的研究中，公开招聘岗位的活页核验尚未完整。",
       geography: "中国大陆",
-      directions: [],
+      directions: [
+        { id: "all", label: "全部" },
+        { id: "marketing", label: "营销传播" },
+        { id: "community", label: "社会服务与社区活动" },
+        { id: "destination", label: "目的地与旅游产品" },
+      ],
       method: [],
       unverifiedItems: [],
     },
@@ -70,7 +75,6 @@ function base(overrides: Partial<Dataset> = {}): Dataset {
         published: "2026-02-28",
         accessed: "2026-11-15",
         url: "https://example.com/source",
-        supports: ["m1"],
       },
     ],
     metrics: [],
@@ -119,4 +123,78 @@ test("排名字段被拒绝", () => {
   const data = base();
   (data as Dataset & { score?: number }).score = 90;
   assert.throws(() => assertValid(data), /score|排名/);
+});
+
+test("指标主体必须是已录入的行业或岗位", () => {
+  assert.throws(
+    () => assertValid(base({ metrics: [metric({ subjectId: "ghost-industry" })] })),
+    /不是已录入的行业或岗位/,
+  );
+});
+
+test("首页指标必须是该行业 metricIds 的子集", () => {
+  const industry = {
+    id: "advertising",
+    slug: "advertising",
+    name: "广告营销服务",
+    comparison: {
+      definition: "",
+      demand: "",
+      roles: "",
+      entry: "",
+      profit: "",
+      risks: "",
+      gaps: "",
+    },
+    definition: [],
+    demand: [],
+    dailyWork: [],
+    thresholds: [],
+    portfolio: [],
+    geographyLimits: [],
+    profit: [],
+    risks: [],
+    openQuestions: [],
+    roleIds: [],
+    metricIds: ["m1"],
+    homeMetricIds: { demand: ["m2"], profit: [] },
+  };
+  assert.throws(
+    () => assertValid(base({ metrics: [metric()], industries: [industry] })),
+    /首页指标 m2 不在它的 metricIds 里/,
+  );
+});
+
+test("岗位与行业的关联必须双向一致", () => {
+  const industry = {
+    id: "advertising",
+    slug: "advertising",
+    name: "广告营销服务",
+    comparison: {
+      definition: "",
+      demand: "",
+      roles: "",
+      entry: "",
+      profit: "",
+      risks: "",
+      gaps: "",
+    },
+    definition: [],
+    demand: [],
+    dailyWork: [],
+    thresholds: [],
+    portfolio: [],
+    geographyLimits: [],
+    profit: [],
+    risks: [],
+    openQuestions: [],
+    roleIds: [],
+    metricIds: [],
+    homeMetricIds: { demand: [], profit: [] },
+  };
+  const linked = role({ industryIds: ["advertising"] });
+  assert.throws(
+    () => assertValid(base({ industries: [industry], roles: [linked] })),
+    /该行业的 roleIds 没有列出它/,
+  );
 });
