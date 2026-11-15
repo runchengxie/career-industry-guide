@@ -9,8 +9,10 @@ function metric(overrides: Partial<Metric>): Metric {
     subjectId: "advertising",
     name: "薪资",
     availability: "unavailable",
-    display: null,
+    value: null,
     unit: null,
+    decimals: 0,
+    group: false,
     year: null,
     geography: "中国大陆",
     scope: null,
@@ -36,16 +38,33 @@ test("尚未核实的线索不渲染成数字", () => {
   assert.equal(text.includes("0"), false);
 });
 
-test("有数值时保留展示字符串并附年份", () => {
+test("有数值时由 value 与单位生成显示", () => {
   const text = formatMetric(
     metric({
       availability: "value",
-      display: "15464.1亿元",
+      value: 15464.1,
+      unit: "亿元",
+      decimals: 1,
+      group: false,
       year: "2024",
       scope: "事业单位和规模以上企业",
       sourceIds: ["s1"],
     }),
   );
-  assert.match(text, /15464\.1亿元/);
-  assert.match(text, /2024/);
+  assert.equal(text, "15464.1亿元");
+});
+
+test("千分位与小数位按指标设置", () => {
+  assert.equal(
+    formatMetric(metric({ availability: "value", value: 68692672430.48, unit: "元", decimals: 2, group: true })),
+    "68,692,672,430.48元",
+  );
+  assert.equal(
+    formatMetric(metric({ availability: "value", value: 768, unit: "万张", decimals: 1, group: false })),
+    "768.0万张",
+  );
+  assert.equal(
+    formatMetric(metric({ availability: "value", value: 17.9, unit: "%", decimals: 1, group: false })),
+    "17.9%",
+  );
 });

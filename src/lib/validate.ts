@@ -23,7 +23,11 @@ function walkKeys(value: unknown, found: string[]): void {
 
 function checkMetric(metric: Metric, sourceIds: Set<string>, errors: string[]): void {
   if (metric.availability === "value") {
-    if (blank(metric.display)) errors.push(`指标 ${metric.id} 有数值但缺少可显示结果`);
+    if (metric.value == null) errors.push(`指标 ${metric.id} 有数值状态但没有 value`);
+    if (blank(metric.unit)) errors.push(`指标 ${metric.id} 有数值但缺少单位`);
+    if (!Number.isInteger(metric.decimals) || metric.decimals < 0) {
+      errors.push(`指标 ${metric.id} 的展示精度不合法`);
+    }
     if (blank(metric.year)) errors.push(`指标 ${metric.id} 有数值但缺少年份`);
     if (blank(metric.scope)) errors.push(`指标 ${metric.id} 有数值但缺少口径`);
     if (blank(metric.geography)) errors.push(`指标 ${metric.id} 有数值但缺少地理范围`);
@@ -34,8 +38,8 @@ function checkMetric(metric: Metric, sourceIds: Set<string>, errors: string[]): 
     if (metric.nature === "self_calculated" && (!metric.inputs || metric.inputs.length === 0)) {
       errors.push(`指标 ${metric.id} 是自行测算但没有输入值`);
     }
-  } else if (metric.display != null) {
-    errors.push(`指标 ${metric.id} 不是数值状态，不能带 display`);
+  } else {
+    if (metric.value != null) errors.push(`指标 ${metric.id} 不是数值状态，不能带 value`);
   }
   if (!metricCategories.includes(metric.category)) {
     errors.push(`指标 ${metric.id} 的分类 ${metric.category} 不在规定类别里`);

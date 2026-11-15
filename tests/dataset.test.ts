@@ -43,9 +43,10 @@ test("自行测算与公式输入一致，且不保留误导性比率", () => {
   const marginInputs = margin.inputs;
   const per2024Inputs = per2024.inputs;
   const per2025Inputs = per2025.inputs;
-  assert.equal(`${((marginInputs[0] / marginInputs[1]) * 100).toFixed(2)}%`, margin.display);
-  assert.equal(`${Math.round(per2024Inputs[0] / per2024Inputs[1])}元/人次`, per2024.display);
-  assert.equal(`${Math.round(per2025Inputs[0] / per2025Inputs[1])}元/人次`, per2025.display);
+  // 自行测算指标：展示值必须与 inputs 复算一致
+  assert.equal(Number(((marginInputs[0] / marginInputs[1]) * 100).toFixed(2)), margin.value);
+  assert.equal(Math.round(per2024Inputs[0] / per2024Inputs[1]), per2024.value);
+  assert.equal(Math.round(per2025Inputs[0] / per2025Inputs[1]), per2025.value);
   assert.equal(byId.has("elder-bed-use-2024"), false);
   assert.equal(byId.has("tour-per-capita-change"), false);
   const serialized = JSON.stringify(data);
@@ -87,6 +88,6 @@ test("薪资、集中度和在招规模保持缺失", () => {
   assert.equal(missing.length, 8);
   for (const metric of missing) {
     assert.notEqual(metric.availability, "value");
-    assert.equal(metric.display, null);
+    assert.equal(metric.value, null);
   }
 });

@@ -9,8 +9,10 @@ function metric(overrides: Partial<Metric> = {}): Metric {
     subjectId: "advertising",
     name: "广告业务收入",
     availability: "value",
-    display: "15464.1亿元",
+    value: 15464.1,
     unit: "亿元",
+    decimals: 1,
+    group: false,
     year: "2024",
     geography: "中国大陆",
     scope: "事业单位和规模以上企业广告业务收入",
@@ -85,6 +87,11 @@ function base(overrides: Partial<Dataset> = {}): Dataset {
   };
 }
 
+test("有数值但没有 unit 或 value 时校验失败", () => {
+  assert.throws(() => assertValid(base({ metrics: [metric({ unit: "" })] })), /单位/);
+  assert.throws(() => assertValid(base({ metrics: [metric({ value: null })] })), /value/);
+});
+
 test("有数值但没有来源时校验失败", () => {
   const data = base({ metrics: [metric({ sourceIds: [] })] });
   assert.throws(() => assertValid(data), /来源/);
@@ -115,9 +122,9 @@ test("已完成活页核验但缺少链接或日期时校验失败", () => {
 
 test("缺失指标不能带可显示数字", () => {
   const data = base({
-    metrics: [metric({ availability: "unavailable", display: "0", sourceIds: [] })],
+    metrics: [metric({ availability: "unavailable", value: 0, sourceIds: [] })],
   });
-  assert.throws(() => assertValid(data), /暂无可靠数据|display/);
+  assert.throws(() => assertValid(data), /不是数值状态，不能带 value/);
 });
 
 test("排名字段被拒绝", () => {
