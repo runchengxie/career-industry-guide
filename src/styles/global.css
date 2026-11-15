@@ -1,16 +1,36 @@
 :root {
-  color-scheme: light;
+  color-scheme: light dark;
 
-  /* 颜色：暖纸底 + 松绿主色，与站点的研究读物定位一致 */
+  /* 颜色：暖纸底 + 松绿主色。每个颜色先给浅色兜底，再用 light-dark() 覆盖，
+     不支持 light-dark() 的浏览器只会用到前一行。 */
   --ink: #1c1917;
+  --ink: light-dark(#1c1917, #f0ece5);
   --muted: #44403c;
+  --muted: light-dark(#44403c, #bdb6ab);
   --paper: #f6f3ee;
+  --paper: light-dark(#f6f3ee, #171614);
   --card: #fffdf9;
+  --card: light-dark(#fffdf9, #201e1b);
   --line: #d6d3d1;
+  --line: light-dark(#d6d3d1, #3a3732);
   --pine: #1f4d3a;
+  --pine: light-dark(#1f4d3a, #2f6b52);
   --pine-dark: #143528;
+  --pine-dark: light-dark(#143528, #9ccdb2);
   --focus: #9a3412;
+  --focus: light-dark(#9a3412, #f0a26b);
   --missing: #7c2d12;
+  --missing: light-dark(#7c2d12, #f0a58a);
+  --banner: #efe6d6;
+  --banner: light-dark(#efe6d6, #2a2621);
+  --banner-line: #e2d3b8;
+  --banner-line: light-dark(#e2d3b8, #3a342c);
+  --head: #ebe4d8;
+  --head: light-dark(#ebe4d8, #2b2824);
+  --chip-on: #e9efea;
+  --chip-on: light-dark(#e9efea, #22302a);
+  --target: #efe6d6;
+  --target: light-dark(#efe6d6, #2f2a22);
 
   /* 字体与字号台阶 */
   --font-sans: "Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -75,7 +95,7 @@ main :is(p, ul, ol, h1, h2, h3, h4, .lede) {
   left: 0.75rem;
   top: -4rem;
   background: var(--ink);
-  color: white;
+  color: var(--paper);
   padding: 0.4rem 0.7rem;
 }
 .skip:focus { top: 0.75rem; }
@@ -94,9 +114,9 @@ main :is(p, ul, ol, h1, h2, h3, h4, .lede) {
 .banner {
   margin: 0;
   padding: 0.75rem 0;
-  background: #efe6d6;
+  background: var(--banner);
   color: var(--ink);
-  border-bottom: 1px solid #e2d3b8;
+  border-bottom: 1px solid var(--banner-line);
   font-size: var(--text-sm);
   line-height: 1.6;
 }
@@ -143,7 +163,7 @@ legend { padding: 0 0.3rem; font-weight: 700; }
 .choices input { margin: 0; }
 .choices label:has(input:checked) {
   border-color: var(--pine);
-  background: #e9efea;
+  background: var(--chip-on);
   color: var(--pine-dark);
   font-weight: 600;
 }
@@ -167,7 +187,7 @@ legend { padding: 0 0.3rem; font-weight: 700; }
   padding: 0.7rem;
   background: var(--card);
 }
-.compare thead th { background: #ebe4d8; }
+.compare thead th { background: var(--head); }
 
 .metrics, .claims, .plain { padding-left: 1.1rem; }
 .metrics li, .claims li { margin: 0.45rem 0 0.8rem; }
@@ -254,8 +274,8 @@ h2:hover .permalink, .permalink:focus-visible { opacity: 1; }
 .source-list { padding-left: 1.6rem; }
 .source-list li { margin: 0.45rem 0; }
 .source-list li:target {
-  background: #efe6d6;
-  outline: 2px solid #e2d3b8;
+  background: var(--target);
+  outline: 2px solid var(--banner-line);
   outline-offset: 2px;
 }
 
@@ -273,6 +293,18 @@ details.meta summary:hover { color: var(--pine-dark); }
 .rail { display: grid; gap: calc(var(--space) * 4); }
 .rail h2 { font-size: var(--step-1); margin: 0 0 var(--space); }
 
+/* 目录：宽屏是常驻侧栏，窄屏收成可折叠的一条 */
+.toc-wrap > summary {
+  list-style: none;
+  cursor: pointer;
+  font-family: var(--font-serif);
+  font-size: var(--step-1);
+  font-weight: 650;
+  margin: 0 0 var(--space);
+}
+.toc-wrap > summary::-webkit-details-marker { display: none; }
+.toc-wrap > summary:hover { color: var(--pine-dark); }
+
 .toc ol {
   list-style: none;
   margin: 0;
@@ -283,6 +315,10 @@ details.meta summary:hover { color: var(--pine-dark); }
 .toc li { margin: 0.3rem 0; }
 .toc a { text-decoration: none; color: var(--muted); }
 .toc a:hover { color: var(--pine-dark); text-decoration: underline; }
+.toc a[aria-current="true"] {
+  color: var(--pine-dark);
+  font-weight: 600;
+}
 
 .rail-block .metrics { padding-left: 1.1rem; }
 .rail-block .metric-name { display: inline; }
@@ -303,10 +339,14 @@ details.meta summary:hover { color: var(--pine-dark); }
   }
 }
 
-/* 窄屏：目录留在展开阅读之外，指标跟在正文后面 */
+/* 窄屏：目录收成顶部一条，指标跟在正文后面 */
 @media (max-width: 999px) {
-  .toc { display: none; }
-  .rail { order: 1; }
+  .layout { display: flex; flex-direction: column; gap: calc(var(--space) * 3); }
+  .rail { display: contents; }
+  .toc-wrap { order: -1; }
+  .toc-wrap > summary::before { content: "▸ "; }
+  .toc-wrap[open] > summary::before { content: "▾ "; }
+  .rail-block { order: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {

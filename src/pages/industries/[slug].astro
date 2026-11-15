@@ -102,12 +102,14 @@ const toc = [
     </div>
 
     <aside class="rail">
-      <nav class="toc" aria-labelledby="toc-heading">
-        <h2 id="toc-heading">本页内容</h2>
-        <ol>
-          {toc.map((item) => <li><a href={`#${item.id}`}>{item.title}</a></li>)}
-        </ol>
-      </nav>
+      <details class="toc-wrap" open>
+        <summary>本页内容</summary>
+        <nav class="toc" aria-label="本页目录">
+          <ol>
+            {toc.map((item) => <li><a href={`#${item.id}`}>{item.title}</a></li>)}
+          </ol>
+        </nav>
+      </details>
       <section class="rail-block" id="metrics" aria-labelledby="metrics-heading">
         <h2 id="metrics-heading">已录入指标</h2>
         <MetricList metrics={metrics} citations={citations} compact />
@@ -119,4 +121,9 @@ const toc = [
     <p class="field-note">按上面第一次出现的顺序编号。每条都写明访问日期；没有可靠发布日期的会直接说明。</p>
     <SourceList entries={citations.referenced()} />
   </Section>
+
+  <script>
+    import { setupToc } from "../../scripts/toc.ts";
+    setupToc(document);
+  </script>
 </Base>
