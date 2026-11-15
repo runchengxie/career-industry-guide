@@ -1,0 +1,104 @@
+---
+import Base from "../../layouts/Base.astro";
+import ClaimList from "../../components/ClaimList.astro";
+import MetricList from "../../components/MetricList.astro";
+import { verificationLabel } from "../../lib/labels.ts";
+import { loadDataset } from "../../lib/load.ts";
+
+export function getStaticPaths() {
+  const data = loadDataset();
+  return data.industries.map((industry) => ({
+    params: { slug: industry.slug },
+    props: { industryId: industry.id },
+  }));
+}
+
+const data = loadDataset();
+const industry = data.industries.find((item) => item.id === Astro.props.industryId);
+if (!industry) throw new Error("缺少行业");
+const roles = data.roles.filter((role) => industry.roleIds.includes(role.id));
+const metrics = data.metrics.filter((metric) => industry.metricIds.includes(metric.id));
+const base = import.meta.env.BASE_URL;
+---
+
+<Base title={industry.name} description={`${industry.name}的定义、证据、岗位和缺口。`}>
+  <p><a href={base}>返回比较</a></p>
+  <h1>{industry.name}</h1>
+  <p>{data.meta.sampleNote}</p>
+
+  <section class="section">
+    <h2>定义与口径</h2>
+    <ClaimList claims={industry.definition} sources={data.sources} />
+  </section>
+  <section class="section">
+    <h2>需求证据</h2>
+    <ClaimList claims={industry.demand} sources={data.sources} />
+  </section>
+  <section class="section">
+    <h2>适合岗位</h2>
+    <ul>
+      {
+        roles.map((role) => (
+          <li>
+            <a href={`${base}roles/${role.slug}/`}>{role.name}</a>
+            <span class="tag">{verificationLabel[role.verification]}</span>
+            {role.humanitiesFit === "adjacent" ? <span class="tag">相邻而非对口</span> : null}
+          </li>
+        ))
+      }
+    </ul>
+    <p>护理、康复和医疗技术岗位如果出现在招聘材料里，只视为相邻工作，不列入上面的文科岗位。</p>
+  </section>
+  <section class="section">
+    <h2>日常工作概况</h2>
+    <ClaimList claims={industry.dailyWork} sources={data.sources} />
+  </section>
+  <section class="section">
+    <h2>入口门槛</h2>
+    <ClaimList claims={industry.thresholds} sources={data.sources} />
+  </section>
+  <section class="section">
+    <h2>可做的小作品或技能准备</h2>
+    <ul class="plain">
+      {industry.portfolio.map((item) => <li>{item}</li>)}
+    </ul>
+    <p>这些是练习方向，不是雇主公布的录用条件。</p>
+  </section>
+  <section class="section">
+    <h2>地域与资历限制</h2>
+    <ClaimList claims={industry.geographyLimits} sources={data.sources} />
+  </section>
+  <section class="section">
+    <h2>盈利与稳定性</h2>
+    <ClaimList claims={industry.profit} sources={data.sources} />
+  </section>
+  <section class="section">
+    <h2>风险</h2>
+    <ClaimList claims={industry.risks} sources={data.sources} />
+  </section>
+  <section class="section">
+    <h2>尚未证实的问题</h2>
+    <ul class="plain">
+      {industry.openQuestions.map((item) => <li>{item}</li>)}
+    </ul>
+  </section>
+  <section class="section">
+    <h2>已录入指标</h2>
+    <MetricList metrics={metrics} sources={data.sources} />
+  </section>
+  <section class="section">
+    <h2>来源列表</h2>
+    <ul>
+      {
+        data.sources
+          .filter((source) => metrics.some((metric) => metric.sourceIds.includes(source.id)) || roles.some((role) => role.sourceIds.includes(source.id)))
+          .map((source) => (
+            <li>
+              <a href={source.url}>{source.author}：{source.title}</a>
+              <span class="scope">访问日期 {source.accessed}{source.published ? `，公布或发布日期 ${source.published}` : "，材料页没有可靠发布日期"}</span>
+            </li>
+          ))
+      }
+    </ul>
+  </section>
+</Base>

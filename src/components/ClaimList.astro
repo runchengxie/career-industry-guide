@@ -1,0 +1,28 @@
+---
+import type { Claim, Source } from "../lib/types.ts";
+
+interface Props {
+  claims: Claim[];
+  sources: Source[];
+}
+
+const { claims, sources } = Astro.props;
+const kindLabel = { evidence: "证据", judgment: "判断", gap: "缺口" };
+---
+
+<ul class="claims">
+  {
+    claims.map((claim) => (
+      <li id={claim.id}>
+        <span class="kind">{kindLabel[claim.kind]}</span>
+        <p>{claim.text}</p>
+        {claim.sourceIds.map((id) => {
+          const source = sources.find((item) => item.id === id);
+          return source ? (
+            <a href={source.url}>{source.author}：{source.title}</a>
+          ) : null;
+        })}
+      </li>
+    ))
+  }
+</ul>

@@ -1,0 +1,10 @@
+import { loadDataset } from "../src/lib/load.ts";
+import { assertValid } from "../src/lib/validate.ts";
+
+try {
+  assertValid(loadDataset());
+} catch (error) {
+  const message = error instanceof Error ? error.message : String(error);
+  console.error(message);
+  process.exit(1);
+}

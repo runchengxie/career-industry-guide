@@ -1,0 +1,119 @@
+[
+  {
+    "id": "src-ad-2024",
+    "author": "经济参考报，新华网转载",
+    "title": "2024年我国广告业务收入增长17.9%",
+    "published": "2025-06-18",
+    "accessed": "2026-11-15",
+    "url": "http://www.news.cn/fortune/20250618/9057c456e15a4889805f8d84b6272073/c.html",
+    "supports": ["ad-revenue-2024", "ad-revenue-growth-2024", "ad-internet-share-2024", "ad-degree-share-2024", "ad-2024-evidence", "ad-internet-evidence"]
+  },
+  {
+    "id": "src-ad-2025",
+    "author": "新华社",
+    "title": "首破2万亿元 中国广告业最新“成绩单”出炉",
+    "published": "2026-06-23",
+    "accessed": "2026-11-15",
+    "url": "http://www.xinhuanet.com/fortune/20260623/cb51f27ea02c498e9f756b976288b0a2/c.html",
+    "supports": ["ad-revenue-2025", "ad-revenue-growth-2025", "ad-2025-evidence"]
+  },
+  {
+    "id": "src-nbs-2025",
+    "author": "国家统计局",
+    "title": "中华人民共和国2025年国民经济和社会发展统计公报",
+    "published": "2026-02-28",
+    "accessed": "2026-11-15",
+    "url": "https://www.stats.gov.cn/sj/zxfb/202602/t20260228_1962662.html",
+    "supports": ["elder-pop-2025", "elder-beds-nbs-2025", "tour-trips-2025-nbs", "tour-spend-2025-nbs", "elder-pop-evidence", "tour-2025-nbs-evidence"]
+  },
+  {
+    "id": "src-mct-2024",
+    "author": "文化和旅游部",
+    "title": "中华人民共和国文化和旅游部2024年文化和旅游发展统计公报",
+    "published": "2025-05-30",
+    "accessed": "2026-11-15",
+    "url": "https://zwgk.mct.gov.cn/zfxxgkml/tjxx/202505/t20250530_960335.html",
+    "supports": ["tour-trips-2024", "tour-spend-2024", "tour-2024-evidence"]
+  },
+  {
+    "id": "src-mct-2025-xinhua",
+    "author": "新华社，转述文化和旅游部抽样调查",
+    "title": "文化和旅游部公布数据：2025年国内居民出游人次达65.22亿",
+    "published": "2026-01-26",
+    "accessed": "2026-11-15",
+    "url": "https://www.news.cn/20260126/8dda85c98d8843e69b256cea591a7d8b/c.html",
+    "supports": ["tour-trips-2025-mct", "tour-spend-2025-mct", "tour-2025-mct-evidence"]
+  },
+  {
+    "id": "src-aging-2025-bj",
+    "author": "北京市民政局网站，转述民政部、全国老龄办公报",
+    "title": "我国老龄事业高质量发展迈出坚实步伐——《2025年度国家老龄事业发展公报》透视",
+    "published": "2026-08-08",
+    "accessed": "2026-11-15",
+    "url": "https://mzj.beijing.gov.cn/art/2026/8/8/art_4490_755642.html",
+    "supports": ["elder-facilities-2025", "elder-beds-bulletin-2025", "elder-workers-2025", "elder-pop-increase-2025", "elder-2025-supply-evidence"]
+  },
+  {
+    "id": "src-aging-2024-cctv",
+    "author": "央视网，转述2024年度国家老龄事业发展公报",
+    "title": "一组数据看2024年我国老龄事业各方面发展",
+    "published": "2025-07-24",
+    "accessed": "2026-11-15",
+    "url": "https://news.cctv.com/2025/07/24/ARTIznketUWX6YN94FtT9IbS250724.shtml",
+    "supports": ["elder-facilities-2024", "elder-beds-2024", "elder-registered-2024", "elder-2024-supply-evidence"]
+  },
+  {
+    "id": "src-bluefocus-2025",
+    "author": "北京蓝色光标数据科技集团股份有限公司",
+    "title": "2025年年度报告摘要（巨潮资讯，公告编号2026-012）",
+    "published": "2026-04-16",
+    "accessed": "2026-11-15",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-04-16/1225107655.PDF",
+    "supports": ["bf-revenue-2025", "bf-profit-2025", "bf-profit-2024", "bf-net-margin-2025", "digital-marketing", "public-relations", "event-management", "content-creative", "ad-company-evidence", "ad-role-limit"]
+  },
+  {
+    "id": "src-songcheng-2025",
+    "author": "宋城演艺发展股份有限公司，新浪财经公告页转载",
+    "title": "宋城演艺：2025年年度报告",
+    "published": "2026-04-24",
+    "accessed": "2026-11-15",
+    "url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=300144&id=12166486",
+    "supports": ["songcheng-revenue-2025", "songcheng-revenue-change-2025", "scenic-marketing", "tour-company-evidence"]
+  },
+  {
+    "id": "src-utour-2025",
+    "author": "众信旅游集团股份有限公司",
+    "title": "2025年年度报告（巨潮资讯）",
+    "published": "2026-04-27",
+    "accessed": "2026-11-15",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-04-27/1225176921.PDF",
+    "supports": ["utour-revenue-2025", "utour-profit-2025", "utour-profit-change-2025", "destination-operations", "tourism-product", "tour-company-evidence"]
+  },
+  {
+    "id": "src-trip-2025",
+    "author": "携程集团",
+    "title": "携程集团发布2025年第四季度及全年未经审计的财务业绩",
+    "published": "2026-02-25",
+    "accessed": "2026-11-15",
+    "url": "https://investors.trip.com/static-files/da716603-67ae-477e-a9ff-fc9ebc203f19",
+    "supports": ["trip-revenue-2025", "trip-revenue-growth-2025", "trip-investment-gain-2025", "tourism-content", "tour-company-evidence"]
+  },
+  {
+    "id": "src-nankai-taikang",
+    "author": "南开大学学生就业指导中心",
+    "title": "泰康之家2027届全球校园招聘宣讲材料",
+    "published": null,
+    "accessed": "2026-11-15",
+    "url": "https://career.nankai.edu.cn/recruitment/content/type/2/id/6305.html",
+    "supports": ["social-worker", "recreation-specialist", "life-butler", "eldercare-marketing", "eldercare-brand", "elder-role-limit", "elder-entry-evidence"]
+  },
+  {
+    "id": "src-ctrip-jobs",
+    "author": "携程集团",
+    "title": "携程集团招聘官网",
+    "published": null,
+    "accessed": "2026-11-15",
+    "url": "https://job.ctrip.com/",
+    "supports": ["destination-operations", "tourism-product", "scenic-marketing", "tourism-content", "tour-role-limit"]
+  }
+]

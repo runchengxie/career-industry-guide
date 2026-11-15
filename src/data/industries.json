@@ -1,0 +1,383 @@
+[
+  {
+    "id": "advertising",
+    "slug": "advertising",
+    "name": "广告营销服务",
+    "comparison": {
+      "definition": "面向企业的营销传播、公关、活动与广告代理，不是整个传媒业。",
+      "demand": "2024和2025年都有广告业务收入增长的公开转述。收入增长不是岗位空缺。",
+      "roles": "数字营销、公共关系、活动管理和内容创意见于蓝色光标年报业务构成。",
+      "entry": "没有核到统一的执照或城市门槛。样本公司总部在北京，业务含出海。",
+      "profit": "行业收入高、公司净利薄可以同时成立。蓝色光标净利率是自行测算。",
+      "risks": "发布环节的互联网占比容易被误读成个人容易入行。客户和平台政策会变化。",
+      "gaps": "薪资、市场集中度、在招人数和从业人员完整时序都没有可靠数据。"
+    },
+    "definition": [
+      {
+        "id": "ad-definition",
+        "kind": "judgment",
+        "sourceIds": ["src-bluefocus-2025"],
+        "text": "本样本指为企业做传播和广告代理的服务，包括数字营销、公共关系、活动管理和广告投放。蓝色光标年报摘要用这些词描述自身业务。它不是广告主的全部营销预算，也不是媒体的全部收入。"
+      }
+    ],
+    "demand": [
+      {
+        "id": "ad-2024-evidence",
+        "kind": "evidence",
+        "sourceIds": ["src-ad-2024"],
+        "text": "2024年的公开转述写明，事业单位和规模以上企业广告业务收入为15464.1亿元，较上年增长17.9%。这是业务收入，不是就业人数。"
+      },
+      {
+        "id": "ad-internet-evidence",
+        "kind": "evidence",
+        "sourceIds": ["src-ad-2024"],
+        "text": "同一则转述写，2024年互联网广告发布收入占发布环节总收入的86.5%，从业人员中本科及以上学历占比为67.6%。86.5%只覆盖发布环节，不能当成市场集中度或全行业收入份额。"
+      },
+      {
+        "id": "ad-2025-evidence",
+        "kind": "evidence",
+        "sourceIds": ["src-ad-2025"],
+        "text": "2025年的新华社稿转述《中国广告业发展指数报告（2026）》，全年广告业务收入20502.1亿元，同比增长32.6%。这一句没有再次写明事业单位和规模以上企业，所以不把它和2024年自动接成一条无差别序列。"
+      },
+      {
+        "id": "ad-demand-judgment",
+        "kind": "judgment",
+        "sourceIds": [],
+        "text": "收入上升只能说明这一统计口径下的业务规模在变大。它不能证明文科背景的人更好找到工作，也不能代替在招职位。"
+      }
+    ],
+    "dailyWork": [
+      {
+        "id": "ad-role-limit",
+        "kind": "evidence",
+        "sourceIds": ["src-bluefocus-2025"],
+        "text": "已录入岗位来自年报摘要的业务构成：全案推广服务包含数字营销、公共关系、活动管理，业务说明另写到内容创意。日常任务、客户行业和作品要求都还没有职位活页。"
+      }
+    ],
+    "thresholds": [
+      {
+        "id": "ad-threshold",
+        "kind": "gap",
+        "sourceIds": [],
+        "text": "没有核到全国统一的入行执照。年报摘要提到服务游戏、电商、汽车、消费等行业客户，这是公司客户结构，不是对应聘者专业的硬性规定。"
+      }
+    ],
+    "portfolio": [
+      "一份标明资料来源的品牌或活动方案",
+      "能区分行业收入、公司营收和公司利润的短说明"
+    ],
+    "geographyLimits": [
+      {
+        "id": "ad-geo",
+        "kind": "evidence",
+        "sourceIds": ["src-bluefocus-2025"],
+        "text": "年报摘要写公司办公地址在北京，并单列出海业务收入564.96亿元。地域限制没有被核成一条招聘规则。"
+      }
+    ],
+    "profit": [
+      {
+        "id": "ad-company-evidence",
+        "kind": "evidence",
+        "sourceIds": ["src-bluefocus-2025"],
+        "text": "蓝色光标2025年年度报告摘要的营业收入是68,692,672,430.48元，归母净利润是224,665,777.93元。2024年归母净利润为负。公司营收不是广告业收入。"
+      },
+      {
+        "id": "ad-margin-judgment",
+        "kind": "judgment",
+        "sourceIds": ["src-bluefocus-2025"],
+        "text": "约0.33%的净利率是用上述两个已披露数字相除得到的，年报没有公布这个净利率。它只描述这一家公司，而且收入里包含大量投放代理，不能读成从业者能分到的利润。"
+      }
+    ],
+    "risks": [
+      {
+        "id": "ad-risk",
+        "kind": "judgment",
+        "sourceIds": ["src-ad-2024", "src-bluefocus-2025"],
+        "text": "发布环节高度依赖互联网，会让行业增长看起来像稳定的个人机会。公司报表同时显示收入规模和很薄的利润，客户预算和平台规则都可能改变招聘。这些是风险线索，不是已量化的失业概率。"
+      }
+    ],
+    "openQuestions": [
+      "可供求职比较的薪资",
+      "可靠的市场集中度",
+      "在招职位数量",
+      "广告业从业人员完整时序"
+    ],
+    "roleIds": ["digital-marketing", "public-relations", "event-management", "content-creative"],
+    "metricIds": [
+      "ad-revenue-2024",
+      "ad-revenue-growth-2024",
+      "ad-internet-share-2024",
+      "ad-degree-share-2024",
+      "ad-revenue-2025",
+      "ad-revenue-growth-2025",
+      "ad-salary",
+      "ad-concentration",
+      "ad-openings",
+      "ad-employment-series",
+      "bf-revenue-2025",
+      "bf-profit-2025",
+      "bf-profit-2024",
+      "bf-net-margin-2025"
+    ],
+    "homeMetricIds": {
+      "demand": ["ad-revenue-2024", "ad-revenue-growth-2024", "ad-internet-share-2024", "ad-revenue-2025", "ad-revenue-growth-2025"],
+      "profit": ["bf-revenue-2025", "bf-profit-2025", "bf-net-margin-2025"]
+    }
+  },
+  {
+    "id": "elderly-care",
+    "slug": "elderly-care",
+    "name": "养老服务",
+    "comparison": {
+      "definition": "面向老年人的机构、社区和居家服务。人口老化是需求背景，不是行业营收。",
+      "demand": "2025年末60岁及以上人口有官方数字。机构和床位较2024年的转述数字下降，原因未证实。",
+      "roles": "社工、文娱活动、管家、市场营销和品牌宣传见于高校就业网转载的校园招聘材料。",
+      "entry": "这份材料面向2027届毕业生，并写到多城项目。官方招聘门户没有完成抓取。",
+      "profit": "全国养老服务营业收入暂无可靠数据。床位使用率若出现，只是自行测算。",
+      "risks": "人口增加不会自动变成文科岗位。护理和医疗岗位是相邻工作，不是本站的对口岗位。",
+      "gaps": "薪资、全行业营收、床位下降原因和官网在招活页都没有完成核实。"
+    },
+    "definition": [
+      {
+        "id": "elder-definition",
+        "kind": "judgment",
+        "sourceIds": ["src-nankai-taikang"],
+        "text": "本样本指养老机构、社区和相关生活服务。泰康之家的校园招聘材料把它分成总部、长寿社区、康复医院和共享平台。康复医院里的医护岗位在本站只作为相邻工作提及。"
+      }
+    ],
+    "demand": [
+      {
+        "id": "elder-pop-evidence",
+        "kind": "evidence",
+        "sourceIds": ["src-nbs-2025"],
+        "text": "国家统计局2025年统计公报写明，2025年末60周岁及以上人口32338万人，占总人口的23.0%。这是人口数，不是服务收入，也不是招工人数。"
+      },
+      {
+        "id": "elder-2025-supply-evidence",
+        "kind": "evidence",
+        "sourceIds": ["src-aging-2025-bj", "src-nbs-2025"],
+        "text": "北京市民政局网站对2025年老龄事业公报的转述写，各类养老机构和设施39.5万个，养老床位合计767.9万张，养老服务从业人员139.5万人。统计局公报则写养老服务床位768.0万张。两个床位数字都保留。"
+      },
+      {
+        "id": "elder-2024-supply-evidence",
+        "kind": "evidence",
+        "sourceIds": ["src-aging-2024-cctv"],
+        "text": "央视网对2024年公报的转述写，机构和设施40.6万个，养老床位合计799.3万张。其中注册登记的养老机构4.0万个、床位507.7万张、年末服务人数230.7万人。与2025年相比，机构和床位数量下降，原因尚未证实。"
+      },
+      {
+        "id": "elder-demand-judgment",
+        "kind": "judgment",
+        "sourceIds": [],
+        "text": "老年人口增加说明照护和生活服务的需求背景在变大。供给指标下降可能是结构调整，也可能是收缩，现有材料不能区分。不能由此写成社工或活动岗位更好找。"
+      }
+    ],
+    "dailyWork": [
+      {
+        "id": "elder-role-limit",
+        "kind": "evidence",
+        "sourceIds": ["src-nankai-taikang"],
+        "text": "已录入的文科相关岗位是社工、文娱活动师、管家、市场营销和品牌宣传。转载材料只给出名称和所属板块，没有每日任务。运动指导师以及医生、护士、康复治疗师等出现在同一份材料中，但算相邻的体育、医疗或照护岗位，不进入文科筛选。"
+      }
+    ],
+    "thresholds": [
+      {
+        "id": "elder-threshold",
+        "kind": "evidence",
+        "sourceIds": ["src-nankai-taikang"],
+        "text": "材料写面向对象是2027届海内外本科及以上毕业生，经济、管理、社工、医疗、艺术、体育等相关专业优先。这是一份校园招聘的优先专业，不是全国养老岗位的法定门槛。"
+      }
+    ],
+    "portfolio": [
+      "一次社区活动的流程和安全边界",
+      "一份把生活协助与医疗护理分开的说明"
+    ],
+    "geographyLimits": [
+      {
+        "id": "elder-entry-evidence",
+        "kind": "evidence",
+        "sourceIds": ["src-nankai-taikang"],
+        "text": "材料写工作地点覆盖37城48个项目，部分园区仍在筹建，可先就近入职。这是招聘材料中的安排，不是已经逐城核实的编制表。"
+      }
+    ],
+    "profit": [
+      {
+        "id": "elder-profit-gap",
+        "kind": "gap",
+        "sourceIds": [],
+        "text": "全国养老服务营业收入没有写入本站。人口、床位和机构不能换算成行业营收。"
+      },
+      {
+        "id": "elder-use-judgment",
+        "kind": "judgment",
+        "sourceIds": ["src-aging-2024-cctv"],
+        "text": "若看到约45.4%的床位使用率，它只是把2024年末注册机构服务人数除以注册机构床位。服务人数是否等于在住人数，材料没有定义。这个比率也不能解释2025年床位下降。"
+      }
+    ],
+    "risks": [
+      {
+        "id": "elder-risk",
+        "kind": "judgment",
+        "sourceIds": ["src-nankai-taikang"],
+        "text": "招聘材料把社区生活岗位和医院专业岗位放在一起。如果只看养老行业增长，容易把护理员或治疗师误当成文科对口岗位。项目仍在筹建时，入职地点也可能变化。"
+      }
+    ],
+    "openQuestions": [
+      "全国养老服务营业收入",
+      "可供求职比较的薪资",
+      "机构和床位下降的原因",
+      "床位使用率的官方定义",
+      "泰康之家官网在招活页"
+    ],
+    "roleIds": ["social-worker", "recreation-specialist", "life-butler", "eldercare-marketing", "eldercare-brand"],
+    "metricIds": [
+      "elder-pop-2025",
+      "elder-pop-increase-2025",
+      "elder-beds-nbs-2025",
+      "elder-facilities-2025",
+      "elder-beds-bulletin-2025",
+      "elder-workers-2025",
+      "elder-facilities-2024",
+      "elder-beds-2024",
+      "elder-registered-2024",
+      "elder-bed-use-2024",
+      "elder-revenue",
+      "elder-salary",
+      "elder-decline-reason"
+    ],
+    "homeMetricIds": {
+      "demand": ["elder-pop-2025", "elder-facilities-2025", "elder-beds-bulletin-2025", "elder-beds-nbs-2025", "elder-facilities-2024", "elder-beds-2024"],
+      "profit": ["elder-revenue", "elder-bed-use-2024"]
+    }
+  },
+  {
+    "id": "domestic-tourism",
+    "slug": "domestic-tourism",
+    "name": "国内旅游服务",
+    "comparison": {
+      "definition": "国内居民在境内的出游和相应的产品、目的地与内容服务。出游花费不是旅行社收入。",
+      "demand": "2024和2025年出游人次、花费都有公开数字。不同公报的约数并列，不平均。",
+      "roles": "目的地运营、产品策划、景区营销和旅游内容有业务线索，职位活页尚未核验。",
+      "entry": "携程招聘官网可以打开。具体职位描述没有核完，没有统一的地域门槛结论。",
+      "profit": "人均单次花费下降是自行测算。企业之间一降一增，不能写成全行业利润。",
+      "risks": "总花费上升仍可能伴随客单价下降。公司投资利得会放大利润。",
+      "gaps": "薪资、集中度、旅行社与景区用工结构，以及具体职位活页，都还没有可靠结果。"
+    },
+    "definition": [
+      {
+        "id": "tour-definition",
+        "kind": "judgment",
+        "sourceIds": ["src-mct-2024", "src-nbs-2025"],
+        "text": "本样本讨论国内出游，以及围绕目的地、产品和内容的服务。统计公报里的出游花费是游客花费，不是某一家旅行社、景区或平台的收入。"
+      }
+    ],
+    "demand": [
+      {
+        "id": "tour-2024-evidence",
+        "kind": "evidence",
+        "sourceIds": ["src-mct-2024"],
+        "text": "文化和旅游部2024年统计公报写，国内居民出游56.2亿人次，出游总花费5.8万亿元。这是经过取整的公报数字。"
+      },
+      {
+        "id": "tour-2025-nbs-evidence",
+        "kind": "evidence",
+        "sourceIds": ["src-nbs-2025"],
+        "text": "国家统计局2025年统计公报写，国内出游65.2亿人次，比上年增长16.2%；国内游客出游总花费63003亿元，增长9.5%。"
+      },
+      {
+        "id": "tour-2025-mct-evidence",
+        "kind": "evidence",
+        "sourceIds": ["src-mct-2025-xinhua"],
+        "text": "新华社对文化和旅游部抽样调查的转述写，2025年国内居民出游65.22亿人次，出游花费6.30万亿元。它和统计局的65.2亿人次、63003亿元同时保留。"
+      },
+      {
+        "id": "tour-demand-judgment",
+        "kind": "judgment",
+        "sourceIds": [],
+        "text": "人次和花费上升说明国内出游这项活动的规模变大。它没有说明旅行社、景区或内容岗位的招聘是否增加。"
+      }
+    ],
+    "dailyWork": [
+      {
+        "id": "tour-role-limit",
+        "kind": "evidence",
+        "sourceIds": ["src-utour-2025", "src-trip-2025", "src-ctrip-jobs"],
+        "text": "众信旅游年报把目的地运营列为业务，并描述多种旅游产品。携程业绩公告写平台提供旅行内容，招聘官网可以打开。这些都不是已经核对过的职位描述。"
+      }
+    ],
+    "thresholds": [
+      {
+        "id": "tour-threshold",
+        "kind": "gap",
+        "sourceIds": [],
+        "text": "本站没有核到国内旅游产品、内容或景区营销岗位的统一学历、执照或作品要求。"
+      }
+    ],
+    "portfolio": [
+      "一条注明来源的短行程",
+      "一份把游客花费、公司营收和公司利润分开的说明"
+    ],
+    "geographyLimits": [
+      {
+        "id": "tour-geo",
+        "kind": "gap",
+        "sourceIds": [],
+        "text": "具体职位的城市限制尚未核验。公司报表覆盖的门店或国际业务不能代替岗位地点。"
+      }
+    ],
+    "profit": [
+      {
+        "id": "tour-company-evidence",
+        "kind": "evidence",
+        "sourceIds": ["src-songcheng-2025", "src-utour-2025", "src-trip-2025"],
+        "text": "宋城演艺2025年营业收入较上年下降6.61%。众信旅游营业收入增长5.69%，归母净利润下降93.34%。携程集团净营业收入624亿元人民币，同比上升17%；公告同时说明净利润增加主要来自投资利得。三家公司不能合成一个行业利润。"
+      },
+      {
+        "id": "tour-per-capita-judgment",
+        "kind": "judgment",
+        "sourceIds": ["src-mct-2024", "src-nbs-2025"],
+        "text": "人均单次花费下降约6.4%是两组约数相除后的自行测算。2024年用的是文化和旅游部公报，2025年用的是统计局公报。它不是官方公布的人均指标。"
+      }
+    ],
+    "risks": [
+      {
+        "id": "tour-risk",
+        "kind": "judgment",
+        "sourceIds": ["src-trip-2025", "src-utour-2025"],
+        "text": "总人次上升时，单次花费仍可能下降。平台利润还可能受投资利得影响。众信旅游的报表包含出境业务，不能直接代表国内旅游服务的利润。"
+      }
+    ],
+    "openQuestions": [
+      "可供求职比较的薪资",
+      "官方市场集中度",
+      "旅行社与景区用工结构",
+      "目的地、产品、景区营销和旅游内容岗位的官网活页"
+    ],
+    "roleIds": ["destination-operations", "tourism-product", "scenic-marketing", "tourism-content"],
+    "metricIds": [
+      "tour-trips-2024",
+      "tour-spend-2024",
+      "tour-trips-2025-nbs",
+      "tour-spend-2025-nbs",
+      "tour-trips-2025-mct",
+      "tour-spend-2025-mct",
+      "tour-per-capita-2024",
+      "tour-per-capita-2025",
+      "tour-per-capita-change",
+      "songcheng-revenue-2025",
+      "songcheng-revenue-change-2025",
+      "utour-revenue-2025",
+      "utour-profit-2025",
+      "utour-profit-change-2025",
+      "trip-revenue-2025",
+      "trip-revenue-growth-2025",
+      "trip-investment-gain-2025",
+      "tour-salary",
+      "tour-concentration",
+      "tour-employment-structure"
+    ],
+    "homeMetricIds": {
+      "demand": ["tour-trips-2024", "tour-spend-2024", "tour-trips-2025-nbs", "tour-spend-2025-nbs", "tour-trips-2025-mct", "tour-spend-2025-mct"],
+      "profit": ["tour-per-capita-2024", "tour-per-capita-2025", "tour-per-capita-change", "songcheng-revenue-change-2025", "utour-profit-change-2025", "trip-revenue-2025", "trip-investment-gain-2025"]
+    }
+  }
+]
