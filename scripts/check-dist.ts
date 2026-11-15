@@ -65,6 +65,21 @@ for (const banned of ["45.4%", "约下降6.4%", "综合评分：", "推荐指数
     process.exit(1);
   }
 }
+const sitemapIndex = "dist/sitemap-index.xml";
+if (!existsSync(sitemapIndex)) {
+  console.error("缺少 sitemap-index.xml");
+  process.exit(1);
+}
+if (!existsSync("dist/robots.txt")) {
+  console.error("缺少 robots.txt");
+  process.exit(1);
+}
+for (const page of required.filter((file) => file.endsWith("index.html"))) {
+  const route = `${base}${page.replace(/^dist\//, "").replace(/index\.html$/, "")}`;
+  const sitemap = readFileSync("dist/sitemap-0.xml", "utf8");
+  if (!sitemap.includes(route)) console.error(`sitemap 缺少 ${route}`);
+}
+
 if (base !== "/" && !home.includes(`href="${base}"`)) {
   console.error(`首页链接没有使用前缀 ${base}`);
   process.exit(1);

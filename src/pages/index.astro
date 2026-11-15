@@ -42,6 +42,7 @@ const rolesByIndustry = new Map(data.industries.map((industry) => [industry.id, 
       }
     </div>
     <p class="field-note">不运行脚本时，下面仍显示全部三个样本。选择某一方向后，只保留至少有一个对口岗位的行业。</p>
+    <p class="field-note" data-status aria-live="polite"></p>
   </fieldset>
 
   <div data-empty class="empty" hidden aria-live="polite">
@@ -104,7 +105,7 @@ const rolesByIndustry = new Map(data.industries.map((industry) => [industry.id, 
                   {key === "demand" ? (
                     <>
                       <p>{industry.comparison.demand}</p>
-                      <MetricList metrics={demand} citations={citations} compact />
+                      <MetricList metrics={demand} citations={citations} compact limit={4} />
                     </>
                   ) : null}
                   {key === "roles" ? (
@@ -123,7 +124,7 @@ const rolesByIndustry = new Map(data.industries.map((industry) => [industry.id, 
                   {key === "profit" ? (
                     <>
                       <p>{industry.comparison.profit}</p>
-                      <MetricList metrics={profit} citations={citations} compact />
+                      <MetricList metrics={profit} citations={citations} compact limit={4} />
                     </>
                   ) : null}
                   {key === "risks" ? industry.comparison.risks : null}

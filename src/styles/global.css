@@ -147,6 +147,13 @@ fieldset {
 }
 legend { padding: 0 0.3rem; font-weight: 700; }
 
+/* 带 ?direction= 的链接在首屏就按方向显示，不等脚本 */
+html[data-direction="marketing"] .compare [data-industry]:not([data-directions~="marketing"]),
+html[data-direction="community"] .compare [data-industry]:not([data-directions~="community"]),
+html[data-direction="destination"] .compare [data-industry]:not([data-directions~="destination"]) {
+  display: none;
+}
+
 /* 筛选：一行 chips，替掉纵向单选列表 */
 .choices { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .choices label {
