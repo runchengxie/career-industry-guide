@@ -12,15 +12,39 @@ interface Props {
 const { title, description = "三个行业样本的比较研究，不是就业保证，也不是排名。" } = Astro.props;
 const meta = loadDataset().meta;
 const pageTitle = title === meta.title ? title : `${title} · ${meta.title}`;
+const directions = meta.directions
+  .map((direction) => direction.id)
+  .filter((id) => id !== "all")
+  .join(" ");
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const siteName = meta.title;
 ---
 
-<html lang={meta.locale}>
+<html lang={meta.locale} data-directions={directions}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.svg`} type="image/svg+xml" />
     <title>{pageTitle}</title>
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="zh_CN" />
+    <meta name="twitter:card" content="summary" />
+    <!-- 首屏按 URL 预置方向，避免带 ?direction= 的链接先闪一下三个样本 -->
+    <script is:inline>
+      (function () {
+        try {
+          var d = new URLSearchParams(location.search).get("direction");
+          var allowed = (document.documentElement.dataset.directions || "").split(/\s+/);
+          if (d && allowed.indexOf(d) !== -1) document.documentElement.dataset.direction = d;
+        } catch (error) {}
+      })();
+    </script>
   </head>
   <body id="top">
     <a class="skip" href="#content">跳到正文</a>

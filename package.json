@@ -12,9 +12,9 @@
     "dev": "astro dev",
     "preview": "astro preview",
     "check:html": "html-validate dist",
-    "verify": "npm run format:check && npm test && npm run typecheck && npm run build && npm run check:dist && npm run check:html",
     "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\" \"tests/**/*.ts\" \"*.{json,mjs}\"",
-    "format:check": "prettier --check \"src/**/*.ts\" \"scripts/**/*.ts\" \"tests/**/*.ts\" \"*.{json,mjs}\""
+    "format:check": "prettier --check \"src/**/*.ts\" \"scripts/**/*.ts\" \"tests/**/*.ts\" \"*.{json,mjs}\"",
+    "verify": "npm run format:check && npm test && npm run typecheck && npm run build && npm run check:dist && npm run check:html"
   },
   "dependencies": {
     "astro": "7.4.12"
@@ -22,6 +22,7 @@
   "devDependencies": {
     "@astrojs/check": "0.9.12",
     "@types/node": "26.6.6",
+    "@astrojs/sitemap": "^3.7.5",
     "html-validate": "^9.7.1",
     "prettier": "^3.10.1",
     "tsx": "^4.20.6",

@@ -42,6 +42,14 @@ test("页末来源表按编号连续排列", () => {
   );
 });
 
+test("ref() 只在第一次出现时标 first，供页末 ↩ 跳回", () => {
+  const citations = createCitations(sources);
+  assert.deepEqual(citations.ref("a"), { number: 1, first: true });
+  assert.deepEqual(citations.ref("a"), { number: 1, first: false });
+  assert.deepEqual(citations.ref("b"), { number: 2, first: true });
+  assert.deepEqual(citations.ref("missing"), { number: 0, first: false });
+});
+
 test("真实数据里每个被引用的来源都能排上号", () => {
   const data = loadDataset();
   const citations = createCitations(data.sources);

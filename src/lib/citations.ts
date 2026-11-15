@@ -13,6 +13,7 @@ export function createCitations(sources: Source[]) {
   const byId = new Map(sources.map((source) => [source.id, source]));
   const order: string[] = [];
   const numbers = new Map<string, number>();
+  const rendered = new Set<string>();
 
   function number(sourceId: string): number {
     const existing = numbers.get(sourceId);
@@ -25,6 +26,18 @@ export function createCitations(sources: Source[]) {
     return next;
   }
 
+  /**
+   * 渲染行内引用时调用：返回编号，并标记是不是这一页的第一次出现，
+   * 第一次出现的地方才有 id，供页末来源表的 ↩ 跳回。
+   */
+  function ref(sourceId: string): { number: number; first: boolean } {
+    const value = number(sourceId);
+    if (value <= 0) return { number: 0, first: false };
+    const first = !rendered.has(sourceId);
+    rendered.add(sourceId);
+    return { number: value, first };
+  }
+
   /** 只在页面末尾调用，此时所有行内引用都已经登记。 */
   function referenced(): CitationEntry[] {
     return order
@@ -32,7 +45,7 @@ export function createCitations(sources: Source[]) {
       .filter((entry): entry is CitationEntry => entry.source != null);
   }
 
-  return { number, referenced };
+  return { number, ref, referenced };
 }
 
 export type Citations = ReturnType<typeof createCitations>;

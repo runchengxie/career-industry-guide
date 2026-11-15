@@ -10,14 +10,18 @@ interface Props {
   citations: Citations;
   /** 首页表格与右栏用紧凑模式：口径、公式和备注收进 details。 */
   compact?: boolean;
+  /** 只显示前几条，其余收进“另有 n 条指标”，不丢数据。 */
+  limit?: number;
 }
 
-const { metrics, citations, compact = false } = Astro.props;
+const { metrics, citations, compact = false, limit } = Astro.props;
+const shown = limit != null ? metrics.slice(0, limit) : metrics;
+const rest = limit != null ? metrics.slice(limit) : [];
 ---
 
 <ul class="metrics">
   {
-    metrics.map((metric) => {
+    shown.map((metric) => {
       const text = formatMetric(metric);
       const meta = (
         <>
@@ -47,3 +51,25 @@ const { metrics, citations, compact = false } = Astro.props;
     })
   }
 </ul>
+
+{
+  rest.length > 0 ? (
+    <details class="more">
+      <summary>另有 {rest.length} 条指标</summary>
+      <ul class="metrics">
+        {rest.map((metric) => (
+          <li id={metric.id}>
+            <span class="metric-name">{metric.name}</span>
+            {metric.availability === "value" ? (
+              <span>{formatMetric(metric)}</span>
+            ) : (
+              <span class="missing">{formatMetric(metric)}</span>
+            )}
+            {metric.availability === "value" ? <span class="tag">{natureLabel[metric.nature]}</span> : null}
+            <CitationRefs sourceIds={metric.sourceIds} citations={citations} />
+          </li>
+        ))}
+      </ul>
+    </details>
+  ) : null
+}

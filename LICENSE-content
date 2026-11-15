@@ -1,0 +1,19 @@
+站点文字与数据采用 知识共享 署名 4.0 国际许可协议（CC BY 4.0）
+
+The text and data of this site are licensed under the Creative Commons
+Attribution 4.0 International License (CC BY 4.0).
+
+适用范围 / Scope
+- 站点的中文正文、指标数据（src/data/*.json）、研究提示词（docs/prompts/）
+  与设计文档，按 CC BY 4.0 授权。
+- 页面模板、样式、构建脚本与校验代码按 MIT 授权，见 LICENSE。
+
+您可以自由地共享与演绎，包括商业用途，条件是署名：注明来源为
+“职业行业研究指南 (Career & Industry Guide), runchengxie”，并链接到
+https://runchengxie.github.io/career-industry-guide/ ，同时说明是否作了修改。
+
+完整许可文本：https://creativecommons.org/licenses/by/4.0/legalcode
+许可摘要（中文）：https://creativecommons.org/licenses/by/4.0/deed.zh-hans
+
+注意：站内引用的第三方公报、公司年报与新闻转述，其版权归原作者所有；
+引用这些材料时请同时遵守原始出版方的条款。
