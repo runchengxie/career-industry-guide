@@ -19,6 +19,7 @@ function metric(overrides: Partial<Metric>): Metric {
     formula: null,
     inputs: null,
     note: null,
+    category: "薪资",
     ...overrides,
   };
 }

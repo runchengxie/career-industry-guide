@@ -1,4 +1,5 @@
 import type { Dataset, Metric, Role } from "./types.ts";
+import { metricCategories } from "./types.ts";
 import { allClaims } from "./support.ts";
 
 const BANNED_KEYS = ["score", "rank", "rating", "recommendationIndex", "综合评分", "推荐指数"];
@@ -35,6 +36,9 @@ function checkMetric(metric: Metric, sourceIds: Set<string>, errors: string[]): 
     }
   } else if (metric.display != null) {
     errors.push(`指标 ${metric.id} 不是数值状态，不能带 display`);
+  }
+  if (!metricCategories.includes(metric.category)) {
+    errors.push(`指标 ${metric.id} 的分类 ${metric.category} 不在规定类别里`);
   }
   for (const sourceId of metric.sourceIds) {
     if (!sourceIds.has(sourceId)) errors.push(`指标 ${metric.id} 引用了不存在的来源 ${sourceId}`);

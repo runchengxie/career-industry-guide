@@ -8,6 +8,7 @@ const base = rawBase === "/" ? "/" : `/${rawBase.replace(/^\/+|\/+$/g, "")}/`;
 
 const required = [
   "dist/index.html",
+  "dist/data/index.html",
   "dist/methods/index.html",
   "dist/404.html",
   "dist/favicon.svg",

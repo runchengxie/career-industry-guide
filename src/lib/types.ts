@@ -12,6 +12,23 @@ export type MetricNature =
 
 export type Verification = "verified" | "materials" | "unverified";
 
+/** 指标分类：数据页的“数据地图”按它排列，顺序即求职时想知道的顺序。 */
+export const metricCategories = [
+  "需求规模",
+  "增长",
+  "人均花费",
+  "结构",
+  "公司财务",
+  "薪资",
+  "市场集中度",
+  "在招职位",
+  "用工结构",
+  "从业人员时序",
+  "变动原因",
+] as const;
+
+export type MetricCategory = (typeof metricCategories)[number];
+
 export type HumanitiesFit = "match" | "adjacent";
 
 export interface Source {
@@ -38,6 +55,8 @@ export interface Metric {
   formula: string | null;
   inputs: number[] | null;
   note: string | null;
+  /** 指标分类，数据页的数据地图按它排列。 */
+  category: MetricCategory;
 }
 
 export interface Role {

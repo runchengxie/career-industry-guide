@@ -24,6 +24,7 @@ function current(href: string): "page" | undefined {
         );
       })
     }
+    <a href={`${base}data/`} aria-current={current(`${base}data/`)}>数据</a>
     <a href={`${base}methods/`} aria-current={current(`${base}methods/`)}>来源与方法</a>
   </div>
 </header>
