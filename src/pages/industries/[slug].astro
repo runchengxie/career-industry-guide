@@ -3,6 +3,8 @@ import Base from "../../layouts/Base.astro";
 import ClaimList from "../../components/ClaimList.astro";
 import MetricList from "../../components/MetricList.astro";
 import Section from "../../components/Section.astro";
+import SourceList from "../../components/SourceList.astro";
+import { createCitations } from "../../lib/citations.ts";
 import { verificationLabel } from "../../lib/labels.ts";
 import { loadDataset } from "../../lib/load.ts";
 import { claimBlocks } from "../../lib/support.ts";
@@ -18,16 +20,30 @@ export function getStaticPaths() {
 const data = loadDataset();
 const industry = data.industries.find((item) => item.id === Astro.props.industryId);
 if (!industry) throw new Error("缺少行业");
+const citations = createCitations(data.sources);
 const roles = data.roles.filter((role) => industry.roleIds.includes(role.id));
 const metrics = data.metrics.filter((metric) => industry.metricIds.includes(metric.id));
 const claims = claimBlocks(industry);
-const industrySources = data.sources.filter(
-  (source) =>
-    claims.some((claim) => claim.sourceIds.includes(source.id)) ||
-    metrics.some((metric) => metric.sourceIds.includes(source.id)) ||
-    roles.some((role) => role.sourceIds.includes(source.id)),
-);
+
+// 编号按页面呈现顺序登记：正文段落在前，右栏指标在后。
+for (const claim of claims) for (const sourceId of claim.sourceIds) citations.number(sourceId);
+for (const metric of metrics) for (const sourceId of metric.sourceIds) citations.number(sourceId);
 const base = import.meta.env.BASE_URL;
+
+const toc = [
+  { id: "definition", title: "定义与口径" },
+  { id: "demand", title: "需求证据" },
+  { id: "roles", title: "适合岗位" },
+  { id: "daily-work", title: "日常工作概况" },
+  { id: "thresholds", title: "入口门槛" },
+  { id: "portfolio", title: "可做的小作品" },
+  { id: "geography", title: "地域与资历限制" },
+  { id: "profit", title: "盈利与稳定性" },
+  { id: "risks", title: "风险" },
+  { id: "questions", title: "尚未证实的问题" },
+  { id: "metrics", title: "已录入指标" },
+  { id: "sources", title: "来源" },
+];
 ---
 
 <Base title={industry.name} description={`${industry.name}的定义、证据、岗位和缺口。`}>
@@ -35,68 +51,72 @@ const base = import.meta.env.BASE_URL;
   <h1>{industry.name}</h1>
   <p>{data.meta.sampleNote}</p>
 
-  <Section id="definition" title="定义与口径">
-    <ClaimList claims={industry.definition} sources={data.sources} />
-  </Section>
-  <Section id="demand" title="需求证据">
-    <ClaimList claims={industry.demand} sources={data.sources} />
-  </Section>
-  <Section id="roles" title="适合岗位">
-    <ul>
-      {
-        roles.map((role) => (
-          <li>
-            <a href={`${base}roles/${role.slug}/`}>{role.name}</a>
-            <span class="tag">{verificationLabel[role.verification]}</span>
-            {role.humanitiesFit === "adjacent" ? <span class="tag">相邻而非对口</span> : null}
-          </li>
-        ))
-      }
-    </ul>
-    <p>护理、康复和医疗技术岗位如果出现在招聘材料里，只视为相邻工作，不列入上面的文科岗位。</p>
-  </Section>
-  <Section id="daily-work" title="日常工作概况">
-    <ClaimList claims={industry.dailyWork} sources={data.sources} />
-  </Section>
-  <Section id="thresholds" title="入口门槛">
-    <ClaimList claims={industry.thresholds} sources={data.sources} />
-  </Section>
-  <Section id="portfolio" title="可做的小作品或技能准备">
-    <ul class="plain">
-      {industry.portfolio.map((item) => <li>{item}</li>)}
-    </ul>
-    <p>这些是练习方向，不是雇主公布的录用条件。</p>
-  </Section>
-  <Section id="geography" title="地域与资历限制">
-    <ClaimList claims={industry.geographyLimits} sources={data.sources} />
-  </Section>
-  <Section id="profit" title="盈利与稳定性">
-    <ClaimList claims={industry.profit} sources={data.sources} />
-  </Section>
-  <Section id="risks" title="风险">
-    <ClaimList claims={industry.risks} sources={data.sources} />
-  </Section>
-  <Section id="questions" title="尚未证实的问题">
-    <ul class="plain">
-      {industry.openQuestions.map((item) => <li>{item}</li>)}
-    </ul>
-  </Section>
-  <Section id="metrics" title="已录入指标">
-    <MetricList metrics={metrics} sources={data.sources} />
-  </Section>
-  <Section id="sources" title="来源列表">
-    <ul>
-      {
-        industrySources.map((source) => (
-          <li>
-            <a href={source.url}>{source.author}：{source.title}</a>
-            <span class="scope">
-              访问日期 {source.accessed}
-              {source.published ? `，公布或发布日期 ${source.published}` : "，材料页没有可靠发布日期"}
-            </span>
-          </li>
-        ))
-      }
-    </ul>
+  <div class="layout">
+    <div class="article">
+      <Section id="definition" title="定义与口径">
+        <ClaimList claims={industry.definition} citations={citations} />
+      </Section>
+      <Section id="demand" title="需求证据">
+        <ClaimList claims={industry.demand} citations={citations} />
+      </Section>
+      <Section id="roles" title="适合岗位">
+        <ul>
+          {
+            roles.map((role) => (
+              <li>
+                <a href={`${base}roles/${role.slug}/`}>{role.name}</a>
+                <span class="tag">{verificationLabel[role.verification]}</span>
+                {role.humanitiesFit === "adjacent" ? <span class="tag">相邻而非对口</span> : null}
+              </li>
+            ))
+          }
+        </ul>
+        <p>护理、康复和医疗技术岗位如果出现在招聘材料里，只视为相邻工作，不列入上面的文科岗位。</p>
+      </Section>
+      <Section id="daily-work" title="日常工作概况">
+        <ClaimList claims={industry.dailyWork} citations={citations} />
+      </Section>
+      <Section id="thresholds" title="入口门槛">
+        <ClaimList claims={industry.thresholds} citations={citations} />
+      </Section>
+      <Section id="portfolio" title="可做的小作品或技能准备">
+        <ul class="plain">
+          {industry.portfolio.map((item) => <li>{item}</li>)}
+        </ul>
+        <p>这些是练习方向，不是雇主公布的录用条件。</p>
+      </Section>
+      <Section id="geography" title="地域与资历限制">
+        <ClaimList claims={industry.geographyLimits} citations={citations} />
+      </Section>
+      <Section id="profit" title="盈利与稳定性">
+        <ClaimList claims={industry.profit} citations={citations} />
+      </Section>
+      <Section id="risks" title="风险">
+        <ClaimList claims={industry.risks} citations={citations} />
+      </Section>
+      <Section id="questions" title="尚未证实的问题">
+        <ul class="plain">
+          {industry.openQuestions.map((item) => <li>{item}</li>)}
+        </ul>
+      </Section>
+    </div>
+
+    <aside class="rail">
+      <nav class="toc" aria-labelledby="toc-heading">
+        <h2 id="toc-heading">本页内容</h2>
+        <ol>
+          {toc.map((item) => <li><a href={`#${item.id}`}>{item.title}</a></li>)}
+        </ol>
+      </nav>
+      <section class="rail-block" id="metrics" aria-labelledby="metrics-heading">
+        <h2 id="metrics-heading">已录入指标</h2>
+        <MetricList metrics={metrics} citations={citations} compact />
+      </section>
+    </aside>
+  </div>
+
+  <Section id="sources" title="来源">
+    <p class="field-note">按上面第一次出现的顺序编号。每条都写明访问日期；没有可靠发布日期的会直接说明。</p>
+    <SourceList entries={citations.referenced()} />
   </Section>
 </Base>

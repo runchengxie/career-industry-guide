@@ -87,6 +87,12 @@ for (const page of pages) {
     }
     if (!existsSync(file)) broken.push(`${page} -> ${href}`);
   }
+  // 页内锚点（目录、脚注）必须能落到本页的 id
+  for (const raw of hrefs) {
+    const href = raw.replace(/^(?:href|src)="/, "").replace(/"$/, "");
+    if (!href.startsWith("#") || href === "#") continue;
+    if (!html.includes(`id="${href.slice(1)}"`)) broken.push(`${page} -> ${href} 没有对应的锚点`);
+  }
 }
 if (broken.length > 0) {
   console.error(broken.join("\n"));

@@ -2,9 +2,11 @@
 import Base from "../layouts/Base.astro";
 import ClaimList from "../components/ClaimList.astro";
 import { loadDataset } from "../lib/load.ts";
+import { createCitations } from "../lib/citations.ts";
 import { allClaims, supportIndex, supportOf } from "../lib/support.ts";
 
 const data = loadDataset();
+const citations = createCitations(data.sources);
 const supports = supportIndex(data);
 const names = new Map<string, string>();
 for (const metric of data.metrics) names.set(metric.id, metric.name);
@@ -19,7 +21,7 @@ for (const claim of allClaims(data)) {
 <Base title="来源与方法" description="研究范围、口径、引用和未核实问题。">
   <h1>来源与方法</h1>
   <p>地理范围是{data.meta.geography}。研究版本日期是 {data.meta.researchVersion}（{data.meta.timezone}）。</p>
-  <ClaimList claims={data.meta.method} sources={data.sources} />
+  <ClaimList claims={data.meta.method} citations={citations} />
 
   <section class="section">
     <h2>当前未核实清单</h2>

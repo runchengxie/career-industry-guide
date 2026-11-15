@@ -236,6 +236,79 @@ h2:hover .permalink, .permalink:focus-visible { opacity: 1; }
 
 .to-top { margin: 0; }
 
+
+/* 行内引用：上标数字，指向页末来源表 */
+.fn {
+  font-size: 0.72em;
+  line-height: 0;
+  vertical-align: super;
+  white-space: nowrap;
+}
+.fn a {
+  text-decoration: none;
+  padding: 0 0.08em;
+}
+.fn a + a::before { content: ","; }
+.fn a:hover { text-decoration: underline; }
+
+.source-list { padding-left: 1.6rem; }
+.source-list li { margin: 0.45rem 0; }
+.source-list li:target {
+  background: #efe6d6;
+  outline: 2px solid #e2d3b8;
+  outline-offset: 2px;
+}
+
+/* 指标的口径与说明在紧凑模式里折叠 */
+details.meta { margin-top: 0.2rem; }
+details.meta summary {
+  cursor: pointer;
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+details.meta summary:hover { color: var(--pine-dark); }
+
+/* 行业页：正文 + 右栏（目录与指标），窄屏回落成单列 */
+.layout { display: grid; gap: calc(var(--space) * 5); }
+.rail { display: grid; gap: calc(var(--space) * 4); }
+.rail h2 { font-size: var(--step-1); margin: 0 0 var(--space); }
+
+.toc ol {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 0.75rem;
+  border-left: 2px solid var(--line);
+  font-size: var(--text-sm);
+}
+.toc li { margin: 0.3rem 0; }
+.toc a { text-decoration: none; color: var(--muted); }
+.toc a:hover { color: var(--pine-dark); text-decoration: underline; }
+
+.rail-block .metrics { padding-left: 1.1rem; }
+.rail-block .metric-name { display: inline; }
+
+@media (min-width: 1000px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) 19rem;
+    gap: 3.5rem;
+    align-items: start;
+  }
+  .rail {
+    position: sticky;
+    top: 1rem;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    padding-right: 0.25rem;
+  }
+}
+
+/* 窄屏：目录留在展开阅读之外，指标跟在正文后面 */
+@media (max-width: 999px) {
+  .toc { display: none; }
+  .rail { order: 1; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto; }
 }
