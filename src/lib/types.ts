@@ -21,7 +21,6 @@ export interface Source {
   published: string | null;
   accessed: string;
   url: string;
-  supports: string[];
 }
 
 export interface Metric {

@@ -2,25 +2,17 @@
 import Base from "../layouts/Base.astro";
 import ClaimList from "../components/ClaimList.astro";
 import { loadDataset } from "../lib/load.ts";
+import { allClaims, supportIndex, supportOf } from "../lib/support.ts";
 
 const data = loadDataset();
+const supports = supportIndex(data);
 const names = new Map<string, string>();
 for (const metric of data.metrics) names.set(metric.id, metric.name);
 for (const role of data.roles) names.set(role.id, role.name);
 for (const industry of data.industries) names.set(industry.id, industry.name);
-for (const claim of [
-  ...data.meta.method,
-  ...data.industries.flatMap((industry) => [
-    ...industry.definition,
-    ...industry.demand,
-    ...industry.dailyWork,
-    ...industry.thresholds,
-    ...industry.geographyLimits,
-    ...industry.profit,
-    ...industry.risks,
-  ]),
-]) {
-  names.set(claim.id, claim.text.slice(0, 28));
+for (const claim of allClaims(data)) {
+  const text = claim.text.trim();
+  names.set(claim.id, text.length > 24 ? `${text.slice(0, 24)}…` : text);
 }
 ---
 
@@ -46,7 +38,7 @@ for (const claim of [
             <span class="scope">
               {source.published ? `发布或公布日期 ${source.published}` : "页面没有可靠发布日期"}，访问日期 {source.accessed}
             </span>
-            <span class="note">支持：{source.supports.map((id) => names.get(id) ?? id).join("、")}</span>
+            <span class="note">支持：{supportOf(supports, source).map((id) => names.get(id) ?? id).join("、")}</span>
           </li>
         ))
       }

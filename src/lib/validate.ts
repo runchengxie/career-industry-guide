@@ -1,4 +1,5 @@
 import type { Dataset, Metric, Role } from "./types.ts";
+import { allClaims } from "./support.ts";
 
 const BANNED_KEYS = ["score", "rank", "rating", "recommendationIndex", "综合评分", "推荐指数"];
 
@@ -95,7 +96,23 @@ export function validateDataset(data: Dataset): string[] {
   for (const metric of data.metrics) {
     if (metricIds.has(metric.id)) errors.push(`指标 id 重复 ${metric.id}`);
     metricIds.add(metric.id);
+    if (!industryIds.has(metric.subjectId) && !roleIds.has(metric.subjectId)) {
+      errors.push(`指标 ${metric.id} 的主体 ${metric.subjectId} 不是已录入的行业或岗位`);
+    }
     checkMetric(metric, sourceIds, errors);
+  }
+
+  const directionIds = new Set(data.meta.directions.map((direction) => direction.id));
+  for (const role of data.roles) {
+    if (!directionIds.has(role.direction)) {
+      errors.push(`岗位 ${role.id} 的方向 ${role.direction} 不在 meta.directions 里`);
+    }
+    for (const industryId of role.industryIds) {
+      const industry = data.industries.find((item) => item.id === industryId);
+      if (industry && !industry.roleIds.includes(role.id)) {
+        errors.push(`岗位 ${role.id} 属于 ${industryId}，但该行业的 roleIds 没有列出它`);
+      }
+    }
   }
 
   for (const role of data.roles) checkRole(role, sourceIds, industryIds, errors);
@@ -111,6 +128,17 @@ export function validateDataset(data: Dataset): string[] {
     ];
     for (const metricId of referencedMetrics) {
       if (!metricIds.has(metricId)) errors.push(`行业 ${industry.id} 引用了不存在的指标 ${metricId}`);
+    }
+    for (const metricId of [...industry.homeMetricIds.demand, ...industry.homeMetricIds.profit]) {
+      if (!industry.metricIds.includes(metricId)) {
+        errors.push(`行业 ${industry.id} 的首页指标 ${metricId} 不在它的 metricIds 里`);
+      }
+    }
+    for (const metricId of industry.metricIds) {
+      const metric = data.metrics.find((item) => item.id === metricId);
+      if (metric && metric.subjectId !== industry.id) {
+        errors.push(`行业 ${industry.id} 列出了指标 ${metricId}，但该指标主体是 ${metric.subjectId}`);
+      }
     }
     const blocks = [
       ...industry.definition,
@@ -132,37 +160,9 @@ export function validateDataset(data: Dataset): string[] {
   }
 
   const claimIds = new Set<string>();
-  for (const claim of data.meta.method) {
+  for (const claim of allClaims(data)) {
+    if (claimIds.has(claim.id)) errors.push(`段落 id 重复 ${claim.id}`);
     claimIds.add(claim.id);
-    for (const sourceId of claim.sourceIds) {
-      if (!sourceIds.has(sourceId)) errors.push(`方法段落 ${claim.id} 引用了不存在的来源 ${sourceId}`);
-    }
-  }
-  for (const industry of data.industries) {
-    for (const claim of [
-      ...industry.definition,
-      ...industry.demand,
-      ...industry.dailyWork,
-      ...industry.thresholds,
-      ...industry.geographyLimits,
-      ...industry.profit,
-      ...industry.risks,
-    ]) {
-      claimIds.add(claim.id);
-    }
-  }
-  const supportedIds = new Set<string>([
-    ...metricIds,
-    ...roleIds,
-    ...industryIds,
-    ...claimIds,
-  ]);
-  for (const source of data.sources) {
-    for (const support of source.supports) {
-      if (!supportedIds.has(support)) {
-        errors.push(`来源 ${source.id} 的支持对象 ${support} 不存在`);
-      }
-    }
   }
 
   return errors;
