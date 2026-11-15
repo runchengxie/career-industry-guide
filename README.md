@@ -2,13 +2,15 @@
 
 这是一个公开的中文静态网站，用来对照广告营销服务、养老服务、国内旅游服务三个研究样本。它帮助查看需求、岗位入口、门槛、风险和证据，不是就业保证，也不是行业排名或求职中介。
 
-研究版本日期：2026-11-15（Asia/Shanghai）。公开招聘岗位的活页核验尚未完整。原始研究提示词、个人隐私材料和未公开附件不在本仓库中。
+研究版本日期：2026-11-15（Asia/Shanghai）。公开招聘岗位的活页核验尚未完整。两份研究提示词已脱敏收录于 `docs/prompts/`；个人隐私材料、原始对话和未公开附件不在本仓库中。
 
 计划发布地址：<https://runchengxie.github.io/career-industry-guide/>
 
 设计说明：`docs/superpowers/specs/2026-11-15-career-industry-guide-design.md`
 
 实现计划：`docs/superpowers/plans/2026-11-15-career-industry-guide.md`
+
+研究提示词：`docs/prompts/README.md`
 
 ## 本地预览
 
