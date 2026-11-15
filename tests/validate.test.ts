@@ -19,6 +19,7 @@ function metric(overrides: Partial<Metric> = {}): Metric {
     formula: null,
     inputs: null,
     note: null,
+    category: "薪资",
     ...overrides,
   };
 }
@@ -114,7 +115,7 @@ test("已完成活页核验但缺少链接或日期时校验失败", () => {
 
 test("缺失指标不能带可显示数字", () => {
   const data = base({
-    metrics: [metric({ availability: "unavailable", display: "0", sourceIds: [] })],
+    metrics: [metric({ availability: "unavailable", display: "0", sourceIds: [],  })],
   });
   assert.throws(() => assertValid(data), /暂无可靠数据|display/);
 });

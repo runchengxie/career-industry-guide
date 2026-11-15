@@ -349,6 +349,76 @@ details.meta summary:hover { color: var(--pine-dark); }
   .rail-block { order: 1; }
 }
 
+
+/* 数据页：概览、缺口地图、指标全量表 */
+.stats {
+  list-style: none;
+  margin: 0 0 calc(var(--space) * 4);
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+  gap: 0.75rem;
+  max-width: none;
+}
+.stats li {
+  border: 1px solid var(--line);
+  background: var(--card);
+  padding: 0.6rem 0.75rem;
+}
+.stats strong {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: var(--step-2);
+  line-height: 1.2;
+}
+.stats span { font-size: var(--text-sm); color: var(--muted); }
+
+.table-scroll { overflow-x: auto; }
+
+.grid-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+.grid-table caption {
+  caption-side: top;
+  text-align: left;
+  color: var(--muted);
+  padding: 0 0 var(--space);
+}
+.grid-table th,
+.grid-table td {
+  border: 1px solid var(--line);
+  padding: 0.5rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+  background: var(--card);
+}
+.grid-table thead th { background: var(--head); }
+.grid-table tbody th { font-weight: 600; }
+.grid-table tr.group-row th {
+  background: var(--target);
+  font-weight: 700;
+}
+.grid-table .scope { font-size: var(--text-xs); }
+
+.map-table th[scope="row"] {
+  width: 8rem;
+  white-space: nowrap;
+}
+
+.state {
+  display: inline-block;
+  padding: 0 0.4rem;
+  border: 1px solid currentColor;
+  font-size: var(--text-xs);
+}
+.state-tracked { color: var(--pine-dark); }
+.state-missing { color: var(--missing); }
+.state-not-tracked { color: var(--muted); }
+
+.data-table td:nth-child(3) { white-space: nowrap; }
+
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto; }
 }

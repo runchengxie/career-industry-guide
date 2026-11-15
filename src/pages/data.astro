@@ -1,0 +1,192 @@
+---
+import Base from "../layouts/Base.astro";
+import Section from "../components/Section.astro";
+import { formatMetric } from "../lib/format.ts";
+import { dataMatrix, labelMetrics, metricsByIndustry, summarize } from "../lib/explore.ts";
+import { metricCategories } from "../lib/types.ts";
+import { natureLabel } from "../lib/labels.ts";
+import { loadDataset } from "../lib/load.ts";
+
+const data = loadDataset();
+const summary = summarize(data);
+const matrix = dataMatrix(data);
+const groups = metricsByIndustry(data);
+const base = import.meta.env.BASE_URL;
+const repo = "https://github.com/runchengxie/career-industry-guide";
+
+const stateLabel: Record<string, string> = {
+  tracked: "有数值",
+  mixed: "有数值，另有缺口",
+  missing: "记了缺口，未取到",
+  "not-tracked": "未立项",
+};
+
+const files = [
+  "src/data/industries.json",
+  "src/data/metrics.json",
+  "src/data/roles.json",
+  "src/data/sources.json",
+  "src/data/meta.json",
+];
+---
+
+<Base title="数据" description="三个样本已录入指标的全量表、缺口地图与数据文件。">
+  <h1>数据</h1>
+  <p class="lede">
+    这里把三个样本录入的指标摊开：哪些有数值、哪些记了缺口但取不到、哪些还没有立项。数值本身仍在行业页按口径解读，这一页只负责让人先看清楚数据的边界。
+  </p>
+
+  <ul class="stats">
+    <li><strong>{summary.total}</strong><span>条指标</span></li>
+    <li><strong>{summary.value}</strong><span>条有数值</span></li>
+    <li><strong>{summary.unavailable + summary.unverified}</strong><span>条暂时取不到</span></li>
+    <li><strong>{summary.sources}</strong><span>个来源</span></li>
+    <li><strong>{summary.verifiedRoles}/{summary.roles}</strong><span>岗位完成活页核验</span></li>
+  </ul>
+
+  <Section id="map" title="数据地图">
+    <p>
+      四类状态要分开看：<strong>有数值</strong>是录到了；<strong>另有缺口</strong>是这一类里有数、也有还取不到的关键项；<strong>记了缺口</strong>是知道该有这个数、但公开渠道取不到；<strong>未立项</strong>是还没有为这个类别建立指标。把第四种说成第三种，等于把“没去找”说成“找不到”。
+    </p>
+    <div class="table-scroll">
+      <table class="grid-table map-table">
+        <caption>指标类别 × 样本</caption>
+        <thead>
+          <tr>
+            <th scope="col">类别</th>
+            {data.industries.map((industry) => <th scope="col">{industry.name}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {
+            matrix.map((row) => (
+              <tr>
+                <th scope="row">{row.category}</th>
+                {row.cells.map((cell) => (
+                  <td data-label={cell.industry.name}>
+                    <span class={`state state-${cell.kind}`}>{stateLabel[cell.kind]}</span>
+                    {cell.values.length > 0 ? (
+                      <span class="scope">{labelMetrics(cell.values).join("、")}</span>
+                    ) : null}
+                    {cell.gaps.length > 0 ? (
+                      <span class="scope">缺口：{labelMetrics(cell.gaps).join("、")}</span>
+                    ) : null}
+                  </td>
+                ))}
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+    <p class="field-note">
+      分类是固定的，共 {metricCategories.length} 类；某个类别在某格是“未立项”，表示这个样本还没有为它建立指标，不代表不存在数据。
+    </p>
+  </Section>
+
+  <Section id="metrics" title="全部指标">
+    <fieldset>
+      <legend>筛选指标</legend>
+      <div class="choices">
+        <label><input type="radio" name="industry" value="all" checked /><span class="chip-name">全部行业</span></label>
+        {
+          data.industries.map((industry) => (
+            <label>
+              <input type="radio" name="industry" value={industry.id} />
+              <span class="chip-name">{industry.name}</span>
+            </label>
+          ))
+        }
+      </div>
+      <div class="choices">
+        <label><input type="radio" name="nature" value="all" checked /><span class="chip-name">全部性质</span></label>
+        {
+          Object.entries(natureLabel).map(([value, label]) => (
+            <label>
+              <input type="radio" name="nature" value={value} />
+              <span class="chip-name">{label}</span>
+            </label>
+          ))
+        }
+      </div>
+      <div class="choices">
+        <label><input type="radio" name="state" value="all" checked /><span class="chip-name">全部状态</span></label>
+        <label><input type="radio" name="state" value="value" /><span class="chip-name">有数值</span></label>
+        <label><input type="radio" name="state" value="missing" /><span class="chip-name">取不到</span></label>
+      </div>
+      <p class="field-note" data-count aria-live="polite">共 {summary.total} 条指标</p>
+    </fieldset>
+
+    <div class="table-scroll">
+      <table class="grid-table data-table">
+        <caption>已录入指标</caption>
+        <thead>
+          <tr>
+            <th scope="col">指标</th>
+            <th scope="col">数值</th>
+            <th scope="col">年份</th>
+            <th scope="col">性质</th>
+            <th scope="col">来源</th>
+          </tr>
+        </thead>
+        {
+          groups.map(({ industry, metrics }) => (
+            <tbody data-group={industry.id}>
+              <tr class="group-row">
+                <th scope="colgroup" colspan="5">
+                  <a href={`${base}industries/${industry.slug}/`}>{industry.name}</a>
+                </th>
+              </tr>
+              {metrics.map((metric) => {
+                const authors = metric.sourceIds
+                  .map((id) => data.sources.find((source) => source.id === id)?.author.split("，")[0] ?? id)
+                  .join("、");
+                return (
+                  <tr
+                    data-industry={industry.id}
+                    data-nature={metric.nature}
+                    data-state={metric.availability === "value" ? "value" : "missing"}
+                  >
+                    <th scope="row">{metric.name}</th>
+                    <td data-label="数值">
+                      {metric.availability === "value" ? (
+                        formatMetric(metric)
+                      ) : (
+                        <span class="missing">{formatMetric(metric)}</span>
+                      )}
+                    </td>
+                    <td data-label="年份">{metric.year ?? "—"}</td>
+                    <td data-label="性质">{natureLabel[metric.nature]}</td>
+                    <td data-label="来源">{authors || "—"}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          ))
+        }
+      </table>
+    </div>
+    <p class="field-note">
+      没有脚本时筛选不生效，表格仍是全量。数值的口径、公式和备注在各行业页的“已录入指标”里，点开“口径与说明”可见。
+    </p>
+  </Section>
+
+  <Section id="files" title="数据文件">
+    <p>站点数据是仓库里的结构化 JSON，页面由它构建，不是另一份拷贝。字段定义见 <a href={`${repo}/blob/main/src/lib/types.ts`}>src/lib/types.ts</a>。</p>
+    <ul>
+      {
+        files.map((file) => (
+          <li>
+            <a href={`${repo}/blob/main/${file}`}>{file}</a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="field-note">研究版本 {data.meta.researchVersion}（{data.meta.timezone}）。</p>
+  </Section>
+
+  <script>
+    import { setupDataFilter } from "../scripts/data-filter.ts";
+    setupDataFilter(document);
+  </script>
+</Base>

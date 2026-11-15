@@ -10,10 +10,13 @@
     "geography": "中国大陆",
     "scope": "新闻转述的全国广告业事业单位和规模以上企业广告业务收入，不是全市场每一家企业，也不是代理公司利润",
     "nature": "restatement",
-    "sourceIds": ["src-ad-2024"],
+    "sourceIds": [
+      "src-ad-2024"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "经济参考报稿写明，该数字来自市场监管总局发布的《中国广告业发展指数报告（2025）》。"
+    "note": "经济参考报稿写明，该数字来自市场监管总局发布的《中国广告业发展指数报告（2025）》。",
+    "category": "需求规模"
   },
   {
     "id": "ad-revenue-growth-2024",
@@ -26,10 +29,13 @@
     "geography": "中国大陆",
     "scope": "与15464.1亿元同一则转述中的同比增幅",
     "nature": "restatement",
-    "sourceIds": ["src-ad-2024"],
+    "sourceIds": [
+      "src-ad-2024"
+    ],
     "formula": null,
     "inputs": null,
-    "note": null
+    "note": null,
+    "category": "增长"
   },
   {
     "id": "ad-internet-share-2024",
@@ -42,10 +48,13 @@
     "geography": "中国大陆",
     "scope": "互联网广告发布收入占发布环节总收入的比重，不是全部广告业务收入的份额，也不是市场集中度",
     "nature": "restatement",
-    "sourceIds": ["src-ad-2024"],
+    "sourceIds": [
+      "src-ad-2024"
+    ],
     "formula": null,
     "inputs": null,
-    "note": null
+    "note": null,
+    "category": "结构"
   },
   {
     "id": "ad-degree-share-2024",
@@ -58,10 +67,13 @@
     "geography": "中国大陆",
     "scope": "同一则转述中的学历构成，只有这一年，不是从业人员完整时序，也不是文科岗位占比",
     "nature": "restatement",
-    "sourceIds": ["src-ad-2024"],
+    "sourceIds": [
+      "src-ad-2024"
+    ],
     "formula": null,
     "inputs": null,
-    "note": null
+    "note": null,
+    "category": "结构"
   },
   {
     "id": "ad-revenue-2025",
@@ -74,10 +86,13 @@
     "geography": "中国大陆",
     "scope": "新华社对《中国广告业发展指数报告（2026）》的转述用语是全年广告业务收入。该句没有再次写明事业单位和规模以上企业，因此不在这里改写成与2024年逐字相同的口径",
     "nature": "restatement",
-    "sourceIds": ["src-ad-2025"],
+    "sourceIds": [
+      "src-ad-2025"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "报告由国家市场监督管理总局联合中国经济信息社发布。本站没有把2024年与2025年合成一条无差别时序。"
+    "note": "报告由国家市场监督管理总局联合中国经济信息社发布。本站没有把2024年与2025年合成一条无差别时序。",
+    "category": "需求规模"
   },
   {
     "id": "ad-revenue-growth-2025",
@@ -90,10 +105,13 @@
     "geography": "中国大陆",
     "scope": "同一则新华社稿对2025年广告业务收入给出的同比增幅",
     "nature": "restatement",
-    "sourceIds": ["src-ad-2025"],
+    "sourceIds": [
+      "src-ad-2025"
+    ],
     "formula": null,
     "inputs": null,
-    "note": null
+    "note": null,
+    "category": "增长"
   },
   {
     "id": "ad-salary",
@@ -109,7 +127,8 @@
     "sourceIds": [],
     "formula": null,
     "inputs": null,
-    "note": "没有找到可引用的可靠薪资口径。"
+    "note": "没有找到可引用的可靠薪资口径。",
+    "category": "薪资"
   },
   {
     "id": "ad-concentration",
@@ -125,7 +144,8 @@
     "sourceIds": [],
     "formula": null,
     "inputs": null,
-    "note": "不输出没有可靠口径的CR或HHI。"
+    "note": "不输出没有可靠口径的CR或HHI。",
+    "category": "市场集中度"
   },
   {
     "id": "ad-openings",
@@ -141,7 +161,8 @@
     "sourceIds": [],
     "formula": null,
     "inputs": null,
-    "note": "没有完成公开招聘活页核验，不能写在招规模。"
+    "note": "没有完成公开招聘活页核验，不能写在招规模。",
+    "category": "在招职位"
   },
   {
     "id": "ad-employment-series",
@@ -157,7 +178,8 @@
     "sourceIds": [],
     "formula": null,
     "inputs": null,
-    "note": "目前只有2024年学历占比这一项转述，不能当成从业人员人数序列。"
+    "note": "目前只有2024年学历占比这一项转述，不能当成从业人员人数序列。",
+    "category": "从业人员时序"
   },
   {
     "id": "bf-revenue-2025",
@@ -170,10 +192,13 @@
     "geography": "公司合并报表，业务含中国大陆及出海",
     "scope": "公司年度报告摘要中的营业收入，不是广告业收入，也不是代理环节净利润",
     "nature": "company_disclosure",
-    "sourceIds": ["src-bluefocus-2025"],
+    "sourceIds": [
+      "src-bluefocus-2025"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "摘要写明数字来自年度报告全文，并另有“实现营业收入686.93亿元”的表述。摘要还列示该年较调整后上年增减12.99%。"
+    "note": "摘要写明数字来自年度报告全文，并另有“实现营业收入686.93亿元”的表述。摘要还列示该年较调整后上年增减12.99%。",
+    "category": "公司财务"
   },
   {
     "id": "bf-profit-2025",
@@ -186,10 +211,13 @@
     "geography": "公司合并报表",
     "scope": "年度报告摘要中的归母净利润，不是行业利润",
     "nature": "company_disclosure",
-    "sourceIds": ["src-bluefocus-2025"],
+    "sourceIds": [
+      "src-bluefocus-2025"
+    ],
     "formula": null,
     "inputs": null,
-    "note": null
+    "note": null,
+    "category": "公司财务"
   },
   {
     "id": "bf-profit-2024",
@@ -202,10 +230,13 @@
     "geography": "公司合并报表",
     "scope": "同一张摘要表中的2024年归母净利润，调整前与调整后相同",
     "nature": "company_disclosure",
-    "sourceIds": ["src-bluefocus-2025"],
+    "sourceIds": [
+      "src-bluefocus-2025"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "2024年为负，不能把2025年的薄利读成行业常态。"
+    "note": "2024年为负，不能把2025年的薄利读成行业常态。",
+    "category": "公司财务"
   },
   {
     "id": "bf-net-margin-2025",
@@ -218,10 +249,16 @@
     "geography": "公司合并报表",
     "scope": "自行测算，不是年报公布的净利率指标",
     "nature": "self_calculated",
-    "sourceIds": ["src-bluefocus-2025"],
+    "sourceIds": [
+      "src-bluefocus-2025"
+    ],
     "formula": "归属于上市公司股东的净利润 224665777.93 元 ÷ 营业收入 68692672430.48 元 × 100，再四舍五入到 0.01 个百分点",
-    "inputs": [224665777.93, 68692672430.48],
-    "note": "只说明这家公司收入和利润的关系，不能推广为广告业利润率。"
+    "inputs": [
+      224665777.93,
+      68692672430.48
+    ],
+    "note": "只说明这家公司收入和利润的关系，不能推广为广告业利润率。",
+    "category": "公司财务"
   },
   {
     "id": "elder-pop-2025",
@@ -234,10 +271,13 @@
     "geography": "全国",
     "scope": "国家统计局2025年统计公报的人口年龄构成，是需求背景，不是养老服务营业收入或在招岗位",
     "nature": "official",
-    "sourceIds": ["src-nbs-2025"],
+    "sourceIds": [
+      "src-nbs-2025"
+    ],
     "formula": null,
     "inputs": null,
-    "note": null
+    "note": null,
+    "category": "需求规模"
   },
   {
     "id": "elder-pop-increase-2025",
@@ -250,10 +290,13 @@
     "geography": "全国",
     "scope": "北京市民政局网站对《2025年度国家老龄事业发展公报》的转述",
     "nature": "restatement",
-    "sourceIds": ["src-aging-2025-bj"],
+    "sourceIds": [
+      "src-aging-2025-bj"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "本站不用这个增量和2025年总数回推一个新的2024年官方人口数。"
+    "note": "本站不用这个增量和2025年总数回推一个新的2024年官方人口数。",
+    "category": "增长"
   },
   {
     "id": "elder-beds-nbs-2025",
@@ -266,10 +309,13 @@
     "geography": "全国",
     "scope": "国家统计局2025年统计公报中的民政服务床位项下“养老服务床位”",
     "nature": "official",
-    "sourceIds": ["src-nbs-2025"],
+    "sourceIds": [
+      "src-nbs-2025"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "与老龄事业公报转述的767.9万张“养老床位合计”名称不同，并列保留，不取平均。"
+    "note": "与老龄事业公报转述的767.9万张“养老床位合计”名称不同，并列保留，不取平均。",
+    "category": "结构"
   },
   {
     "id": "elder-facilities-2025",
@@ -282,10 +328,13 @@
     "geography": "全国",
     "scope": "老龄事业发展公报转述中的各类养老机构和设施",
     "nature": "restatement",
-    "sourceIds": ["src-aging-2025-bj"],
+    "sourceIds": [
+      "src-aging-2025-bj"
+    ],
     "formula": null,
     "inputs": null,
-    "note": null
+    "note": null,
+    "category": "结构"
   },
   {
     "id": "elder-beds-bulletin-2025",
@@ -298,10 +347,13 @@
     "geography": "全国",
     "scope": "同一则公报转述中的养老床位总数，不是统计局条目的简单改名",
     "nature": "restatement",
-    "sourceIds": ["src-aging-2025-bj"],
+    "sourceIds": [
+      "src-aging-2025-bj"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "同一篇转述还写护理型床位占比69.9%。那是床位结构，不是文科岗位占比。"
+    "note": "同一篇转述还写护理型床位占比69.9%。那是床位结构，不是文科岗位占比。",
+    "category": "结构"
   },
   {
     "id": "elder-workers-2025",
@@ -314,10 +366,13 @@
     "geography": "全国",
     "scope": "公报转述中的养老服务从业人员，不是文科对口岗位数，也不是在招职位数",
     "nature": "restatement",
-    "sourceIds": ["src-aging-2025-bj"],
+    "sourceIds": [
+      "src-aging-2025-bj"
+    ],
     "formula": null,
     "inputs": null,
-    "note": null
+    "note": null,
+    "category": "结构"
   },
   {
     "id": "elder-facilities-2024",
@@ -330,10 +385,13 @@
     "geography": "全国",
     "scope": "央视网对《2024年度国家老龄事业发展公报》的转述",
     "nature": "restatement",
-    "sourceIds": ["src-aging-2024-cctv"],
+    "sourceIds": [
+      "src-aging-2024-cctv"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "与2025年的39.5万个相比数量下降。下降原因尚未证实。"
+    "note": "与2025年的39.5万个相比数量下降。下降原因尚未证实。",
+    "category": "结构"
   },
   {
     "id": "elder-beds-2024",
@@ -346,10 +404,13 @@
     "geography": "全国",
     "scope": "同一则2024年公报转述的养老床位合计",
     "nature": "restatement",
-    "sourceIds": ["src-aging-2024-cctv"],
+    "sourceIds": [
+      "src-aging-2024-cctv"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "与2025年公报转述的767.9万张相比下降。下降原因尚未证实。"
+    "note": "与2025年公报转述的767.9万张相比下降。下降原因尚未证实。",
+    "category": "结构"
   },
   {
     "id": "elder-registered-2024",
@@ -362,10 +423,13 @@
     "geography": "全国",
     "scope": "只包括转述中的注册登记养老机构，不包括全部社区设施和床位",
     "nature": "restatement",
-    "sourceIds": ["src-aging-2024-cctv"],
+    "sourceIds": [
+      "src-aging-2024-cctv"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "转述同时写护理型床位占比65.7%。服务人数和床位都保留为原文，本站不把服务人数当成在住人数，也不相除得到使用率。"
+    "note": "转述同时写护理型床位占比65.7%。服务人数和床位都保留为原文，本站不把服务人数当成在住人数，也不相除得到使用率。",
+    "category": "结构"
   },
   {
     "id": "elder-revenue",
@@ -381,7 +445,8 @@
     "sourceIds": [],
     "formula": null,
     "inputs": null,
-    "note": "没有使用未经官方公布的全行业营业收入。"
+    "note": "没有使用未经官方公布的全行业营业收入。",
+    "category": "需求规模"
   },
   {
     "id": "elder-salary",
@@ -397,7 +462,8 @@
     "sourceIds": [],
     "formula": null,
     "inputs": null,
-    "note": "校园招聘材料提到薪酬福利，但没有可引用的工资金额。"
+    "note": "校园招聘材料提到薪酬福利，但没有可引用的工资金额。",
+    "category": "薪资"
   },
   {
     "id": "elder-decline-reason",
@@ -413,7 +479,8 @@
     "sourceIds": [],
     "formula": null,
     "inputs": null,
-    "note": "数量对比可以保留，原因尚未证实。"
+    "note": "数量对比可以保留，原因尚未证实。",
+    "category": "变动原因"
   },
   {
     "id": "tour-trips-2024",
@@ -426,10 +493,13 @@
     "geography": "国内居民国内出游",
     "scope": "文化和旅游部2024年文化和旅游发展统计公报，公报写明据国内居民出游统计。这不是旅行社或景区收入",
     "nature": "official",
-    "sourceIds": ["src-mct-2024"],
+    "sourceIds": [
+      "src-mct-2024"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "其中城镇居民43.7亿人次，农村居民12.5亿人次。公报给出的同比增长为14.8%。"
+    "note": "其中城镇居民43.7亿人次，农村居民12.5亿人次。公报给出的同比增长为14.8%。",
+    "category": "需求规模"
   },
   {
     "id": "tour-spend-2024",
@@ -442,10 +512,13 @@
     "geography": "国内居民国内出游",
     "scope": "同一公报中的国内居民出游总花费，不是旅行社收入或景区收入",
     "nature": "official",
-    "sourceIds": ["src-mct-2024"],
+    "sourceIds": [
+      "src-mct-2024"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "公报写同比增长17.1%。数字按0.1万亿元取整。"
+    "note": "公报写同比增长17.1%。数字按0.1万亿元取整。",
+    "category": "需求规模"
   },
   {
     "id": "tour-trips-2025-nbs",
@@ -458,10 +531,13 @@
     "geography": "国内",
     "scope": "国家统计局2025年统计公报的国内出游人次，按0.1亿人次取整",
     "nature": "official",
-    "sourceIds": ["src-nbs-2025"],
+    "sourceIds": [
+      "src-nbs-2025"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "公报写比上年增长16.2%。与新华社转述的65.22亿人次并列，不平均。"
+    "note": "公报写比上年增长16.2%。与新华社转述的65.22亿人次并列，不平均。",
+    "category": "需求规模"
   },
   {
     "id": "tour-spend-2025-nbs",
@@ -474,10 +550,13 @@
     "geography": "国内",
     "scope": "国家统计局2025年统计公报的国内游客出游总花费，不是旅行社或景区收入",
     "nature": "official",
-    "sourceIds": ["src-nbs-2025"],
+    "sourceIds": [
+      "src-nbs-2025"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "公报写增长9.5%。"
+    "note": "公报写增长9.5%。",
+    "category": "需求规模"
   },
   {
     "id": "tour-trips-2025-mct",
@@ -490,10 +569,13 @@
     "geography": "国内居民",
     "scope": "新华社对文化和旅游部国内居民出游抽样调查的转述",
     "nature": "restatement",
-    "sourceIds": ["src-mct-2025-xinhua"],
+    "sourceIds": [
+      "src-mct-2025-xinhua"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "转述写比上年同期增加9.07亿、同比增长16.2%。这与统计局65.2亿人次是不同约数。"
+    "note": "转述写比上年同期增加9.07亿、同比增长16.2%。这与统计局65.2亿人次是不同约数。",
+    "category": "需求规模"
   },
   {
     "id": "tour-spend-2025-mct",
@@ -506,10 +588,13 @@
     "geography": "国内居民",
     "scope": "同一则抽样调查转述中的国内居民出游花费",
     "nature": "restatement",
-    "sourceIds": ["src-mct-2025-xinhua"],
+    "sourceIds": [
+      "src-mct-2025-xinhua"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "转述写同比增长9.5%。不与63003亿元合并。"
+    "note": "转述写同比增长9.5%。不与63003亿元合并。",
+    "category": "需求规模"
   },
   {
     "id": "tour-per-capita-2024",
@@ -522,10 +607,16 @@
     "geography": "国内居民国内出游",
     "scope": "用文化和旅游部公报已四舍五入的总花费和人次相除，不是官方公布的人均花费",
     "nature": "self_calculated",
-    "sourceIds": ["src-mct-2024"],
+    "sourceIds": [
+      "src-mct-2024"
+    ],
     "formula": "5.8万亿元按58000亿元计入 ÷ 56.2亿人次，四舍五入到1元",
-    "inputs": [58000, 56.2],
-    "note": "只描述2024年这一份公报的约数。不与2025年或其他机构的数字连成可比序列，也不计算下降幅度。"
+    "inputs": [
+      58000,
+      56.2
+    ],
+    "note": "只描述2024年这一份公报的约数。不与2025年或其他机构的数字连成可比序列，也不计算下降幅度。",
+    "category": "人均花费"
   },
   {
     "id": "tour-per-capita-2025",
@@ -538,10 +629,16 @@
     "geography": "国内",
     "scope": "用国家统计局公报的总花费和人次相除，不是官方公布的人均花费",
     "nature": "self_calculated",
-    "sourceIds": ["src-nbs-2025"],
+    "sourceIds": [
+      "src-nbs-2025"
+    ],
     "formula": "63003亿元 ÷ 65.2亿人次，四舍五入到1元",
-    "inputs": [63003, 65.2],
-    "note": "2025年人次按0.1亿取整。发布机构、取整方式和2024年公报都不同，因此不与2024年的1032元/人次比较，也不计算下降百分比。"
+    "inputs": [
+      63003,
+      65.2
+    ],
+    "note": "2025年人次按0.1亿取整。发布机构、取整方式和2024年公报都不同，因此不与2024年的1032元/人次比较，也不计算下降百分比。",
+    "category": "人均花费"
   },
   {
     "id": "songcheng-revenue-2025",
@@ -554,10 +651,13 @@
     "geography": "公司合并报表",
     "scope": "新浪财经转载的公司2025年年度报告主要会计数据。公司业务含现场演艺和旅游服务，不是全行业收入",
     "nature": "restatement",
-    "sourceIds": ["src-songcheng-2025"],
+    "sourceIds": [
+      "src-songcheng-2025"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "转载页标示公告日期2026-04-24。阅读时应再核对交易所披露的年报全文。"
+    "note": "转载页标示公告日期2026-04-24。阅读时应再核对交易所披露的年报全文。",
+    "category": "公司财务"
   },
   {
     "id": "songcheng-revenue-change-2025",
@@ -570,10 +670,13 @@
     "geography": "公司合并报表",
     "scope": "同一张主要会计数据表的本年比上年增减",
     "nature": "restatement",
-    "sourceIds": ["src-songcheng-2025"],
+    "sourceIds": [
+      "src-songcheng-2025"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "这是一家公司的收入变化，不能推广为国内旅游全行业利润下降。"
+    "note": "这是一家公司的收入变化，不能推广为国内旅游全行业利润下降。",
+    "category": "公司财务"
   },
   {
     "id": "utour-revenue-2025",
@@ -586,10 +689,13 @@
     "geography": "公司合并报表",
     "scope": "公司年报主要会计数据。众信旅游的主业包含出境游批发等，不是国内旅游全行业收入",
     "nature": "company_disclosure",
-    "sourceIds": ["src-utour-2025"],
+    "sourceIds": [
+      "src-utour-2025"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "收入上升与归母净利润下降同时出现，不能只摘下降的一项。"
+    "note": "收入上升与归母净利润下降同时出现，不能只摘下降的一项。",
+    "category": "公司财务"
   },
   {
     "id": "utour-profit-2025",
@@ -602,10 +708,13 @@
     "geography": "公司合并报表",
     "scope": "公司年报中的归母净利润",
     "nature": "company_disclosure",
-    "sourceIds": ["src-utour-2025"],
+    "sourceIds": [
+      "src-utour-2025"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "2024年同表为105,918,494.95元。"
+    "note": "2024年同表为105,918,494.95元。",
+    "category": "公司财务"
   },
   {
     "id": "utour-profit-change-2025",
@@ -618,10 +727,13 @@
     "geography": "公司合并报表",
     "scope": "年报主要会计数据表的本年比上年增减",
     "nature": "company_disclosure",
-    "sourceIds": ["src-utour-2025"],
+    "sourceIds": [
+      "src-utour-2025"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "只作为企业分化的例子。扣非后净利润的增减是-32.05%，两列不是同一个利润概念。"
+    "note": "只作为企业分化的例子。扣非后净利润的增减是-32.05%，两列不是同一个利润概念。",
+    "category": "公司财务"
   },
   {
     "id": "trip-revenue-2025",
@@ -634,10 +746,13 @@
     "geography": "集团合并报表，含国际业务",
     "scope": "公司未经审计业绩公告中的全年净营业收入，不是国内旅游花费",
     "nature": "company_disclosure",
-    "sourceIds": ["src-trip-2025"],
+    "sourceIds": [
+      "src-trip-2025"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "公告日期为2026-02-25，标题写明未经审计。"
+    "note": "公告日期为2026-02-25，标题写明未经审计。",
+    "category": "公司财务"
   },
   {
     "id": "trip-revenue-growth-2025",
@@ -650,10 +765,13 @@
     "geography": "集团合并报表",
     "scope": "同一业绩公告对全年净营业收入的同比表述",
     "nature": "company_disclosure",
-    "sourceIds": ["src-trip-2025"],
+    "sourceIds": [
+      "src-trip-2025"
+    ],
     "formula": null,
     "inputs": null,
-    "note": null
+    "note": null,
+    "category": "公司财务"
   },
   {
     "id": "trip-investment-gain-2025",
@@ -666,10 +784,13 @@
     "geography": "集团合并报表",
     "scope": "业绩公告对净利润同比增加原因的说明，不是经营利润，也不是行业利润",
     "nature": "company_disclosure",
-    "sourceIds": ["src-trip-2025"],
+    "sourceIds": [
+      "src-trip-2025"
+    ],
     "formula": null,
     "inputs": null,
-    "note": "公告写2025年净利润334亿元人民币，2024年为172亿元人民币，同比增加主要由于上述投资利得。"
+    "note": "公告写2025年净利润334亿元人民币，2024年为172亿元人民币，同比增加主要由于上述投资利得。",
+    "category": "公司财务"
   },
   {
     "id": "tour-salary",
@@ -685,7 +806,8 @@
     "sourceIds": [],
     "formula": null,
     "inputs": null,
-    "note": null
+    "note": null,
+    "category": "薪资"
   },
   {
     "id": "tour-concentration",
@@ -701,7 +823,8 @@
     "sourceIds": [],
     "formula": null,
     "inputs": null,
-    "note": "不输出没有可靠口径的CR或HHI。"
+    "note": "不输出没有可靠口径的CR或HHI。",
+    "category": "市场集中度"
   },
   {
     "id": "tour-employment-structure",
@@ -717,6 +840,7 @@
     "sourceIds": [],
     "formula": null,
     "inputs": null,
-    "note": "不把文化和旅游单位的宽口径从业人数改写成旅行社或景区岗位结构。"
+    "note": "不把文化和旅游单位的宽口径从业人数改写成旅行社或景区岗位结构。",
+    "category": "用工结构"
   }
 ]
