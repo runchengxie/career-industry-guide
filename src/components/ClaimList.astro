@@ -1,12 +1,14 @@
 ---
-import type { Claim, Source } from "../lib/types.ts";
+import CitationRefs from "./CitationRefs.astro";
+import type { Citations } from "../lib/citations.ts";
+import type { Claim } from "../lib/types.ts";
 
 interface Props {
   claims: Claim[];
-  sources: Source[];
+  citations: Citations;
 }
 
-const { claims, sources } = Astro.props;
+const { claims, citations } = Astro.props;
 const kindLabel = { evidence: "证据", judgment: "判断", gap: "缺口" };
 ---
 
@@ -15,17 +17,10 @@ const kindLabel = { evidence: "证据", judgment: "判断", gap: "缺口" };
     claims.map((claim) => (
       <li id={claim.id}>
         <span class="kind">{kindLabel[claim.kind]}</span>
-        <p>{claim.text}</p>
-        {
-          claim.sourceIds.some((id) => sources.some((item) => item.id === id)) ? (
-            <p class="cite">
-              {claim.sourceIds.map((id) => {
-                const source = sources.find((item) => item.id === id);
-                return source ? <a href={source.url}>{source.author}：{source.title}</a> : null;
-              })}
-            </p>
-          ) : null
-        }
+        <p>
+          {claim.text}
+          <CitationRefs sourceIds={claim.sourceIds} citations={citations} />
+        </p>
       </li>
     ))
   }

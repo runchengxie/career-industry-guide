@@ -1,11 +1,25 @@
 ---
 import Base from "../layouts/Base.astro";
 import MetricList from "../components/MetricList.astro";
+import Section from "../components/Section.astro";
+import SourceList from "../components/SourceList.astro";
+import { createCitations } from "../lib/citations.ts";
 import { emptyFilterMessage } from "../lib/filter.ts";
 import { loadDataset } from "../lib/load.ts";
 
 const data = loadDataset();
+const citations = createCitations(data.sources);
 const metrics = new Map(data.metrics.map((metric) => [metric.id, metric]));
+
+// 编号按表格的呈现顺序登记（先“需求证据”行，再“盈利与稳定性”行），
+// 这样上标编号与页末来源表不依赖组件的渲染时机。
+for (const key of ["demand", "profit"] as const) {
+  for (const industry of data.industries) {
+    for (const metricId of industry.homeMetricIds[key]) {
+      for (const sourceId of metrics.get(metricId)?.sourceIds ?? []) citations.number(sourceId);
+    }
+  }
+}
 const rolesByIndustry = new Map(data.industries.map((industry) => [industry.id, data.roles.filter((role) => role.industryIds.includes(industry.id))]));
 ---
 
@@ -90,7 +104,7 @@ const rolesByIndustry = new Map(data.industries.map((industry) => [industry.id, 
                   {key === "demand" ? (
                     <>
                       <p>{industry.comparison.demand}</p>
-                      <MetricList metrics={demand} sources={data.sources} />
+                      <MetricList metrics={demand} citations={citations} compact />
                     </>
                   ) : null}
                   {key === "roles" ? (
@@ -109,7 +123,7 @@ const rolesByIndustry = new Map(data.industries.map((industry) => [industry.id, 
                   {key === "profit" ? (
                     <>
                       <p>{industry.comparison.profit}</p>
-                      <MetricList metrics={profit} sources={data.sources} />
+                      <MetricList metrics={profit} citations={citations} compact />
                     </>
                   ) : null}
                   {key === "risks" ? industry.comparison.risks : null}
@@ -122,6 +136,11 @@ const rolesByIndustry = new Map(data.industries.map((industry) => [industry.id, 
       }
     </tbody>
   </table>
+
+  <Section id="sources" title="来源">
+    <p class="field-note">按上面第一次出现的顺序编号；口径与地理位置收在每个指标下的“口径与说明”里。</p>
+    <SourceList entries={citations.referenced()} />
+  </Section>
 </Base>
 
 <script>

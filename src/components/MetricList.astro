@@ -1,33 +1,47 @@
 ---
+import CitationRefs from "./CitationRefs.astro";
 import { formatMetric } from "../lib/format.ts";
 import { natureLabel } from "../lib/labels.ts";
-import type { Metric, Source } from "../lib/types.ts";
+import type { Citations } from "../lib/citations.ts";
+import type { Metric } from "../lib/types.ts";
 
 interface Props {
   metrics: Metric[];
-  sources: Source[];
+  citations: Citations;
+  /** 首页表格与右栏用紧凑模式：口径、公式和备注收进 details。 */
+  compact?: boolean;
 }
 
-const { metrics, sources } = Astro.props;
+const { metrics, citations, compact = false } = Astro.props;
 ---
 
 <ul class="metrics">
   {
     metrics.map((metric) => {
-      const linked = sources.filter((source) => metric.sourceIds.includes(source.id));
       const text = formatMetric(metric);
+      const meta = (
+        <>
+          {metric.geography ? <span class="scope">地理范围：{metric.geography}</span> : null}
+          {metric.scope ? <span class="scope">口径：{metric.scope}</span> : null}
+          {metric.formula ? <span class="note">公式：{metric.formula}</span> : null}
+          {metric.note ? <span class="note">{metric.note}</span> : null}
+        </>
+      );
+      const hasMeta = Boolean(metric.geography || metric.scope || metric.formula || metric.note);
       return (
         <li id={metric.id}>
           <span class="metric-name">{metric.name}</span>
           {metric.availability === "value" ? <span>{text}</span> : <span class="missing">{text}</span>}
           {metric.availability === "value" ? <span class="tag">{natureLabel[metric.nature]}</span> : null}
-          {metric.geography ? <span class="scope">地理范围：{metric.geography}</span> : null}
-          {metric.scope ? <span class="scope">口径：{metric.scope}</span> : null}
-          {metric.formula ? <span class="note">公式：{metric.formula}</span> : null}
-          {metric.note ? <span class="note">{metric.note}</span> : null}
-          {linked.map((source) => (
-            <a href={source.url}>{source.author}：{source.title}{source.published ? `（${source.published}）` : ""}</a>
-          ))}
+          <CitationRefs sourceIds={metric.sourceIds} citations={citations} />
+          {compact && hasMeta ? (
+            <details class="meta">
+              <summary>口径与说明</summary>
+              {meta}
+            </details>
+          ) : (
+            meta
+          )}
         </li>
       );
     })
