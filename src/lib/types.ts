@@ -40,8 +40,13 @@ export interface Metric {
   subjectId: string;
   name: string;
   availability: Availability;
-  display: string | null;
+  /** 数值型指标的可显示值；没有可靠数据时为 null。 */
+  value: number | null;
   unit: string | null;
+  /** 展示精度：保留几位小数。 */
+  decimals: number;
+  /** 是否用千分位。 */
+  group: boolean;
   year: string | null;
   geography: string | null;
   scope: string | null;
