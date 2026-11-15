@@ -103,6 +103,10 @@ export function validateDataset(data: Dataset): string[] {
   }
 
   const directionIds = new Set(data.meta.directions.map((direction) => direction.id));
+  if (directionIds.size !== data.meta.directions.length) errors.push("方向 id 重复");
+  for (const direction of data.meta.directions) {
+    if (blank(direction.label)) errors.push(`方向 ${direction.id} 缺少名称`);
+  }
   for (const role of data.roles) {
     if (!directionIds.has(role.direction)) {
       errors.push(`岗位 ${role.id} 的方向 ${role.direction} 不在 meta.directions 里`);

@@ -9,10 +9,26 @@
   "verificationLimit": "截至 2026-11-15 的研究中，公开招聘岗位的活页核验尚未完整。",
   "geography": "中国大陆",
   "directions": [
-    { "id": "all", "label": "全部" },
-    { "id": "marketing", "label": "营销传播（客户执行、策略、公关、活动、内容、品牌宣传等）" },
-    { "id": "community", "label": "社会服务与社区活动（社工、文娱活动、生活管家、社区运营等）" },
-    { "id": "destination", "label": "目的地与旅游产品（目的地运营、旅游产品策划、景区营销、旅游内容等）" }
+    {
+      "id": "all",
+      "label": "全部",
+      "detail": null
+    },
+    {
+      "id": "marketing",
+      "label": "营销传播",
+      "detail": "客户执行、策略、公关、活动、内容、品牌宣传等"
+    },
+    {
+      "id": "community",
+      "label": "社会服务",
+      "detail": "社工、文娱活动、生活管家、社区运营等"
+    },
+    {
+      "id": "destination",
+      "label": "目的地与旅游",
+      "detail": "目的地运营、旅游产品策划、景区营销、旅游内容等"
+    }
   ],
   "method": [
     {

@@ -21,12 +21,13 @@ const rolesByIndustry = new Map(data.industries.map((industry) => [industry.id, 
         data.meta.directions.map((direction) => (
           <label>
             <input type="radio" name="direction" value={direction.id} checked={direction.id === "all"} />
-            <span>{direction.label}</span>
+            <span class="chip-name">{direction.label}</span>
+            {direction.detail ? <span class="chip-detail">（{direction.detail}）</span> : null}
           </label>
         ))
       }
     </div>
-    <p>不运行脚本时，下面仍显示全部三个样本。选择某一方向后，只保留至少有一个对口岗位的行业。</p>
+    <p class="field-note">不运行脚本时，下面仍显示全部三个样本。选择某一方向后，只保留至少有一个对口岗位的行业。</p>
   </fieldset>
 
   <div data-empty class="empty" hidden aria-live="polite">

@@ -1,0 +1,17 @@
+---
+interface Props {
+  id: string;
+  title: string;
+}
+
+const { id, title } = Astro.props;
+const headingId = `${id}-heading`;
+---
+
+<section class="section" id={id} aria-labelledby={headingId}>
+  <h2 id={headingId}>
+    {title}
+    <a class="permalink" href={`#${id}`} aria-label={`链接到「${title}」`}>#</a>
+  </h2>
+  <slot />
+</section>
