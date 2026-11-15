@@ -115,7 +115,7 @@ test("已完成活页核验但缺少链接或日期时校验失败", () => {
 
 test("缺失指标不能带可显示数字", () => {
   const data = base({
-    metrics: [metric({ availability: "unavailable", display: "0", sourceIds: [],  })],
+    metrics: [metric({ availability: "unavailable", display: "0", sourceIds: [] })],
   });
   assert.throws(() => assertValid(data), /暂无可靠数据|display/);
 });
@@ -194,8 +194,5 @@ test("岗位与行业的关联必须双向一致", () => {
     homeMetricIds: { demand: [], profit: [] },
   };
   const linked = role({ industryIds: ["advertising"] });
-  assert.throws(
-    () => assertValid(base({ industries: [industry], roles: [linked] })),
-    /该行业的 roleIds 没有列出它/,
-  );
+  assert.throws(() => assertValid(base({ industries: [industry], roles: [linked] })), /该行业的 roleIds 没有列出它/);
 });

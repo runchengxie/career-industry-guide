@@ -25,9 +25,7 @@ export function applyFilters(doc: Document): number {
   // 分组表头在该组所有行都被隐藏时一起隐藏
   for (const body of doc.querySelectorAll<HTMLTableSectionElement>("tbody[data-group]")) {
     const groupId = body.dataset.group ?? "";
-    const anyVisible = [...body.querySelectorAll<HTMLTableRowElement>("tr[data-industry]")].some(
-      (row) => !row.hidden,
-    );
+    const anyVisible = [...body.querySelectorAll<HTMLTableRowElement>("tr[data-industry]")].some((row) => !row.hidden);
     for (const head of body.querySelectorAll<HTMLTableRowElement>("tr.group-row")) {
       head.hidden = !anyVisible || (industry !== "all" && industry !== groupId);
     }
@@ -40,7 +38,9 @@ export function applyFilters(doc: Document): number {
 }
 
 export function setupDataFilter(doc: Document): void {
-  const controls = [...doc.querySelectorAll<HTMLInputElement>('input[name="industry"], input[name="nature"], input[name="state"]')];
+  const controls = [
+    ...doc.querySelectorAll<HTMLInputElement>('input[name="industry"], input[name="nature"], input[name="state"]'),
+  ];
   if (controls.length === 0) return;
   for (const control of controls) control.addEventListener("change", () => applyFilters(doc));
   applyFilters(doc);

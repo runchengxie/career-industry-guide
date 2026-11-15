@@ -13,7 +13,10 @@ test("已录入的三个样本通过校验", () => {
     data.industries.map((item) => item.slug),
     ["advertising", "elderly-care", "domestic-tourism"],
   );
-  assert.equal(data.roles.some((role) => role.verification === "verified"), false);
+  assert.equal(
+    data.roles.some((role) => role.verification === "verified"),
+    false,
+  );
 });
 
 test("真实数据的三个方向都能筛到样本，且不是排名", () => {
@@ -61,13 +64,25 @@ test("行业、岗位和来源可以互相定位", () => {
     for (const industryId of role.industryIds) assert.ok(industryIds.has(industryId));
   }
   const files = readdirSync(new URL("../src/data/", import.meta.url));
-  assert.equal(files.some((file: string) => file.endsWith(".csv") || file.endsWith(".parquet")), false);
+  assert.equal(
+    files.some((file: string) => file.endsWith(".csv") || file.endsWith(".parquet")),
+    false,
+  );
 });
 
 test("薪资、集中度和在招规模保持缺失", () => {
   const data = loadDataset();
   const missing = data.metrics.filter((metric) =>
-    ["ad-salary", "ad-concentration", "ad-openings", "elder-revenue", "elder-salary", "tour-salary", "tour-concentration", "tour-employment-structure"].includes(metric.id),
+    [
+      "ad-salary",
+      "ad-concentration",
+      "ad-openings",
+      "elder-revenue",
+      "elder-salary",
+      "tour-salary",
+      "tour-concentration",
+      "tour-employment-structure",
+    ].includes(metric.id),
   );
   assert.equal(missing.length, 8);
   for (const metric of missing) {

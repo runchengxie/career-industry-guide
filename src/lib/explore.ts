@@ -49,9 +49,7 @@ export function dataMatrix(data: Dataset): MapRow[] {
   return metricCategories.map((category) => ({
     category,
     cells: data.industries.map((industry) => {
-      const metrics = data.metrics.filter(
-        (metric) => metric.subjectId === industry.id && metric.category === category,
-      );
+      const metrics = data.metrics.filter((metric) => metric.subjectId === industry.id && metric.category === category);
       const values = metrics.filter((metric) => metric.availability === "value");
       const gaps = metrics.filter((metric) => metric.availability !== "value");
       const kind: CellKind =
@@ -83,7 +81,5 @@ export function labelMetrics(metrics: Metric[]): string[] {
     if (metric.year) years.add(metric.year);
     byName.set(metric.name, years);
   }
-  return [...byName].map(([name, years]) =>
-    years.size > 0 ? `${name}（${[...years].join("、")}）` : name,
-  );
+  return [...byName].map(([name, years]) => (years.size > 0 ? `${name}（${[...years].join("、")}）` : name));
 }
