@@ -1,20 +1,28 @@
-# 职业行业研究指南
+# Career & Industry Guide
 
-这是一个公开的中文静态网站，用来对照广告营销服务、养老服务、国内旅游服务三个研究样本。它帮助查看需求、岗位入口、门槛、风险和证据，不是就业保证，也不是行业排名或求职中介。
+English | [简体中文](README.zh-CN.md)
 
-研究版本日期：2026-11-15（Asia/Shanghai）。公开招聘岗位的活页核验尚未完整。两份研究提示词已脱敏收录于 `docs/prompts/`；个人隐私材料、原始对话和未公开附件不在本仓库中。
+A public, Chinese-language static site that compares three research samples — advertising and marketing services, elderly care, and domestic tourism — on demand evidence, entry points, barriers, risks and evidence gaps.
 
-计划发布地址：<https://runchengxie.github.io/career-industry-guide/>
+It is not an employment guarantee, not a ranking, and not a recruiting service. Every number carries a year, a scope and a source; missing data is marked as missing instead of filled in.
 
-设计说明：`docs/superpowers/specs/2026-11-15-career-industry-guide-design.md`
+- Research version: 2026-11-15 (Asia/Shanghai). Verification of live job postings is still incomplete.
+- Published at <https://runchengxie.github.io/career-industry-guide/>
+- The two research prompts are included in redacted form under `docs/prompts/`. Personal material, raw conversations and unpublished attachments are not in this repository.
 
-实现计划：`docs/superpowers/plans/2026-11-15-career-industry-guide.md`
+## Pages
 
-研究提示词：`docs/prompts/README.md`
+| Path | Content |
+| --- | --- |
+| `/` | the three samples side by side, filterable by job direction |
+| `/industries/<slug>/` | one sample: definition, demand evidence, roles, thresholds, risks, sources |
+| `/roles/<slug>/` | one role: what it involves, what to prepare, verification status |
+| `/data/` | every recorded metric, a map of what is tracked or missing, and the data files |
+| `/methods/` | sources, scope, verification rules and open questions |
 
-## 本地预览
+## Local development
 
-需要 Node.js 22。
+Node.js 22.23.4 or newer.
 
 ```bash
 npm ci
@@ -24,22 +32,28 @@ npm run build
 npm run preview
 ```
 
-`npm run verify` 依次跑数据校验、测试、类型检查、构建、产物检查（断链与必须出现/必须缺失的内容）和 HTML 规则检查（含无障碍），与 CI 的检查项一致。
+`npm run verify` runs the same chain as CI: data validation, tests, type check, build, output checks (broken links, required and forbidden content) and HTML/WCAG checks.
 
-不设置 `BASE_PATH` 时，站点前缀是 `/`，适合本地预览。
+## Deployment
 
-## GitHub Pages
-
-发布工作流把前缀固定为 `/career-industry-guide/`，站点来源设为 `https://runchengxie.github.io`。可以用同样的变量在本地检查线上路径：
+GitHub Actions builds and deploys to GitHub Pages on every push to `main`. The workflow fixes `BASE_PATH=/career-industry-guide/` and `SITE=https://runchengxie.github.io`; both can be overridden locally to inspect the deployed paths.
 
 ```bash
 BASE_PATH=/career-industry-guide/ SITE=https://runchengxie.github.io npm run build
 BASE_PATH=/career-industry-guide/ npm run check:dist
-BASE_PATH=/career-industry-guide/ npm run preview
 ```
 
-然后打开 `http://127.0.0.1:4321/career-industry-guide/`。构建前会校验数据：有数值却缺来源、年份或口径，或把岗位标成已完成活页核验却没有链接和日期，构建都会失败。
+## Data
 
-## 口径
+Site content lives in `src/data/*.json`; the schema is `src/lib/types.ts`. Page templates never hard-code numbers, and `scripts/check-data.ts` fails the build when a value lacks a source, year or scope, or when a role claims a verified posting without a link and date.
 
-页面不提供综合评分，也不编造薪资、市场集中度或在招职位。2024 与 2025 年广告收入的转述用词不同，养老床位的 767.9 万张和 768.0 万张并列保留。床位使用率没有计算，因为公报中的服务人数没有被定义成在住人数。国内旅游两次人均除法来自不同公报，不连成下降幅度。公司报表只说明该公司。高校就业网转载和招聘网站首页都不是已核验的在招活页。
+## Documentation
+
+- `docs/prompts/` — the two research prompts, plus how they were converted and redacted
+- `docs/superpowers/specs/` — design record, including the revision log
+- `docs/superpowers/plans/` — implementation plan and execution record
+
+## License
+
+- Text and data: [CC BY 4.0](LICENSE-content)
+- Code: [MIT](LICENSE)
