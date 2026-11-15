@@ -51,5 +51,8 @@ test("真实数据里每个被引用的来源都能排上号", () => {
     }
   }
   const numbers = citations.referenced().map((entry) => entry.number);
-  assert.deepEqual(numbers, numbers.map((_, index) => index + 1));
+  assert.deepEqual(
+    numbers,
+    numbers.map((_, index) => index + 1),
+  );
 });

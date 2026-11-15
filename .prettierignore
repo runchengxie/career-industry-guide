@@ -1,0 +1,8 @@
+dist/
+node_modules/
+.astro/
+# 数据文件由脚本生成，保持稳定格式，避免自动格式化制造噪声
+src/data/
+# 中文文档不自动换行
+*.md
+package-lock.json

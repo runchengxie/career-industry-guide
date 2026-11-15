@@ -44,7 +44,10 @@ test("有数值又有缺口的格子标成 mixed", () => {
 test("按行业分组的指标数加起来等于总数", () => {
   const data = loadDataset();
   const groups = metricsByIndustry(data);
-  assert.equal(groups.reduce((sum, group) => sum + group.metrics.length, 0), data.metrics.length);
+  assert.equal(
+    groups.reduce((sum, group) => sum + group.metrics.length, 0),
+    data.metrics.length,
+  );
 });
 
 test("同名指标合并年份，不重复列出", () => {

@@ -3,12 +3,7 @@ export type DirectionId = "all" | "marketing" | "community" | "destination";
 export type Availability = "value" | "unavailable" | "unverified";
 
 export type MetricNature =
-  | "official"
-  | "institution_estimate"
-  | "company_disclosure"
-  | "self_calculated"
-  | "forecast"
-  | "restatement";
+  "official" | "institution_estimate" | "company_disclosure" | "self_calculated" | "forecast" | "restatement";
 
 export type Verification = "verified" | "materials" | "unverified";
 
