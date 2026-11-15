@@ -1,0 +1,24 @@
+{
+  "name": "career-industry-guide",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "tsx --test tests/**/*.test.ts",
+    "check:data": "tsx scripts/check-data.ts",
+    "check:dist": "tsx scripts/check-dist.ts",
+    "prebuild": "tsx scripts/check-data.ts",
+    "build": "astro build",
+    "typecheck": "astro check && tsc --noEmit",
+    "dev": "astro dev",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "7.4.12"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@types/node": "^26.6.6",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}

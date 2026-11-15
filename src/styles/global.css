@@ -1,0 +1,182 @@
+:root {
+  color-scheme: light;
+  --ink: #1c1917;
+  --muted: #44403c;
+  --paper: #f6f3ee;
+  --card: #fffdf9;
+  --line: #d6d3d1;
+  --pine: #1f4d3a;
+  --pine-dark: #143528;
+  --focus: #9a3412;
+  --missing: #7c2d12;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+h1, h2, h3 {
+  font-family: "Songti SC", "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+  line-height: 1.3;
+  font-weight: 650;
+}
+
+a { color: var(--pine-dark); }
+a:hover { color: var(--pine); }
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.skip {
+  position: absolute;
+  left: 0.75rem;
+  top: -4rem;
+  background: var(--ink);
+  color: white;
+  padding: 0.4rem 0.7rem;
+}
+.skip:focus { top: 0.75rem; }
+
+.wrap {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.site-header, .site-footer {
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+}
+.site-footer { border-top: 1px solid var(--line); border-bottom: 0; margin-top: 3rem; }
+
+.banner {
+  margin: 0;
+  padding: 0.75rem 0;
+  background: #efe6d6;
+  color: var(--ink);
+  border-bottom: 1px solid #e2d3b8;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: center;
+  padding: 0.9rem 0;
+}
+.nav a { text-decoration-thickness: 1px; }
+.brand { font-weight: 700; margin-right: auto; color: var(--ink); text-decoration: none; }
+
+main { padding: 1.5rem 0 2rem; }
+.lede { font-size: 1.125rem; }
+
+fieldset {
+  border: 1px solid var(--line);
+  background: var(--card);
+  margin: 1.25rem 0;
+  padding: 0.8rem 1rem 1rem;
+}
+legend { padding: 0 0.3rem; font-weight: 700; }
+.choices { display: grid; gap: 0.55rem; }
+.choices label { display: flex; gap: 0.55rem; align-items: flex-start; }
+
+.compare { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.compare th:first-child, .compare td:first-child { width: 8.5rem; }
+.compare th, .compare td {
+  border: 1px solid var(--line);
+  vertical-align: top;
+  text-align: left;
+  padding: 0.7rem;
+  background: var(--card);
+}
+.compare thead th { background: #ebe4d8; }
+
+.metrics, .claims, .plain { padding-left: 1.1rem; }
+.metrics li, .claims li { margin: 0.45rem 0 0.8rem; }
+.metric-name { font-weight: 700; }
+.missing {
+  display: inline-block;
+  border: 1px dashed var(--missing);
+  color: var(--missing);
+  padding: 0 0.35rem;
+  font-weight: 700;
+}
+.scope, .note { display: block; color: var(--muted); font-size: 0.95rem; }
+.tag {
+  display: inline-block;
+  border: 1px solid var(--pine);
+  color: var(--pine-dark);
+  padding: 0 0.4rem;
+  font-size: 0.875rem;
+  margin-right: 0.35rem;
+}
+
+.empty {
+  border: 1px solid var(--line);
+  background: var(--card);
+  padding: 1rem;
+}
+button, .button {
+  font: inherit;
+  background: var(--pine);
+  color: white;
+  border: 0;
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
+}
+button:hover { background: var(--pine-dark); }
+
+.section { margin: 1.6rem 0; }
+.kind { font-size: 0.875rem; color: var(--muted); }
+
+@media (max-width: 900px) {
+  .compare {
+    display: block;
+    width: 100%;
+    table-layout: auto;
+  }
+  .compare caption {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin: 0 0 0.75rem;
+  }
+  .compare th:first-child,
+  .compare td:first-child { width: auto; }
+  .compare thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .compare, .compare tbody, .compare tr, .compare th, .compare td {
+    display: block;
+    width: auto;
+  }
+  .compare tr {
+    margin: 0 0 1rem;
+    border: 1px solid var(--line);
+  }
+  .compare th, .compare td { border-width: 0 0 1px; }
+  .compare td::before, .compare tbody th::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--pine-dark);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto; }
+}

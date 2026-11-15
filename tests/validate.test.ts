@@ -1,0 +1,122 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { assertValid } from "../src/lib/validate.ts";
+import type { Dataset, Metric, Role } from "../src/lib/types.ts";
+
+function metric(overrides: Partial<Metric> = {}): Metric {
+  return {
+    id: "m1",
+    subjectId: "advertising",
+    name: "广告业务收入",
+    availability: "value",
+    display: "15464.1亿元",
+    unit: "亿元",
+    year: "2024",
+    geography: "中国大陆",
+    scope: "事业单位和规模以上企业广告业务收入",
+    nature: "restatement",
+    sourceIds: ["s1"],
+    formula: null,
+    inputs: null,
+    note: null,
+    ...overrides,
+  };
+}
+
+function role(overrides: Partial<Role> = {}): Role {
+  return {
+    id: "role-1",
+    slug: "public-relations",
+    name: "公共关系",
+    direction: "marketing",
+    humanitiesFit: "match",
+    industryIds: [],
+    summary: "年报业务中出现的工作类型。",
+    dailyWork: "本站没有已核验的职位说明书。",
+    preparation: ["作品集"],
+    verification: "materials",
+    materialNature: "公司年度报告中的业务构成",
+    limits: "不是在招活页。",
+    employer: null,
+    postingTitle: null,
+    postingUrl: null,
+    verifiedOn: null,
+    sourceIds: ["s1"],
+    ...overrides,
+  };
+}
+
+function base(overrides: Partial<Dataset> = {}): Dataset {
+  return {
+    meta: {
+      researchVersion: "2026-11-15",
+      timezone: "Asia/Shanghai",
+      locale: "zh-CN",
+      title: "职业行业研究指南",
+      sampleNote: "三个样本用于比较，不是排名。",
+      disclaimer: "这是初步研究，不是就业保证。",
+      publicationStatus: "尚未正式上线",
+      verificationLimit: "截至 2026-11-15 的研究中，公开招聘岗位的活页核验尚未完整。",
+      geography: "中国大陆",
+      directions: [],
+      method: [],
+      unverifiedItems: [],
+    },
+    sources: [
+      {
+        id: "s1",
+        author: "示例机构",
+        title: "示例文献",
+        published: "2026-02-28",
+        accessed: "2026-11-15",
+        url: "https://example.com/source",
+        supports: ["m1"],
+      },
+    ],
+    metrics: [],
+    industries: [],
+    roles: [],
+    ...overrides,
+  };
+}
+
+test("有数值但没有来源时校验失败", () => {
+  const data = base({ metrics: [metric({ sourceIds: [] })] });
+  assert.throws(() => assertValid(data), /来源/);
+});
+
+test("有数值但没有年份或口径时校验失败", () => {
+  assert.throws(() => assertValid(base({ metrics: [metric({ year: "" })] })), /年份/);
+  assert.throws(() => assertValid(base({ metrics: [metric({ scope: "" })] })), /口径/);
+});
+
+test("自行测算没有公式时校验失败", () => {
+  const data = base({
+    metrics: [metric({ nature: "self_calculated", formula: null, inputs: [1, 2] })],
+  });
+  assert.throws(() => assertValid(data), /公式/);
+});
+
+test("已完成活页核验但缺少链接或日期时校验失败", () => {
+  const verified = role({
+    verification: "verified",
+    employer: "某雇主",
+    postingTitle: "社工",
+    postingUrl: null,
+    verifiedOn: null,
+  });
+  assert.throws(() => assertValid(base({ roles: [verified] })), /链接|核验日期/);
+});
+
+test("缺失指标不能带可显示数字", () => {
+  const data = base({
+    metrics: [metric({ availability: "unavailable", display: "0", sourceIds: [] })],
+  });
+  assert.throws(() => assertValid(data), /暂无可靠数据|display/);
+});
+
+test("排名字段被拒绝", () => {
+  const data = base();
+  (data as Dataset & { score?: number }).score = 90;
+  assert.throws(() => assertValid(data), /score|排名/);
+});

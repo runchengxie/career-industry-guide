@@ -1,0 +1,131 @@
+---
+import Base from "../layouts/Base.astro";
+import MetricList from "../components/MetricList.astro";
+import { emptyFilterMessage } from "../lib/filter.ts";
+import { loadDataset } from "../lib/load.ts";
+
+const data = loadDataset();
+const metrics = new Map(data.metrics.map((metric) => [metric.id, metric]));
+const rolesByIndustry = new Map(data.industries.map((industry) => [industry.id, data.roles.filter((role) => role.industryIds.includes(industry.id))]));
+---
+
+<Base title={data.meta.title}>
+  <h1>{data.meta.title}</h1>
+  <p class="lede">{data.meta.sampleNote}</p>
+  <p>比较只覆盖已经录入的样本和岗位。筛选不会补充名单之外的行业，也不给出综合评分。</p>
+
+  <form>
+    <fieldset>
+      <legend>按岗位方向筛选</legend>
+      <div class="choices">
+        {
+          data.meta.directions.map((direction) => (
+            <label>
+              <input type="radio" name="direction" value={direction.id} checked={direction.id === "all"} />
+              <span>{direction.label}</span>
+            </label>
+          ))
+        }
+      </div>
+      <p>不运行脚本时，下面仍显示全部三个样本。选择某一方向后，只保留至少有一个对口岗位的行业。</p>
+    </fieldset>
+  </form>
+
+  <div data-empty class="empty" hidden aria-live="polite">
+    <p>{emptyFilterMessage}</p>
+    <button type="button" data-reset>恢复全部</button>
+  </div>
+
+  <table class="compare">
+    <caption>三个研究样本的对照，不是排名</caption>
+    <thead>
+      <tr>
+        <th>比较维度</th>
+        {
+          data.industries.map((industry) => {
+            const roles = rolesByIndustry.get(industry.id) ?? [];
+            const directions = [...new Set(roles.filter((role) => role.humanitiesFit === "match").map((role) => role.direction))].join(" ");
+            return (
+              <th data-industry={industry.id} data-directions={directions} scope="col">
+                <a href={`${import.meta.env.BASE_URL}industries/${industry.slug}/`}>{industry.name}</a>
+              </th>
+            );
+          })
+        }
+      </tr>
+    </thead>
+    <tbody>
+      {
+        [
+          ["definition", "行业定义"],
+          ["demand", "需求证据"],
+          ["roles", "适合的文科岗位"],
+          ["entry", "入口与地域限制"],
+          ["profit", "盈利与稳定性"],
+          ["risks", "主要风险"],
+          ["gaps", "证据缺口"],
+        ].map(([key, label]) => (
+          <tr>
+            <th scope="row">{label}</th>
+            {data.industries.map((industry) => {
+              const roles = rolesByIndustry.get(industry.id) ?? [];
+              const directions = [...new Set(roles.filter((role) => role.humanitiesFit === "match").map((role) => role.direction))].join(" ");
+              const demand = industry.homeMetricIds.demand.flatMap((id) => {
+                const metric = metrics.get(id);
+                return metric ? [metric] : [];
+              });
+              const profit = industry.homeMetricIds.profit.flatMap((id) => {
+                const metric = metrics.get(id);
+                return metric ? [metric] : [];
+              });
+              return (
+                <td data-industry={industry.id} data-directions={directions} data-label={industry.name}>
+                  {key === "definition" ? (
+                    <>
+                      <p>
+                        <a href={`${import.meta.env.BASE_URL}industries/${industry.slug}/`}>{industry.name}</a>
+                      </p>
+                      <p>{industry.comparison.definition}</p>
+                    </>
+                  ) : null}
+                  {key === "demand" ? (
+                    <>
+                      <p>{industry.comparison.demand}</p>
+                      <MetricList metrics={demand} sources={data.sources} />
+                    </>
+                  ) : null}
+                  {key === "roles" ? (
+                    <>
+                      <p>{industry.comparison.roles}</p>
+                      <ul>
+                        {roles.map((role) => (
+                          <li data-role-direction={role.direction}>
+                            <a href={`${import.meta.env.BASE_URL}roles/${role.slug}/`}>{role.name}</a>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  ) : null}
+                  {key === "entry" ? industry.comparison.entry : null}
+                  {key === "profit" ? (
+                    <>
+                      <p>{industry.comparison.profit}</p>
+                      <MetricList metrics={profit} sources={data.sources} />
+                    </>
+                  ) : null}
+                  {key === "risks" ? industry.comparison.risks : null}
+                  {key === "gaps" ? industry.comparison.gaps : null}
+                </td>
+              );
+            })}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</Base>
+
+<script>
+  import { setupHomeFilter } from "../scripts/home-filter.ts";
+  setupHomeFilter(document);
+</script>
