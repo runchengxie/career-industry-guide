@@ -14,22 +14,20 @@ const rolesByIndustry = new Map(data.industries.map((industry) => [industry.id, 
   <p class="lede">{data.meta.sampleNote}</p>
   <p>比较只覆盖已经录入的样本和岗位。筛选不会补充名单之外的行业，也不给出综合评分。</p>
 
-  <form>
-    <fieldset>
-      <legend>按岗位方向筛选</legend>
-      <div class="choices">
-        {
-          data.meta.directions.map((direction) => (
-            <label>
-              <input type="radio" name="direction" value={direction.id} checked={direction.id === "all"} />
-              <span>{direction.label}</span>
-            </label>
-          ))
-        }
-      </div>
-      <p>不运行脚本时，下面仍显示全部三个样本。选择某一方向后，只保留至少有一个对口岗位的行业。</p>
-    </fieldset>
-  </form>
+  <fieldset>
+    <legend>按岗位方向筛选</legend>
+    <div class="choices">
+      {
+        data.meta.directions.map((direction) => (
+          <label>
+            <input type="radio" name="direction" value={direction.id} checked={direction.id === "all"} />
+            <span>{direction.label}</span>
+          </label>
+        ))
+      }
+    </div>
+    <p>不运行脚本时，下面仍显示全部三个样本。选择某一方向后，只保留至少有一个对口岗位的行业。</p>
+  </fieldset>
 
   <div data-empty class="empty" hidden aria-live="polite">
     <p>{emptyFilterMessage}</p>
@@ -40,7 +38,7 @@ const rolesByIndustry = new Map(data.industries.map((industry) => [industry.id, 
     <caption>三个研究样本的对照，不是排名</caption>
     <thead>
       <tr>
-        <th>比较维度</th>
+        <th scope="col">比较维度</th>
         {
           data.industries.map((industry) => {
             const roles = rolesByIndustry.get(industry.id) ?? [];
@@ -79,7 +77,7 @@ const rolesByIndustry = new Map(data.industries.map((industry) => [industry.id, 
                 return metric ? [metric] : [];
               });
               return (
-                <td data-industry={industry.id} data-directions={directions} data-label={industry.name}>
+                <td data-industry={industry.id} data-directions={directions} data-label={key === "definition" ? "" : industry.name}>
                   {key === "definition" ? (
                     <>
                       <p>

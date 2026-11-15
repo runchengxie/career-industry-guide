@@ -16,12 +16,16 @@ const kindLabel = { evidence: "证据", judgment: "判断", gap: "缺口" };
       <li id={claim.id}>
         <span class="kind">{kindLabel[claim.kind]}</span>
         <p>{claim.text}</p>
-        {claim.sourceIds.map((id) => {
-          const source = sources.find((item) => item.id === id);
-          return source ? (
-            <a href={source.url}>{source.author}：{source.title}</a>
-          ) : null;
-        })}
+        {
+          claim.sourceIds.some((id) => sources.some((item) => item.id === id)) ? (
+            <p class="cite">
+              {claim.sourceIds.map((id) => {
+                const source = sources.find((item) => item.id === id);
+                return source ? <a href={source.url}>{source.author}：{source.title}</a> : null;
+              })}
+            </p>
+          ) : null
+        }
       </li>
     ))
   }

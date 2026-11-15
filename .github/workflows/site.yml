@@ -1,6 +1,7 @@
-name: Pages
+name: Site
 
 on:
+  pull_request:
   push:
     branches:
       - main
@@ -10,11 +11,15 @@ permissions:
   contents: read
 
 concurrency:
-  group: pages
+  group: site-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  BASE_PATH: /career-industry-guide/
+  SITE: https://runchengxie.github.io
+
 jobs:
-  build:
+  check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -26,22 +31,25 @@ jobs:
           cache: npm
       - name: Install
         run: npm ci
-      - name: Build
+      - name: Test
+        run: npm test
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Build for GitHub Pages base path
         run: npm run build
-        env:
-          BASE_PATH: /career-industry-guide/
-          SITE: https://runchengxie.github.io
       - name: Check static output
         run: npm run check:dist
-        env:
-          BASE_PATH: /career-industry-guide/
+      - name: Check generated HTML
+        run: npm run check:html
       - name: Upload Pages artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: dist
 
   deploy:
-    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: check
     runs-on: ubuntu-latest
     permissions:
       pages: write

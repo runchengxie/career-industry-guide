@@ -111,4 +111,4 @@ for (const role of data.roles) {
   }
 }
 
-console.log(`dist ok: ${required.length} pages, ${pages.length} html files, base ${base}`);
+console.log(`dist ok: ${required.length} 个必需文件，${pages.length} 个 HTML，base ${base}`);
