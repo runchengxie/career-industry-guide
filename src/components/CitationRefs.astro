@@ -7,15 +7,17 @@ interface Props {
 }
 
 const { sourceIds, citations } = Astro.props;
-const numbers = sourceIds.map((id) => citations.number(id)).filter((n) => n > 0);
+const refs = sourceIds
+  .map((id) => citations.ref(id))
+  .filter((ref) => ref.number > 0);
 ---
 
 {
-  numbers.length > 0 ? (
+  refs.length > 0 ? (
     <sup class="fn">
-      {numbers.map((n) => (
-        <a href={`#src-${n}`} aria-label={`来源 ${n}`}>
-          {n}
+      {refs.map((ref) => (
+        <a id={ref.first ? `ref-${ref.number}` : undefined} href={`#src-${ref.number}`} aria-label={`来源 ${ref.number}`}>
+          {ref.number}
         </a>
       ))}
     </sup>

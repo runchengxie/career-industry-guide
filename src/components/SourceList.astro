@@ -17,6 +17,7 @@ const { entries } = Astro.props;
           访问日期 {source.accessed}
           {source.published ? `，公布或发布日期 ${source.published}` : "，材料页没有可靠发布日期"}
         </span>
+        <a class="backref" href={`#ref-${number}`} aria-label={`回到第 ${number} 条引用`}>↩</a>
       </li>
     ))
   }

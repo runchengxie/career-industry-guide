@@ -15,6 +15,7 @@ const data = loadDataset();
 const role = data.roles.find((item) => item.id === Astro.props.roleId);
 if (!role) throw new Error("缺少岗位");
 const industries = data.industries.filter((industry) => role.industryIds.includes(industry.id));
+const siblings = data.roles.filter((item) => item.id !== role.id && item.direction === role.direction);
 const sources = data.sources.filter((source) => role.sourceIds.includes(source.id));
 const base = import.meta.env.BASE_URL;
 ---
@@ -69,6 +70,23 @@ const base = import.meta.env.BASE_URL;
         <p>没有可标成已核验职位的链接。</p>
       )
     }
+  </section>
+  <section class="section">
+    <h2>同方向的其他岗位</h2>
+    <ul>
+      {
+        siblings.length > 0 ? (
+          siblings.map((item) => (
+            <li>
+              <a href={`${base}roles/${item.slug}/`}>{item.name}</a>
+              <span class="tag">{verificationLabel[item.verification]}</span>
+            </li>
+          ))
+        ) : (
+          <li>这个方向目前只录入了这一个岗位。</li>
+        )
+      }
+    </ul>
   </section>
   <section class="section">
     <h2>来源</h2>

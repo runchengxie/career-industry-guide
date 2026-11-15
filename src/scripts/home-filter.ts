@@ -24,6 +24,7 @@ function selected(radios: HTMLInputElement[]): string {
 }
 
 export function setupHomeFilter(doc: Document): void {
+  const root = doc.documentElement;
   const radios = [...doc.querySelectorAll<HTMLInputElement>('input[name="direction"]')];
   if (radios.length === 0) return;
   const requested = new URLSearchParams(doc.defaultView?.location.search ?? "").get("direction") ?? "all";
@@ -33,7 +34,16 @@ export function setupHomeFilter(doc: Document): void {
     radios.forEach((radio) => {
       radio.checked = radio.value === direction;
     });
-    applyDirection(doc, direction);
+    if (direction === "all") delete root.dataset.direction;
+    else root.dataset.direction = direction;
+    const shown = applyDirection(doc, direction);
+    const status = doc.querySelector<HTMLElement>("[data-status]");
+    if (status) {
+      const total = new Set(
+        [...doc.querySelectorAll<HTMLElement>("[data-industry]")].map((cell) => cell.dataset.industry),
+      ).size;
+      status.textContent = `已显示 ${shown} / ${total} 个样本`;
+    }
     if (updateUrl && doc.defaultView) {
       const url = new URL(doc.defaultView.location.href);
       if (direction === "all") url.searchParams.delete("direction");
@@ -46,6 +56,10 @@ export function setupHomeFilter(doc: Document): void {
     radio.addEventListener("change", () => sync(selected(radios), true));
   });
   doc.querySelector("[data-reset]")?.addEventListener("click", () => sync("all", true));
+  doc.defaultView?.addEventListener("popstate", () => {
+    const requested = new URLSearchParams(doc.defaultView?.location.search ?? "").get("direction") ?? "all";
+    sync(allowed.has(requested) ? requested : "all", false);
+  });
   sync(initial, false);
 }
 
