@@ -62,6 +62,5 @@ test("名字不同的指标不合并", () => {
   const data = loadDataset();
   const labels = labelMetrics(data.metrics.filter((metric) => metric.id.startsWith("tour-trips")));
   assert.equal(labels.length, 2);
-  assert.ok(labels.some((label) => label.startsWith("国内居民出游人次（2024、2025）")));
-  assert.ok(labels.some((label) => label.startsWith("国内出游人次（2025）")));
+  assert.deepEqual(labels.sort(), ["国内出游人次（2023、2025）", "国内居民出游人次（2024、2025）"].sort());
 });

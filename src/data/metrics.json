@@ -18,7 +18,11 @@
     "category": "需求规模",
     "value": 15464.1,
     "decimals": 1,
-    "group": false
+    "group": false,
+    "comparison": {
+      "group": "广告业务收入",
+      "comparable": false
+    }
   },
   {
     "id": "ad-revenue-growth-2024",
@@ -60,7 +64,11 @@
     "category": "结构",
     "value": 86.5,
     "decimals": 1,
-    "group": false
+    "group": false,
+    "comparison": {
+      "group": "互联网广告发布占比",
+      "comparable": true
+    }
   },
   {
     "id": "ad-degree-share-2024",
@@ -102,7 +110,11 @@
     "category": "需求规模",
     "value": 20502.1,
     "decimals": 1,
-    "group": false
+    "group": false,
+    "comparison": {
+      "group": "广告业务收入",
+      "comparable": false
+    }
   },
   {
     "id": "ad-revenue-growth-2025",
@@ -307,7 +319,11 @@
     "category": "需求规模",
     "value": 32338,
     "decimals": 0,
-    "group": false
+    "group": false,
+    "comparison": {
+      "group": "六十岁以上人口",
+      "comparable": true
+    }
   },
   {
     "id": "elder-pop-increase-2025",
@@ -349,7 +365,11 @@
     "category": "结构",
     "value": 768.0,
     "decimals": 1,
-    "group": false
+    "group": false,
+    "comparison": {
+      "group": "养老床位",
+      "comparable": true
+    }
   },
   {
     "id": "elder-facilities-2025",
@@ -391,7 +411,11 @@
     "category": "结构",
     "value": 767.9,
     "decimals": 1,
-    "group": false
+    "group": false,
+    "comparison": {
+      "group": "养老床位",
+      "comparable": true
+    }
   },
   {
     "id": "elder-workers-2025",
@@ -454,7 +478,11 @@
     "category": "结构",
     "value": 799.3,
     "decimals": 1,
-    "group": false
+    "group": false,
+    "comparison": {
+      "group": "养老床位",
+      "comparable": true
+    }
   },
   {
     "subjectId": "elderly-care",
@@ -595,14 +623,18 @@
     "category": "需求规模",
     "value": 56.2,
     "decimals": 1,
-    "group": false
+    "group": false,
+    "comparison": {
+      "group": "国内出游人次",
+      "comparable": true
+    }
   },
   {
     "id": "tour-spend-2024",
     "subjectId": "domestic-tourism",
     "name": "国内居民出游总花费",
     "availability": "value",
-    "unit": "万亿元",
+    "unit": "亿元",
     "year": "2024",
     "geography": "国内居民国内出游",
     "scope": "同一公报中的国内居民出游总花费，不是旅行社收入或景区收入",
@@ -612,11 +644,15 @@
     ],
     "formula": null,
     "inputs": null,
-    "note": "公报写同比增长17.1%。数字按0.1万亿元取整。",
+    "note": "公报写同比增长17.1%。数字按0.1万亿元取整。 原文按5.8 万亿元计，这里换算成亿元以便同组比较。",
     "category": "需求规模",
-    "value": 5.8,
-    "decimals": 1,
-    "group": false
+    "value": 58000,
+    "decimals": 0,
+    "group": false,
+    "comparison": {
+      "group": "国内出游花费",
+      "comparable": true
+    }
   },
   {
     "id": "tour-trips-2025-nbs",
@@ -637,7 +673,11 @@
     "category": "需求规模",
     "value": 65.2,
     "decimals": 1,
-    "group": false
+    "group": false,
+    "comparison": {
+      "group": "国内出游人次",
+      "comparable": true
+    }
   },
   {
     "id": "tour-spend-2025-nbs",
@@ -658,7 +698,11 @@
     "category": "需求规模",
     "value": 63003.0,
     "decimals": 0,
-    "group": false
+    "group": false,
+    "comparison": {
+      "group": "国内出游花费",
+      "comparable": true
+    }
   },
   {
     "id": "tour-trips-2025-mct",
@@ -679,14 +723,18 @@
     "category": "需求规模",
     "value": 65.22,
     "decimals": 2,
-    "group": false
+    "group": false,
+    "comparison": {
+      "group": "国内出游人次",
+      "comparable": true
+    }
   },
   {
     "id": "tour-spend-2025-mct",
     "subjectId": "domestic-tourism",
     "name": "国内居民出游花费",
     "availability": "value",
-    "unit": "万亿元",
+    "unit": "亿元",
     "year": "2025",
     "geography": "国内居民",
     "scope": "同一则抽样调查转述中的国内居民出游花费",
@@ -696,11 +744,15 @@
     ],
     "formula": null,
     "inputs": null,
-    "note": "转述写同比增长9.5%。不与63003亿元合并。",
+    "note": "转述写同比增长9.5%。不与63003亿元合并。 原文按6.30 万亿元计，这里换算成亿元以便同组比较。",
     "category": "需求规模",
-    "value": 6.3,
-    "decimals": 2,
-    "group": false
+    "value": 63000,
+    "decimals": 0,
+    "group": false,
+    "comparison": {
+      "group": "国内出游花费",
+      "comparable": true
+    }
   },
   {
     "id": "tour-per-capita-2024",
@@ -724,7 +776,11 @@
     "category": "人均花费",
     "value": 1032.0,
     "decimals": 0,
-    "group": false
+    "group": false,
+    "comparison": {
+      "group": "旅游人均花费",
+      "comparable": false
+    }
   },
   {
     "id": "tour-per-capita-2025",
@@ -748,7 +804,11 @@
     "category": "人均花费",
     "value": 966.0,
     "decimals": 0,
-    "group": false
+    "group": false,
+    "comparison": {
+      "group": "旅游人均花费",
+      "comparable": false
+    }
   },
   {
     "id": "songcheng-revenue-2025",
@@ -974,5 +1034,221 @@
     "value": null,
     "decimals": 0,
     "group": false
+  },
+  {
+    "id": "ad-revenue-2023",
+    "subjectId": "advertising",
+    "name": "广告业务收入",
+    "availability": "value",
+    "value": 13120.7,
+    "unit": "亿元",
+    "decimals": 1,
+    "group": false,
+    "year": "2023",
+    "geography": "中国大陆",
+    "scope": "市场监管总局统计调查的全国从事广告业务的事业单位和规模以上企业广告业务收入",
+    "nature": "official",
+    "sourceIds": [
+      "src-samr-2023"
+    ],
+    "formula": null,
+    "inputs": null,
+    "note": null,
+    "category": "需求规模",
+    "comparison": {
+      "group": "广告业务收入",
+      "comparable": false
+    }
+  },
+  {
+    "id": "ad-revenue-growth-2023",
+    "subjectId": "advertising",
+    "name": "广告业务收入较上年增长",
+    "availability": "value",
+    "value": 17.5,
+    "unit": "%",
+    "decimals": 1,
+    "group": false,
+    "year": "2023",
+    "geography": "中国大陆",
+    "scope": "与 13120.7 亿元同一则总局通稿中的同比增幅",
+    "nature": "official",
+    "sourceIds": [
+      "src-samr-2023"
+    ],
+    "formula": null,
+    "inputs": null,
+    "note": null,
+    "category": "增长",
+    "comparison": null
+  },
+  {
+    "id": "ad-internet-share-2023",
+    "subjectId": "advertising",
+    "name": "互联网广告发布收入占广告发布业务的比重",
+    "availability": "value",
+    "value": 82.4,
+    "unit": "%",
+    "decimals": 1,
+    "group": false,
+    "year": "2023",
+    "geography": "中国大陆",
+    "scope": "互联网广告发布收入占广告发布业务的比重，不是全部广告业务收入的份额",
+    "nature": "official",
+    "sourceIds": [
+      "src-samr-2023"
+    ],
+    "formula": null,
+    "inputs": null,
+    "note": "同一则通稿写互联网广告发布收入 7190.6 亿元，同比增长 33.4%。",
+    "category": "结构",
+    "comparison": {
+      "group": "互联网广告发布占比",
+      "comparable": true
+    }
+  },
+  {
+    "id": "elder-pop-2023",
+    "subjectId": "elderly-care",
+    "name": "60周岁及以上人口",
+    "availability": "value",
+    "value": 29697,
+    "unit": "万人",
+    "decimals": 0,
+    "group": false,
+    "year": "2023年末",
+    "geography": "中国大陆",
+    "scope": "2023 年度国家老龄事业发展公报的 60 周岁及以上人口数",
+    "nature": "official",
+    "sourceIds": [
+      "src-aging-2023-mca"
+    ],
+    "formula": null,
+    "inputs": null,
+    "note": "占总人口的 21.1%。这是人口数，不是服务收入，也不是招工人数。",
+    "category": "需求规模",
+    "comparison": {
+      "group": "六十岁以上人口",
+      "comparable": true
+    }
+  },
+  {
+    "id": "elder-facilities-2023",
+    "subjectId": "elderly-care",
+    "name": "养老机构和设施",
+    "availability": "value",
+    "value": 40.4,
+    "unit": "万个",
+    "decimals": 1,
+    "group": false,
+    "year": "2023年末",
+    "geography": "中国大陆",
+    "scope": "同类养老机构和设施合计，含社区养老服务机构和设施",
+    "nature": "official",
+    "sourceIds": [
+      "src-aging-2023-mca"
+    ],
+    "formula": null,
+    "inputs": null,
+    "note": "其中社区养老服务机构和设施 36.3 万个。",
+    "category": "结构",
+    "comparison": null
+  },
+  {
+    "id": "elder-beds-2023",
+    "subjectId": "elderly-care",
+    "name": "养老床位合计",
+    "availability": "value",
+    "value": 823,
+    "unit": "万张",
+    "decimals": 0,
+    "group": false,
+    "year": "2023年末",
+    "geography": "中国大陆",
+    "scope": "2023 年度公报的养老床位合计",
+    "nature": "official",
+    "sourceIds": [
+      "src-aging-2023-mca"
+    ],
+    "formula": null,
+    "inputs": null,
+    "note": null,
+    "category": "结构",
+    "comparison": {
+      "group": "养老床位",
+      "comparable": true
+    }
+  },
+  {
+    "id": "elder-registered-beds-2023",
+    "subjectId": "elderly-care",
+    "name": "注册登记养老机构床位",
+    "availability": "value",
+    "value": 517.2,
+    "unit": "万张",
+    "decimals": 1,
+    "group": false,
+    "year": "2023年末",
+    "geography": "中国大陆",
+    "scope": "注册登记的养老机构 4.1 万个拥有的床位，护理型床位占比 58.9%",
+    "nature": "official",
+    "sourceIds": [
+      "src-aging-2023-mca"
+    ],
+    "formula": null,
+    "inputs": null,
+    "note": null,
+    "category": "结构",
+    "comparison": null
+  },
+  {
+    "id": "tour-trips-2023",
+    "subjectId": "domestic-tourism",
+    "name": "国内出游人次",
+    "availability": "value",
+    "value": 48.91,
+    "unit": "亿人次",
+    "decimals": 2,
+    "group": false,
+    "year": "2023",
+    "geography": "中国大陆",
+    "scope": "文化和旅游部统计的国内出游人次，含城镇与农村居民",
+    "nature": "official",
+    "sourceIds": [
+      "src-mct-2023"
+    ],
+    "formula": null,
+    "inputs": null,
+    "note": "同比增长 93.3%，是低基数下的反弹，不能据此推断后续增速。",
+    "category": "需求规模",
+    "comparison": {
+      "group": "国内出游人次",
+      "comparable": true
+    }
+  },
+  {
+    "id": "tour-spend-2023",
+    "subjectId": "domestic-tourism",
+    "name": "国内游客出游总花费",
+    "availability": "value",
+    "value": 49100,
+    "unit": "亿元",
+    "decimals": 0,
+    "group": false,
+    "year": "2023",
+    "geography": "中国大陆",
+    "scope": "同一则数据中的国内游客出游总花费，是游客花费，不是旅行社收入",
+    "nature": "official",
+    "sourceIds": [
+      "src-mct-2023"
+    ],
+    "formula": null,
+    "inputs": null,
+    "note": "同比增长 140.3%。 原文按4.91 万亿元计，这里换算成亿元以便同组比较。",
+    "category": "需求规模",
+    "comparison": {
+      "group": "国内出游花费",
+      "comparable": true
+    }
   }
 ]

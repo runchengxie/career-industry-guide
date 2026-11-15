@@ -44,6 +44,9 @@ function checkMetric(metric: Metric, sourceIds: Set<string>, errors: string[]): 
   if (!metricCategories.includes(metric.category)) {
     errors.push(`指标 ${metric.id} 的分类 ${metric.category} 不在规定类别里`);
   }
+  if (metric.comparison && blank(metric.comparison.group)) {
+    errors.push(`指标 ${metric.id} 的可比性分组缺少名称`);
+  }
   for (const sourceId of metric.sourceIds) {
     if (!sourceIds.has(sourceId)) errors.push(`指标 ${metric.id} 引用了不存在的来源 ${sourceId}`);
   }
@@ -125,6 +128,21 @@ export function validateDataset(data: Dataset): string[] {
         errors.push(`岗位 ${role.id} 属于 ${industryId}，但该行业的 roleIds 没有列出它`);
       }
     }
+  }
+
+  const groups = new Map<string, Metric[]>();
+  for (const metric of data.metrics) {
+    if (!metric.comparison) continue;
+    const list = groups.get(metric.comparison.group);
+    if (list) list.push(metric);
+    else groups.set(metric.comparison.group, [metric]);
+  }
+  for (const [group, members] of groups) {
+    const units = new Set(members.map((metric) => metric.unit));
+    const categories = new Set(members.map((metric) => metric.category));
+    if (units.size > 1) errors.push(`可比性分组 ${group} 里的单位不一致：${[...units].join("、")}`);
+    if (categories.size > 1) errors.push(`可比性分组 ${group} 里的分类不一致：${[...categories].join("、")}`);
+    if (members.length < 2) errors.push(`可比性分组 ${group} 只有一个指标`);
   }
 
   for (const role of data.roles) checkRole(role, sourceIds, industryIds, errors);

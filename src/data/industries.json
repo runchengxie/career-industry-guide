@@ -5,7 +5,7 @@
     "name": "广告营销服务",
     "comparison": {
       "definition": "面向企业的营销传播、公关、活动与广告代理，不是整个传媒业。",
-      "demand": "2024和2025年都有广告业务收入增长的公开转述。收入增长不是岗位空缺。",
+      "demand": "2023 至 2025 年都有广告业务收入与增速的公开数字，发布方式不同，并列保留。收入增长不是岗位空缺。",
       "roles": "数字营销、公共关系、活动管理和内容创意见于蓝色光标年报业务构成。",
       "entry": "没有核到统一的执照或城市门槛。样本公司总部在北京，业务含出海。",
       "profit": "行业收入高、公司净利薄可以同时成立。蓝色光标净利率是自行测算。",
@@ -23,6 +23,14 @@
       }
     ],
     "demand": [
+      {
+        "id": "ad-2023-evidence",
+        "kind": "evidence",
+        "sourceIds": [
+          "src-samr-2023"
+        ],
+        "text": "市场监管总局的统计调查写，2023 年全国从事广告业务的事业单位和规模以上企业广告业务收入 13120.7 亿元，比上年增长 17.5%；互联网广告发布收入 7190.6 亿元，增长 33.4%，在广告发布业务中占比 82.4%。这组数字与 2024 年的 15464.1 亿元可以对上：按 17.9% 反推，起点约 1.31 万亿元。"
+      },
       {
         "id": "ad-2024-evidence",
         "kind": "evidence",
@@ -141,7 +149,10 @@
       "bf-revenue-2025",
       "bf-profit-2025",
       "bf-profit-2024",
-      "bf-net-margin-2025"
+      "bf-net-margin-2025",
+      "ad-revenue-2023",
+      "ad-revenue-growth-2023",
+      "ad-internet-share-2023"
     ],
     "homeMetricIds": {
       "demand": [
@@ -164,7 +175,7 @@
     "name": "养老服务",
     "comparison": {
       "definition": "面向老年人的机构、社区和居家服务。人口老化是需求背景，不是行业营收。",
-      "demand": "2025年末60岁及以上人口有官方数字。机构和床位较2024年的转述数字下降，原因未证实。",
+      "demand": "2023 至 2025 年的养老床位与机构数逐年可比，2025 年两个来源的床位数字并列。人口老化是需求背景，不是行业营收。",
       "roles": "社工、文娱活动、管家、市场营销和品牌宣传见于高校就业网转载的校园招聘材料。",
       "entry": "这份材料面向2027届毕业生，并写到多城项目。官方招聘门户没有完成抓取。",
       "profit": "全国养老服务营业收入暂无可靠数据。本站不计算床位使用率。",
@@ -182,6 +193,14 @@
       }
     ],
     "demand": [
+      {
+        "id": "elder-2023-supply-evidence",
+        "kind": "evidence",
+        "sourceIds": [
+          "src-aging-2023-mca"
+        ],
+        "text": "2023 年度国家老龄事业发展公报写，2023 年末 60 周岁及以上人口 29697 万人，占总人口 21.1%；各类养老机构和设施 40.4 万个，养老床位合计 823 万张。其中注册登记的养老机构 4.1 万个、床位 517.2 万张，护理型床位占 58.9%；社区养老服务机构和设施 36.3 万个、床位 305.8 万张。"
+      },
       {
         "id": "elder-pop-evidence",
         "kind": "evidence",
@@ -302,7 +321,11 @@
       "elder-registered-served-2024",
       "elder-revenue",
       "elder-salary",
-      "elder-decline-reason"
+      "elder-decline-reason",
+      "elder-pop-2023",
+      "elder-facilities-2023",
+      "elder-beds-2023",
+      "elder-registered-beds-2023"
     ],
     "homeMetricIds": {
       "demand": [
@@ -324,7 +347,7 @@
     "name": "国内旅游服务",
     "comparison": {
       "definition": "国内居民在境内的出游和相应的产品、目的地与内容服务。出游花费不是旅行社收入。",
-      "demand": "2024和2025年出游人次、花费都有公开数字。不同公报的约数并列，不平均。",
+      "demand": "2023 至 2025 年出游人次、花费都有公开数字。不同公报的约数并列，不平均。",
       "roles": "目的地运营、产品策划、景区营销和旅游内容有业务线索，职位活页尚未核验。",
       "entry": "携程招聘官网可以打开。具体职位描述没有核完，没有统一的地域门槛结论。",
       "profit": "两份公报的人均除法不是可比序列，本站不计算下降幅度。企业之间一降一增，不能写成全行业利润。",
@@ -343,6 +366,14 @@
       }
     ],
     "demand": [
+      {
+        "id": "tour-2023-evidence",
+        "kind": "evidence",
+        "sourceIds": [
+          "src-mct-2023"
+        ],
+        "text": "文化和旅游部的 2023 年国内旅游数据写，国内出游 48.91 亿人次，同比增长 93.3%；国内游客出游总花费 4.91 万亿元，同比增长 140.3%。这两个增速建立在 2022 年的低基数上，不能当作常态增长率。"
+      },
       {
         "id": "tour-2024-evidence",
         "kind": "evidence",
@@ -469,7 +500,9 @@
       "trip-investment-gain-2025",
       "tour-salary",
       "tour-concentration",
-      "tour-employment-structure"
+      "tour-employment-structure",
+      "tour-trips-2023",
+      "tour-spend-2023"
     ],
     "homeMetricIds": {
       "demand": [

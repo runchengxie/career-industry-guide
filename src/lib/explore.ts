@@ -65,21 +65,59 @@ export function dataMatrix(data: Dataset): MapRow[] {
   }));
 }
 
-/** 指标按行业分组，供数据页表格使用。 */
+/** 指标按行业分组，组内按分类顺序、同年份相邻排列，供数据页表格使用。 */
 export function metricsByIndustry(data: Dataset): { industry: Industry; metrics: Metric[] }[] {
+  const order = (metric: Metric): number => metricCategories.indexOf(metric.category);
+  const byYear = (a: Metric, b: Metric): number =>
+    (a.year ?? "").localeCompare(b.year ?? "", "zh-CN", { numeric: true });
   return data.industries.map((industry) => ({
     industry,
-    metrics: data.metrics.filter((metric) => metric.subjectId === industry.id),
+    metrics: data.metrics
+      .filter((metric) => metric.subjectId === industry.id)
+      .sort((a, b) => order(a) - order(b) || byYear(a, b)),
   }));
 }
 
-/** 把同名指标的年份合并成一条，避免“广告业务收入、广告业务收入”。 */
-export function labelMetrics(metrics: Metric[]): string[] {
-  const byName = new Map<string, Set<string>>();
+/** 把同名指标合并成一条：保留第一次出现的指标 id 与全部年份，供地图里的链接使用。 */
+export function labelGroups(metrics: Metric[]): { name: string; years: string[]; firstId: string }[] {
+  const byName = new Map<string, { years: Set<string>; firstId: string }>();
   for (const metric of metrics) {
-    const years = byName.get(metric.name) ?? new Set<string>();
-    if (metric.year) years.add(metric.year);
-    byName.set(metric.name, years);
+    const entry = byName.get(metric.name) ?? { years: new Set<string>(), firstId: metric.id };
+    if (metric.year) entry.years.add(metric.year);
+    byName.set(metric.name, entry);
   }
-  return [...byName].map(([name, years]) => (years.size > 0 ? `${name}（${[...years].join("、")}）` : name));
+  const byYear = (a: string, b: string): number => a.localeCompare(b, "zh-CN", { numeric: true });
+  return [...byName].map(([name, entry]) => ({
+    name,
+    firstId: entry.firstId,
+    years: [...entry.years].sort(byYear),
+  }));
+}
+
+export function labelMetrics(metrics: Metric[]): string[] {
+  return labelGroups(metrics).map((group) =>
+    group.years.length > 0 ? `${group.name}（${group.years.join("、")}）` : group.name,
+  );
+}
+
+export interface ComparisonGroup {
+  name: string;
+  comparable: boolean;
+  metrics: Metric[];
+}
+
+/** 把标了 comparison 的指标按组聚合，供数据页的“可比性”一节使用。 */
+export function comparisonGroups(data: Dataset): ComparisonGroup[] {
+  const groups = new Map<string, ComparisonGroup>();
+  for (const metric of data.metrics) {
+    if (!metric.comparison) continue;
+    const entry = groups.get(metric.comparison.group) ?? {
+      name: metric.comparison.group,
+      comparable: metric.comparison.comparable,
+      metrics: [],
+    };
+    entry.metrics.push(metric);
+    groups.set(metric.comparison.group, entry);
+  }
+  return [...groups.values()];
 }
