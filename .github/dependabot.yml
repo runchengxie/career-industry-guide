@@ -8,6 +8,13 @@ updates:
     groups:
       dev-dependencies:
         dependency-type: development
+    # typescript 受 @astrojs/check 的 peer 范围约束（当前 ^5 || ^6），
+    # 大版本要人工确认；html-validate 的大版本也先手动升级并跑一遍 verify。
+    ignore:
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
+      - dependency-name: html-validate
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
