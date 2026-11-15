@@ -7,3 +7,7 @@ dist/
 .env
 .env.*
 .DS_Store
+
+# 原始 Word 文件带作者与软件账号属性，只收录转换后的 Markdown
+*.docx
+~$*
