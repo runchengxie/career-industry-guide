@@ -30,28 +30,24 @@ test("真实数据的三个方向都能筛到样本，且不是排名", () => {
   );
 });
 
-test("自行测算与公式输入一致", () => {
+test("自行测算与公式输入一致，且不保留误导性比率", () => {
   const data = loadDataset();
   const byId = new Map(data.metrics.map((metric) => [metric.id, metric]));
   const margin = byId.get("bf-net-margin-2025");
-  const occupancy = byId.get("elder-bed-use-2024");
   const per2024 = byId.get("tour-per-capita-2024");
   const per2025 = byId.get("tour-per-capita-2025");
-  const change = byId.get("tour-per-capita-change");
-  assert.ok(margin?.inputs && occupancy?.inputs && per2024?.inputs && per2025?.inputs && change?.inputs);
+  assert.ok(margin?.inputs && per2024?.inputs && per2025?.inputs);
   const marginInputs = margin.inputs;
-  const occupancyInputs = occupancy.inputs;
   const per2024Inputs = per2024.inputs;
   const per2025Inputs = per2025.inputs;
-  const changeInputs = change.inputs;
   assert.equal(`${((marginInputs[0] / marginInputs[1]) * 100).toFixed(2)}%`, margin.display);
-  assert.equal(`${((occupancyInputs[0] / occupancyInputs[1]) * 100).toFixed(1)}%`, occupancy.display);
   assert.equal(`${Math.round(per2024Inputs[0] / per2024Inputs[1])}元/人次`, per2024.display);
   assert.equal(`${Math.round(per2025Inputs[0] / per2025Inputs[1])}元/人次`, per2025.display);
-  const before = changeInputs[0] / changeInputs[1];
-  const after = changeInputs[2] / changeInputs[3];
-  assert.equal((((after - before) / before) * 100).toFixed(1), "-6.4");
-  assert.match(change.display ?? "", /6\.4%/);
+  assert.equal(byId.has("elder-bed-use-2024"), false);
+  assert.equal(byId.has("tour-per-capita-change"), false);
+  const serialized = JSON.stringify(data);
+  assert.equal(serialized.includes("45.4%"), false);
+  assert.equal(serialized.includes("约下降6.4%"), false);
 });
 
 test("行业、岗位和来源可以互相定位", () => {

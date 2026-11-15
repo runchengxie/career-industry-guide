@@ -133,7 +133,7 @@
       "demand": "2025年末60岁及以上人口有官方数字。机构和床位较2024年的转述数字下降，原因未证实。",
       "roles": "社工、文娱活动、管家、市场营销和品牌宣传见于高校就业网转载的校园招聘材料。",
       "entry": "这份材料面向2027届毕业生，并写到多城项目。官方招聘门户没有完成抓取。",
-      "profit": "全国养老服务营业收入暂无可靠数据。床位使用率若出现，只是自行测算。",
+      "profit": "全国养老服务营业收入暂无可靠数据。本站不计算床位使用率。",
       "risks": "人口增加不会自动变成文科岗位。护理和医疗岗位是相邻工作，不是本站的对口岗位。",
       "gaps": "薪资、全行业营收、床位下降原因和官网在招活页都没有完成核实。"
     },
@@ -210,7 +210,7 @@
         "id": "elder-use-judgment",
         "kind": "judgment",
         "sourceIds": ["src-aging-2024-cctv"],
-        "text": "若看到约45.4%的床位使用率，它只是把2024年末注册机构服务人数除以注册机构床位。服务人数是否等于在住人数，材料没有定义。这个比率也不能解释2025年床位下降。"
+        "text": "本站不公布床位使用率。2024年转述里的年末服务人数没有被定义成在住人数，不能拿来除以床位。机构和床位数量下降的原因也尚未证实。"
       }
     ],
     "risks": [
@@ -225,7 +225,7 @@
       "全国养老服务营业收入",
       "可供求职比较的薪资",
       "机构和床位下降的原因",
-      "床位使用率的官方定义",
+      "本站不计算的床位使用率",
       "泰康之家官网在招活页"
     ],
     "roleIds": ["social-worker", "recreation-specialist", "life-butler", "eldercare-marketing", "eldercare-brand"],
@@ -239,14 +239,13 @@
       "elder-facilities-2024",
       "elder-beds-2024",
       "elder-registered-2024",
-      "elder-bed-use-2024",
       "elder-revenue",
       "elder-salary",
       "elder-decline-reason"
     ],
     "homeMetricIds": {
       "demand": ["elder-pop-2025", "elder-facilities-2025", "elder-beds-bulletin-2025", "elder-beds-nbs-2025", "elder-facilities-2024", "elder-beds-2024"],
-      "profit": ["elder-revenue", "elder-bed-use-2024"]
+      "profit": ["elder-revenue"]
     }
   },
   {
@@ -258,8 +257,8 @@
       "demand": "2024和2025年出游人次、花费都有公开数字。不同公报的约数并列，不平均。",
       "roles": "目的地运营、产品策划、景区营销和旅游内容有业务线索，职位活页尚未核验。",
       "entry": "携程招聘官网可以打开。具体职位描述没有核完，没有统一的地域门槛结论。",
-      "profit": "人均单次花费下降是自行测算。企业之间一降一增，不能写成全行业利润。",
-      "risks": "总花费上升仍可能伴随客单价下降。公司投资利得会放大利润。",
+      "profit": "两份公报的人均除法不是可比序列，本站不计算下降幅度。企业之间一降一增，不能写成全行业利润。",
+      "risks": "总人次和总花费不能直接换成客单价结论。公司投资利得会放大利润。",
       "gaps": "薪资、集中度、旅行社与景区用工结构，以及具体职位活页，都还没有可靠结果。"
     },
     "definition": [
@@ -335,7 +334,7 @@
         "id": "tour-per-capita-judgment",
         "kind": "judgment",
         "sourceIds": ["src-mct-2024", "src-nbs-2025"],
-        "text": "人均单次花费下降约6.4%是两组约数相除后的自行测算。2024年用的是文化和旅游部公报，2025年用的是统计局公报。它不是官方公布的人均指标。"
+        "text": "2024年和2025年可以分别用当年公报的总花费除以人次，但发布机构和取整不同。本站把它们标成不可比的两条自行测算，不计算下降百分比，也不把它写成官方人均花费。"
       }
     ],
     "risks": [
@@ -343,7 +342,7 @@
         "id": "tour-risk",
         "kind": "judgment",
         "sourceIds": ["src-trip-2025", "src-utour-2025"],
-        "text": "总人次上升时，单次花费仍可能下降。平台利润还可能受投资利得影响。众信旅游的报表包含出境业务，不能直接代表国内旅游服务的利润。"
+        "text": "平台利润可能受投资利得影响。众信旅游的报表包含出境业务，不能直接代表国内旅游服务的利润。不同公报的约数也不能连成客单价下降。"
       }
     ],
     "openQuestions": [
@@ -362,7 +361,6 @@
       "tour-spend-2025-mct",
       "tour-per-capita-2024",
       "tour-per-capita-2025",
-      "tour-per-capita-change",
       "songcheng-revenue-2025",
       "songcheng-revenue-change-2025",
       "utour-revenue-2025",
@@ -377,7 +375,7 @@
     ],
     "homeMetricIds": {
       "demand": ["tour-trips-2024", "tour-spend-2024", "tour-trips-2025-nbs", "tour-spend-2025-nbs", "tour-trips-2025-mct", "tour-spend-2025-mct"],
-      "profit": ["tour-per-capita-2024", "tour-per-capita-2025", "tour-per-capita-change", "songcheng-revenue-change-2025", "utour-profit-change-2025", "trip-revenue-2025", "trip-investment-gain-2025"]
+      "profit": ["tour-per-capita-2024", "tour-per-capita-2025", "songcheng-revenue-change-2025", "utour-profit-change-2025", "trip-revenue-2025", "trip-investment-gain-2025"]
     }
   }
 ]

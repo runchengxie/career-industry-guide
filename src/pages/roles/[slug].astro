@@ -62,8 +62,8 @@ const base = import.meta.env.BASE_URL;
     {
       role.postingUrl ? (
         <p>
-          <a href={role.postingUrl}>材料链接</a>
-          {role.verifiedOn ? <span>，核验日期 {role.verifiedOn}</span> : <span>。此链接不是已完成的官网活页核验。</span>}
+          <a href={role.postingUrl}>转载或年报材料链接，不是在招活页</a>
+          {role.verifiedOn ? <span>，核验日期 {role.verifiedOn}</span> : <span>。本站没有把它核对成雇主官网正在发布的职位。</span>}
         </p>
       ) : (
         <p>没有可标成已核验职位的链接。</p>

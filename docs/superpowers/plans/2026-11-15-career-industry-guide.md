@@ -258,6 +258,10 @@ git commit -m "docs: add local preview and future base path notes"
 ```
 
 
+## Revision after review
+
+发布前删去了两类容易误读的数字：把 2024 年养老机构服务人数除以床位得到的约 45.4% 使用率，以及把两份不同公报的约数连成约下降 6.4% 的人均花费。服务人数和床位仍按原文分别保留。两次人均除法也分别保留，并标明不可比。依赖升级到 Astro 7.4.12，以处理审计给出的框架漏洞。
+
 ## Execution record
 
 计划已在分支 `cursor/career-industry-site-8014` 执行。任务共用同一套数据类型和页面合约，因此在本会话内顺序实现，而不是拆给并行子任务。校验、筛选、自行测算、生产构建和浏览器筛选都已跑过。仓库保持私有，没有启用 Pages，没有添加 GitHub Actions，没有合并或修改设计 PR #1。

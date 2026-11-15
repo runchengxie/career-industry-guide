@@ -31,7 +31,7 @@ const rolesByIndustry = new Map(data.industries.map((industry) => [industry.id, 
     </fieldset>
   </form>
 
-  <div data-empty class="empty" hidden>
+  <div data-empty class="empty" hidden aria-live="polite">
     <p>{emptyFilterMessage}</p>
     <button type="button" data-reset>恢复全部</button>
   </div>
@@ -80,7 +80,14 @@ const rolesByIndustry = new Map(data.industries.map((industry) => [industry.id, 
               });
               return (
                 <td data-industry={industry.id} data-directions={directions} data-label={industry.name}>
-                  {key === "definition" ? industry.comparison.definition : null}
+                  {key === "definition" ? (
+                    <>
+                      <p>
+                        <a href={`${import.meta.env.BASE_URL}industries/${industry.slug}/`}>{industry.name}</a>
+                      </p>
+                      <p>{industry.comparison.definition}</p>
+                    </>
+                  ) : null}
                   {key === "demand" ? (
                     <>
                       <p>{industry.comparison.demand}</p>
