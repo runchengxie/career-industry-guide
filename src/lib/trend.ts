@@ -3,7 +3,7 @@ export function yearNumber(label: string | null): number | null {
   return label && /^\d{4}(年末)?$/.test(label) ? Number(label.slice(0, 4)) : null;
 }
 
-export function chartGeometry(points: { year: number; value: number }[]) {
+export function chartGeometry<T extends { year: number; value: number }>(points: T[]) {
   const width = 360,
     height = 180,
     left = 68,
@@ -39,9 +39,14 @@ export function chartGeometry(points: { year: number; value: number }[]) {
   };
 }
 
-/** Missing years and duplicate years must never become synthetic line segments. */
-export function annualSegments<T extends { year: number }>(points: T[], connect: boolean) {
-  return connect
-    ? points.slice(1).flatMap((p, i) => (p.year - points[i].year === 1 ? [{ a: points[i], b: p }] : []))
-    : [];
+/**
+ * 连线只穿过每年标记为主来源的点，且只连接相邻年份。
+ * 同年其他来源保留为独立点，不参与连线，也不做平均。
+ */
+export function seriesSegments<T extends { year: number; primary: boolean }>(points: T[], connect: boolean) {
+  if (!connect) return [];
+  const primary = points.filter((point) => point.primary).sort((a, b) => a.year - b.year);
+  return primary
+    .slice(1)
+    .flatMap((point, index) => (point.year - primary[index].year === 1 ? [{ a: primary[index], b: point }] : []));
 }

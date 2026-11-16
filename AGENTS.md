@@ -28,6 +28,7 @@
 - 取不到的数据标 `availability: "unavailable"`（找不到）或 `"unverified"`（尚未核实），并按 `category` 归入已有分类。不要用 0、估算或示例数据填充。
 - 自行测算的指标要写 `formula` 与 `inputs`，测试会用 `inputs` 复算并比对 `value`。
 - 同组可比性写在 `comparison`，标为 `comparable: false` 的不要连成序列或计算变化幅度。
+- 要画连线的组必须标 `comparison.series`，并给每年恰好一个 `primary: true` 的主来源；其他来源保持 `primary: false`，作为并列点显示，不参与连线、不平均。年度与年末时点不能混在同一序列里。
 - 来源只引公开可核验材料；新闻转述要写明转述关系；付费报告摘要只能作线索。
 - 研究版本日期只在 `src/data/meta.json` 改，代码里不写死。
 
