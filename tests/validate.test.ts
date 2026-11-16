@@ -128,6 +128,15 @@ test("缺失指标不能带可显示数字", () => {
   assert.throws(() => assertValid(data), /不是数值状态，不能带 value/);
 });
 
+test("研究版本日期来自 meta，不写死在代码里", () => {
+  const base0 = base();
+  const moved = { ...base0, meta: { ...base0.meta, researchVersion: "2027-01-31" } };
+  assert.doesNotThrow(() => assertValid(moved));
+
+  const broken = { ...base0, meta: { ...base0.meta, researchVersion: "2026/11/15" } };
+  assert.throws(() => assertValid(broken), /YYYY-MM-DD/);
+});
+
 test("排名字段被拒绝", () => {
   const data = base();
   (data as Dataset & { score?: number }).score = 90;

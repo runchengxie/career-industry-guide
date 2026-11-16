@@ -31,6 +31,8 @@ jobs:
           cache: npm
       - name: Install
         run: npm ci
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
       - name: Test
         run: npm test
       - name: Typecheck
