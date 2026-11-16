@@ -189,6 +189,10 @@ export function validateDataset(data: Dataset): string[] {
     }
   }
 
+  for (const claim of data.meta.method) {
+    if (blank(claim.section)) errors.push(`方法段落 ${claim.id} 缺少分组`);
+  }
+
   const claimIds = new Set<string>();
   for (const claim of allClaims(data)) {
     if (claimIds.has(claim.id)) errors.push(`段落 id 重复 ${claim.id}`);
