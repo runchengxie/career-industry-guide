@@ -1,4 +1,4 @@
-/* Additive editorial sample styles. Shared research data and chart styles are unchanged. */
+/* 编辑部版式：首页导读、行业速读、岗位探索路径。研究数据与图表样式不变。 */
 .banner-compact {
   padding-block: 0.4rem;
 }
@@ -94,12 +94,12 @@
 .industry-card .read-link {
   margin-top: auto;
 }
-.sample-overview {
+.industry-overview {
   border-block: 1px solid var(--line);
   padding: 1.5rem 0;
   margin: 1.5rem 0 2rem;
 }
-.sample-overview h2 {
+.industry-overview h2 {
   margin-top: 0;
 }
 .overview-columns h3 {
@@ -109,7 +109,7 @@
 .overview-columns p {
   font-size: var(--text-sm);
 }
-.sample-overview .field-note {
+.industry-overview .field-note {
   margin-top: 1.25rem;
 }
 .role-path {

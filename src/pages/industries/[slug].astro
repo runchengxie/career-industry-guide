@@ -29,7 +29,6 @@ const claims = claimBlocks(industry);
 for (const claim of claims) for (const sourceId of claim.sourceIds) citations.number(sourceId);
 for (const metric of metrics) for (const sourceId of metric.sourceIds) citations.number(sourceId);
 const base = import.meta.env.BASE_URL;
-const isSample = industry.id === "advertising";
 
 const toc = [
   { id: "definition", title: "定义与口径" },
@@ -52,38 +51,34 @@ const toc = [
     <a href={base}>返回比较</a>
   </p>
   <h1>{industry.name}</h1>
-  {isSample ? (
-    <section class="sample-overview" aria-labelledby="overview-title">
-      <p class="eyebrow">行业速读 · 研究摘要</p>
-      <h2 id="overview-title">先了解业务，再看岗位线索</h2>
-      <p class="lede">{industry.comparison.definition}</p>
-      <div class="overview-columns">
-        <div>
-          <h3>有哪些工作线索</h3>
-          <p>{industry.comparison.roles}</p>
-          <a href="#roles">查看岗位方向 →</a>
-        </div>
-        <div>
-          <h3>先别下的结论</h3>
-          <p>{industry.comparison.demand}</p>
-          <a href="#demand">追溯需求证据 →</a>
-        </div>
-        <div>
-          <h3>还不知道什么</h3>
-          <p>{industry.comparison.gaps}</p>
-          <a href="#questions">查看待核实问题 →</a>
-        </div>
+  <section class="industry-overview" aria-labelledby="overview-title">
+    <p class="eyebrow">行业速读 · 研究摘要</p>
+    <h2 id="overview-title">先了解业务，再看岗位线索</h2>
+    <p class="lede">{industry.comparison.definition}</p>
+    <div class="overview-columns">
+      <div>
+        <h3>有哪些工作线索</h3>
+        <p>{industry.comparison.roles}</p>
+        <a href="#roles">查看岗位方向 →</a>
       </div>
-      <p class="field-note">以上是现有材料的导读，不是招聘结论。详细依据和口径见下方正文。</p>
-      <nav class="editorial-actions" aria-label="阅读路径">
-        <a href="#roles">了解岗位</a>
-        <a href="#portfolio">尝试一个练习</a>
-        <a href="#sources">核对来源</a>
-      </nav>
-    </section>
-  ) : (
-    <p>{data.meta.sampleNote}</p>
-  )}
+      <div>
+        <h3>先别下的结论</h3>
+        <p>{industry.comparison.demand}</p>
+        <a href="#demand">追溯需求证据 →</a>
+      </div>
+      <div>
+        <h3>还不知道什么</h3>
+        <p>{industry.comparison.gaps}</p>
+        <a href="#questions">查看待核实问题 →</a>
+      </div>
+    </div>
+    <p class="field-note">以上是现有材料的导读，不是招聘结论。详细依据和口径见下方正文。</p>
+    <nav class="editorial-actions" aria-label="阅读路径">
+      <a href="#roles">了解岗位</a>
+      <a href="#portfolio">尝试一个练习</a>
+      <a href="#sources">核对来源</a>
+    </nav>
+  </section>
 
   <div class="layout">
     <div class="article">
