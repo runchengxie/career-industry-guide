@@ -27,9 +27,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           broken=$(jq -r '.broken' link-summary.json)
-          echo "失效链接数：$broken"
+          unreachable=$(jq -r '.unreachable' link-summary.json)
+          echo "失效（404/410）：$broken；不可达（可能是网络环境）：$unreachable"
           if [ "$broken" = "0" ]; then
-            echo "没有失效链接，不建 issue。"
+            echo "没有确定为失效的链接，不建 issue。不可达的条目见上面的报告。"
             exit 0
           fi
           title="来源链接失效"
