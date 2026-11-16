@@ -15,7 +15,8 @@
     "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\" \"tests/**/*.ts\" \"*.{json,mjs}\"",
     "format:check": "prettier --check \"src/**/*.ts\" \"scripts/**/*.ts\" \"tests/**/*.ts\" \"*.{json,mjs}\"",
     "verify": "npm run format:check && npm test && npm run typecheck && npm run build && npm run check:dist && npm run check:html",
-    "check:browser": "node scripts/browser-smoke.mjs"
+    "check:browser": "node scripts/browser-smoke.mjs",
+    "check:links": "node scripts/check-links.mjs"
   },
   "dependencies": {
     "astro": "7.4.12"

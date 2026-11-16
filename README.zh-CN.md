@@ -54,6 +54,10 @@ BASE_PATH=/career-industry-guide/ SITE=https://runchengxie.github.io npm run bui
 BASE_PATH=/career-industry-guide/ npm run check:dist
 ```
 
+## 来源链接检查
+
+`npm run check:links` 用浏览器 UA 请求每条来源链接，把结果分成正常、拒绝自动访问（401/403/429，多为防爬虫）和失效三类。`Link check` 工作流每月 1 号跑一次；出现失效时开或更新 issue，不让构建失败——外部站点是否可用不由本项目决定。已知会被拒的地址连同原因记在 `scripts/link-check-ignore.json`。
+
 ## 数据
 
 站点内容放在 `src/data/*.json`，字段定义见 `src/lib/types.ts`。页面模板不写死数字；`scripts/check-data.ts` 会在数值缺来源、年份或口径，或者岗位声称已完成活页核验却没有链接和日期时让构建失败。
