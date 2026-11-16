@@ -32,6 +32,17 @@ npm run build
 npm run preview
 ```
 
+### Browser smoke test
+
+`npm run check:browser` drives a real Chrome over a running preview: the direction filter, `?direction=` links, horizontal overflow at 420px, dark mode, and the CSV exports. It is not part of CI because it needs a local Chrome.
+
+```bash
+npm run build && npm run preview
+npm run check:browser
+```
+
+Defaults: `PREVIEW_URL=http://127.0.0.1:4321`, `CHROME_PATH=/usr/bin/google-chrome`; screenshots go to a temporary directory unless `SMOKE_OUT` is set.
+
 `npm run verify` runs the same chain as CI: data validation, tests, type check, build, output checks (broken links, required and forbidden content) and HTML/WCAG checks.
 
 ## Deployment
