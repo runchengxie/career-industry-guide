@@ -51,7 +51,34 @@ const toc = [
     <a href={base}>返回比较</a>
   </p>
   <h1>{industry.name}</h1>
-  <p>{data.meta.sampleNote}</p>
+  <section class="industry-overview" aria-labelledby="overview-title">
+    <p class="eyebrow">行业速读 · 研究摘要</p>
+    <h2 id="overview-title">先了解业务，再看岗位线索</h2>
+    <p class="lede">{industry.comparison.definition}</p>
+    <div class="overview-columns">
+      <div>
+        <h3>有哪些工作线索</h3>
+        <p>{industry.comparison.roles}</p>
+        <a href="#roles">查看岗位方向 →</a>
+      </div>
+      <div>
+        <h3>先别下的结论</h3>
+        <p>{industry.comparison.demand}</p>
+        <a href="#demand">追溯需求证据 →</a>
+      </div>
+      <div>
+        <h3>还不知道什么</h3>
+        <p>{industry.comparison.gaps}</p>
+        <a href="#questions">查看待核实问题 →</a>
+      </div>
+    </div>
+    <p class="field-note">以上是现有材料的导读，不是招聘结论。详细依据和口径见下方正文。</p>
+    <nav class="editorial-actions" aria-label="阅读路径">
+      <a href="#roles">了解岗位</a>
+      <a href="#portfolio">尝试一个练习</a>
+      <a href="#sources">核对来源</a>
+    </nav>
+  </section>
 
   <div class="layout">
     <div class="article">
@@ -71,7 +98,9 @@ const toc = [
             </li>
           ))}
         </ul>
-        <p>护理、康复和医疗技术岗位如果出现在招聘材料里，只视为相邻工作，不列入上面的文科岗位。</p>
+        {industry.id === "elderly-care" ? (
+          <p>护理、康复和医疗技术岗位如果出现在招聘材料里，只视为相邻工作，不列入上面的文科岗位。</p>
+        ) : null}
       </Section>
       <Section id="daily-work" title="日常工作概况">
         <ClaimList claims={industry.dailyWork} citations={citations} />
