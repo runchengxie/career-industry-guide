@@ -414,6 +414,28 @@ details.meta summary:hover { color: var(--pine-dark); }
   white-space: nowrap;
 }
 
+.trends {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.25rem;
+  margin: 1rem 0 0;
+}
+.trend {
+  margin: 0;
+  border: 1px solid var(--line);
+  background: var(--card);
+  padding: 0.6rem 0.75rem 0.35rem;
+}
+.trend figcaption {
+  font-family: var(--font-serif);
+  font-size: var(--text-sm);
+  font-weight: 650;
+  margin-bottom: 0.25rem;
+}
+.trend svg { width: 100%; height: auto; display: block; }
+.trend .point-value { font-size: 9px; fill: var(--ink); }
+.trend .point-label { font-size: 9px; fill: var(--muted); }
+
 .state {
   display: inline-block;
   padding: 0 0.4rem;
