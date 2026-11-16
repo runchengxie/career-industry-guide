@@ -4,7 +4,7 @@ import MetricList from "../components/MetricList.astro";
 import Section from "../components/Section.astro";
 import SourceList from "../components/SourceList.astro";
 import { createCitations } from "../lib/citations.ts";
-import { emptyFilterMessage } from "../lib/filter.ts";
+import { emptyFilterMessage, matchingRoles } from "../lib/filter.ts";
 import { loadDataset } from "../lib/load.ts";
 
 const data = loadDataset();
@@ -58,7 +58,7 @@ const rolesByIndustry = new Map(data.industries.map((industry) => [industry.id, 
         {
           data.industries.map((industry) => {
             const roles = rolesByIndustry.get(industry.id) ?? [];
-            const directions = [...new Set(roles.filter((role) => role.humanitiesFit === "match").map((role) => role.direction))].join(" ");
+            const directions = [...new Set(matchingRoles(data.roles, industry.id, "all").map((role) => role.direction))].join(" ");
             return (
               <th data-industry={industry.id} data-directions={directions} scope="col">
                 <a href={`${import.meta.env.BASE_URL}industries/${industry.slug}/`}>{industry.name}</a>
@@ -83,7 +83,7 @@ const rolesByIndustry = new Map(data.industries.map((industry) => [industry.id, 
             <th scope="row">{label}</th>
             {data.industries.map((industry) => {
               const roles = rolesByIndustry.get(industry.id) ?? [];
-              const directions = [...new Set(roles.filter((role) => role.humanitiesFit === "match").map((role) => role.direction))].join(" ");
+              const directions = [...new Set(matchingRoles(data.roles, industry.id, "all").map((role) => role.direction))].join(" ");
               const demand = industry.homeMetricIds.demand.flatMap((id) => {
                 const metric = metrics.get(id);
                 return metric ? [metric] : [];

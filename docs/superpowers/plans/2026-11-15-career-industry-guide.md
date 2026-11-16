@@ -1,5 +1,7 @@
 # 职业行业研究网站 Implementation Plan
 
+> **状态说明（2026-11-16）：** 本文是当时的实现计划记录，保留原样。执行后站点继续迭代：Astro 7.4.12、`Site` 工作流（检查 + GitHub Pages 部署）、数据页与 CSV 导出、2023 年数据、趋势图与浏览器冒烟测试。下文出现的“Astro 5”“无部署工作流”“仓库保持私有”都是计划撰写时的状态，不是当前事实。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** 在本地构建一个可预览的中文静态网站，用同一套结构比较广告营销服务、养老服务、国内旅游服务三个样本，并明示证据缺口。

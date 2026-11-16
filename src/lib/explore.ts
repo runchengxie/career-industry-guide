@@ -93,13 +93,6 @@ export function labelGroups(metrics: Metric[]): { name: string; years: string[];
     years: [...entry.years].sort(byYear),
   }));
 }
-
-export function labelMetrics(metrics: Metric[]): string[] {
-  return labelGroups(metrics).map((group) =>
-    group.years.length > 0 ? `${group.name}（${group.years.join("、")}）` : group.name,
-  );
-}
-
 export interface ComparisonGroup {
   name: string;
   comparable: boolean;

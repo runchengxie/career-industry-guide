@@ -1,21 +1,19 @@
 import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { loadDataset } from "../src/lib/load.ts";
+import { siteRoutes } from "../src/lib/routes.ts";
 
 const data = loadDataset();
 const rawBase = process.env.BASE_PATH ?? "/";
 const base = rawBase === "/" ? "/" : `/${rawBase.replace(/^\/+|\/+$/g, "")}/`;
 
+const routes = siteRoutes(data);
 const required = [
-  "dist/index.html",
-  "dist/data/index.html",
-  "dist/data/metrics.csv",
-  "dist/data/roles.csv",
-  "dist/methods/index.html",
+  ...routes.map((route) => `dist${route}index.html`),
   "dist/404.html",
   "dist/favicon.svg",
-  ...data.industries.map((industry) => `dist/industries/${industry.slug}/index.html`),
-  ...data.roles.map((role) => `dist/roles/${role.slug}/index.html`),
+  "dist/data/metrics.csv",
+  "dist/data/roles.csv",
 ];
 
 const missing = required.filter((file) => !existsSync(file));
@@ -76,10 +74,10 @@ if (!existsSync("dist/robots.txt")) {
   console.error("缺少 robots.txt");
   process.exit(1);
 }
-for (const page of required.filter((file) => file.endsWith("index.html"))) {
-  const route = `${base}${page.replace(/^dist\//, "").replace(/index\.html$/, "")}`;
-  const sitemap = readFileSync("dist/sitemap-0.xml", "utf8");
-  if (!sitemap.includes(route)) console.error(`sitemap 缺少 ${route}`);
+const sitemap = readFileSync("dist/sitemap-0.xml", "utf8");
+for (const route of routes) {
+  const url = `${base}${route.slice(1)}`;
+  if (!sitemap.includes(url)) console.error(`sitemap 缺少 ${url}`);
 }
 
 if (base !== "/" && !home.includes(`href="${base}"`)) {

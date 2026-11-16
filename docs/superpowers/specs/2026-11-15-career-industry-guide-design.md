@@ -2,8 +2,8 @@
 
 - 文档路径：`docs/superpowers/specs/2026-11-15-career-industry-guide-design.md`
 - 研究版本日期：2026-11-15（Asia/Shanghai）
-- 文档状态：待用户审阅。本文件通过后才能编写实现计划或应用代码
-- 仓库状态：私有。本阶段不启用 GitHub Pages，不配置自动部署，不将仓库改为公开
+- 文档状态：已审阅并执行；实现记录见 `docs/superpowers/plans/2026-11-15-career-industry-guide.md`
+- 仓库状态（2026-11-16 更新）：公开仓库，GitHub Pages 已启用，`Site` 工作流在推送 `main` 时跑检查并部署。下文第 6、10 节写的“保持私有、不启用 Pages、不加工作流”是当时的约束，已由第 13 节修订记录覆盖。
 
 ## 1. 背景与目的
 

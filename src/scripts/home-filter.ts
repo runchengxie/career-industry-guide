@@ -1,5 +1,3 @@
-import { emptyFilterMessage } from "../lib/filter.ts";
-
 const allowed = new Set(["all", "marketing", "community", "destination"]);
 
 export function applyDirection(root: ParentNode, direction: string): number {
@@ -62,5 +60,3 @@ export function setupHomeFilter(doc: Document): void {
   });
   sync(initial, false);
 }
-
-export { emptyFilterMessage };
