@@ -1,0 +1,7 @@
+[
+  {
+    "url": "https://investors.trip.com/static-files/da716603-67ae-477e-a9ff-fc9ebc203f19",
+    "reason": "该投资者页面拒绝 HEAD 请求（403），GET 加浏览器 UA 可以正常打开；留作兜底，避免它临时拦自动访问时被误报为失效",
+    "added": "2026-11-16"
+  }
+]

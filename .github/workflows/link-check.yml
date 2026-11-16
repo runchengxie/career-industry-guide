@@ -1,0 +1,42 @@
+name: Link check
+
+on:
+  schedule:
+    # 每月 1 号 01:00 UTC，对应北京时间 09:00
+    - cron: "0 1 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Setup Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - name: Check source links
+        run: node scripts/check-links.mjs
+      - name: Open or update an issue when links break
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          broken=$(jq -r '.broken' link-summary.json)
+          echo "失效链接数：$broken"
+          if [ "$broken" = "0" ]; then
+            echo "没有失效链接，不建 issue。"
+            exit 0
+          fi
+          title="来源链接失效"
+          existing=$(gh issue list --state open --search "$title in:title" --json number --jq '.[0].number // ""')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body-file link-report.md
+            echo "已在 issue #$existing 追加本次结果。"
+          else
+            gh issue create --title "$title" --body-file link-report.md
+          fi

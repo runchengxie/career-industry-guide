@@ -10,4 +10,8 @@ dist/
 
 # 原始 Word 文件带作者与软件账号属性，只收录转换后的 Markdown
 *.docx
+
+# 链接检查的生成物
+link-report.md
+link-summary.json
 ~$*

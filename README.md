@@ -54,6 +54,10 @@ BASE_PATH=/career-industry-guide/ SITE=https://runchengxie.github.io npm run bui
 BASE_PATH=/career-industry-guide/ npm run check:dist
 ```
 
+## Source link check
+
+`npm run check:links` requests every source URL with a browser user agent and splits the result into ok, blocked (401/403/429, usually anti-bot) and broken. A `Link check` workflow runs it on the first of each month; broken links open or update an issue instead of failing a build, because external availability is not under this project's control. Known cases live in `scripts/link-check-ignore.json` with a reason.
+
 ## Data
 
 Site content lives in `src/data/*.json`; the schema is `src/lib/types.ts`. Page templates never hard-code numbers, and `scripts/check-data.ts` fails the build when a value lacks a source, year or scope, or when a role claims a verified posting without a link and date.
