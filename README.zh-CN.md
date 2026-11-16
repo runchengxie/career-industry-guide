@@ -56,7 +56,7 @@ BASE_PATH=/career-industry-guide/ npm run check:dist
 
 ## 来源链接检查
 
-`npm run check:links` 用浏览器 UA 请求每条来源链接，把结果分成正常、拒绝自动访问（401/403/429，多为防爬虫）和失效三类。`Link check` 工作流每月 1 号跑一次；出现失效时开或更新 issue，不让构建失败——外部站点是否可用不由本项目决定。已知会被拒的地址连同原因记在 `scripts/link-check-ignore.json`。
+`npm run check:links` 用浏览器 UA 请求每条来源链接，结果分正常、拒绝自动访问（401/403/429，多为防爬虫）、不可达（超时或 DNS 失败）、服务端错误（5xx）和失效（404/410）。每月 1 号的 `Link check` 工作流只有“失效”会开或更新 issue；不可达常见于运行器不在来源所在网络，只记录不处理。已知会被拒的地址连同原因记在 `scripts/link-check-ignore.json`。
 
 ## 数据
 

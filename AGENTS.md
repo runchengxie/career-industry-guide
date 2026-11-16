@@ -17,7 +17,7 @@
 | `npm run check:dist` | 只检查构建产物（必需文件、断链、页内锚点、sitemap） |
 | `npm run check:html` | 只跑 HTML/WCAG 规则 |
 | `npm run check:browser` | 浏览器冒烟测试，需要先 `npm run build && npm run preview`；不进 CI |
-| `npm run check:links` | 检查 16 条来源链接是否还能打开；每月由 `Link check` 工作流跑一次，失效时开 issue，不红构建 |
+| `npm run check:links` | 检查 16 条来源链接；每月由 `Link check` 工作流跑一次，只有 404/410 会开 issue，不可达与 5xx 只记录 |
 | `npm run dev` / `preview` | 本地开发与预览 |
 
 `BASE_PATH` 与 `SITE` 影响构建路径；CI 固定为 `/career-industry-guide/` 与 `https://runchengxie.github.io`。
