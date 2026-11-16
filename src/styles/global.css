@@ -434,7 +434,7 @@ details.meta summary:hover { color: var(--pine-dark); }
 }
 .trend svg { width: 100%; height: auto; display: block; }
 .trend .point-value { font-size: 9px; fill: var(--ink); }
-.trend .point-label { font-size: 9px; fill: var(--muted); }
+.trend .point-label { font-size: 12px; fill: var(--muted); }
 
 .state {
   display: inline-block;
@@ -522,3 +522,5 @@ details.meta summary:hover { color: var(--pine-dark); }
   .section { break-inside: avoid; }
   .compare tr { break-inside: avoid; }
 }
+
+.trend-values { padding-left: 1.2rem; font-size: var(--text-sm); overflow-wrap: anywhere; }

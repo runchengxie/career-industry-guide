@@ -1,4 +1,5 @@
 import type { Dataset, Industry, Metric, MetricCategory } from "./types.ts";
+import { yearNumber } from "./trend.ts";
 import { metricCategories } from "./types.ts";
 
 export interface Summary {
@@ -96,6 +97,7 @@ export function labelGroups(metrics: Metric[]): { name: string; years: string[];
 export interface ComparisonGroup {
   name: string;
   comparable: boolean;
+  reasons: string[];
   metrics: Metric[];
 }
 
@@ -106,11 +108,33 @@ export function comparisonGroups(data: Dataset): ComparisonGroup[] {
     if (!metric.comparison) continue;
     const entry = groups.get(metric.comparison.group) ?? {
       name: metric.comparison.group,
-      comparable: metric.comparison.comparable,
+      comparable: false,
+      reasons: [],
       metrics: [],
     };
     entry.metrics.push(metric);
     groups.set(metric.comparison.group, entry);
   }
-  return [...groups.values()];
+  return [...groups.values()].map((entry) => {
+    const members = entry.metrics;
+    const reasons: string[] = [];
+    if (!members.every((m) => m.comparison?.comparable)) reasons.push("含明确不可比或可比性标记不一致的条目");
+    for (const [field, label] of [
+      ["unit", "单位"],
+      ["category", "分类"],
+      ["subjectId", "对象"],
+      ["geography", "地域"],
+      ["scope", "口径描述"],
+    ] as const) {
+      if (new Set(members.map((m) => m[field])).size > 1) reasons.push(`${label}不一致，尚未核验为同口径`);
+    }
+    if (new Set(members.map((m) => m.year?.endsWith("年末"))).size > 1) reasons.push("年度与年末时点不同，不直接连线");
+    const years = members.map((m) => yearNumber(m.year));
+    if (years.some((y) => y === null)) reasons.push("包含非年度或年份未明确的条目");
+    if (new Set(years).size < years.length) reasons.push("同年有多个来源或观测，保留并列值，不选择、平均或连线");
+    if (members.some((m) => m.availability !== "value" || m.value === null || !Number.isFinite(m.value)))
+      reasons.push("包含缺失或未核验数值");
+    if (members.length < 2) reasons.push("不足两个年度观测");
+    return { ...entry, comparable: reasons.length === 0, reasons };
+  });
 }
