@@ -6,6 +6,7 @@ import { formatMetric } from "../lib/format.ts";
 import { comparisonGroups, dataMatrix, labelGroups, metricsByIndustry, summarize } from "../lib/explore.ts";
 import { metricCategories } from "../lib/types.ts";
 import { natureLabel, verificationLabel } from "../lib/labels.ts";
+import { yearNumber } from "../lib/trend.ts";
 import { loadDataset } from "../lib/load.ts";
 
 const data = loadDataset();
@@ -14,7 +15,7 @@ const matrix = dataMatrix(data);
 const comparisonSets = comparisonGroups(data);
 const byYear = (a: string, b: string): number => a.localeCompare(b, "zh-CN", { numeric: true });
 const trendSets = comparisonSets
-  .filter((set) => set.comparable)
+  .filter((set) => set.metrics.every((m) => m.comparison?.comparable && m.availability === "value" && yearNumber(m.year) !== null) && new Set(set.metrics.map((m) => m.unit)).size === 1)
   .map((set) => ({
     ...set,
     points: set.metrics
@@ -23,6 +24,9 @@ const trendSets = comparisonSets
       .sort((a, b) => byYear(a.year ?? "", b.year ?? ""))
       .map((metric) => ({
         value: metric.value as number,
+        year: yearNumber(metric.year)!,
+        id: metric.id,
+        sources: metric.sourceIds.join("、"),
         label: metric.year ?? "—",
         decimals: metric.decimals,
         group: metric.group,
@@ -256,12 +260,12 @@ const files = [
 
   <Section id="trend" title="趋势">
     <p>
-      只把同组、同单位、标记为可比的数据画在一起。点上的数字直接来自公报，本站没有做平滑、插值或预测。
+      同组年度值按真实年份定位；同年多来源共用横坐标，明细逐条保留。不满足保守可比条件时只画散点，不连线；缺失年份不跨年连线。纵轴包含零点，本站不选择、平均、平滑或预测来源值。
     </p>
     <div class="trends">
       {
         trendSets.map((set) => (
-          <TrendChart label={set.name} unit={set.metrics[0]?.unit ?? null} points={set.points} />
+          <TrendChart label={set.name} unit={set.metrics[0]?.unit ?? null} points={set.points} connect={set.comparable} reasons={set.reasons} />
         ))
       }
     </div>
@@ -277,8 +281,9 @@ const files = [
           <li>
             <strong>{group.name}</strong>{" "}
             <span class={`state ${group.comparable ? "state-tracked" : "state-missing"}`}>
-              {group.comparable ? "可比" : "不可比"}
+              {group.comparable ? "满足保守连线条件" : "不连线，需核验"}
             </span>
+            <span class="scope">{group.reasons.join("；")}</span>
             <span class="scope">
               {group.metrics.map((metric) => `${metric.name}（${metric.year ?? "—"}）`).join("、")}
             </span>
