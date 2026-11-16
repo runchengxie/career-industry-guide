@@ -1,13 +1,9 @@
 import type { APIRoute } from "astro";
+import { toCsv } from "../../lib/csv.ts";
 import { formatMetric } from "../../lib/format.ts";
 import { natureLabel } from "../../lib/labels.ts";
 import { metricCategories } from "../../lib/types.ts";
 import { loadDataset } from "../../lib/load.ts";
-
-function cell(value: string | number | null | undefined): string {
-  const text = value == null ? "" : String(value);
-  return /[",\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
-}
 
 export const GET: APIRoute = () => {
   const data = loadDataset();
@@ -42,6 +38,7 @@ export const GET: APIRoute = () => {
     metric.note ?? "",
   ]);
 
-  const csv = [header, ...rows].map((row) => row.map(cell).join(",")).join("\n");
-  return new Response(`\ufeff${csv}\n`, { headers: { "content-type": "text/csv; charset=utf-8" } });
+  return new Response(toCsv(header, rows), {
+    headers: { "content-type": "text/csv; charset=utf-8" },
+  });
 };

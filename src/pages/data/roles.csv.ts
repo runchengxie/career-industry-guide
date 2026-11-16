@@ -1,11 +1,7 @@
 import type { APIRoute } from "astro";
+import { toCsv } from "../../lib/csv.ts";
 import { verificationLabel } from "../../lib/labels.ts";
 import { loadDataset } from "../../lib/load.ts";
-
-function cell(value: string | null | undefined): string {
-  const text = value == null ? "" : String(value);
-  return /[",\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
-}
 
 export const GET: APIRoute = () => {
   const data = loadDataset();
@@ -27,6 +23,7 @@ export const GET: APIRoute = () => {
     role.limits,
     role.sourceIds.join("；"),
   ]);
-  const csv = [header, ...rows].map((row) => row.map(cell).join(",")).join("\n");
-  return new Response(`\ufeff${csv}\n`, { headers: { "content-type": "text/csv; charset=utf-8" } });
+  return new Response(toCsv(header, rows), {
+    headers: { "content-type": "text/csv; charset=utf-8" },
+  });
 };

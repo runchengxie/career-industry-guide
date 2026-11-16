@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { dataMatrix, labelMetrics, metricsByIndustry, summarize } from "../src/lib/explore.ts";
+import { dataMatrix, labelGroups, metricsByIndustry, summarize } from "../src/lib/explore.ts";
 import { loadDataset } from "../src/lib/load.ts";
 import { metricCategories } from "../src/lib/types.ts";
 
@@ -50,17 +50,18 @@ test("按行业分组的指标数加起来等于总数", () => {
   );
 });
 
-test("同名指标合并年份，不重复列出", () => {
+test("同名指标合并年份，保留第一次出现的 id", () => {
   const data = loadDataset();
-  const labels = labelMetrics(
+  const groups = labelGroups(
     data.metrics.filter((metric) => metric.id === "ad-revenue-2024" || metric.id === "ad-revenue-2025"),
   );
-  assert.deepEqual(labels, ["广告业务收入（2024、2025）"]);
+  assert.deepEqual(groups, [{ name: "广告业务收入", years: ["2024", "2025"], firstId: "ad-revenue-2024" }]);
 });
 
 test("名字不同的指标不合并", () => {
   const data = loadDataset();
-  const labels = labelMetrics(data.metrics.filter((metric) => metric.id.startsWith("tour-trips")));
-  assert.equal(labels.length, 2);
-  assert.deepEqual(labels.sort(), ["国内出游人次（2023、2025）", "国内居民出游人次（2024、2025）"].sort());
+  const names = labelGroups(data.metrics.filter((metric) => metric.id.startsWith("tour-trips"))).map(
+    (group) => `${group.name}（${group.years.join("、")}）`,
+  );
+  assert.deepEqual(names.sort(), ["国内出游人次（2023、2025）", "国内居民出游人次（2024、2025）"].sort());
 });
