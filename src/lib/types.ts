@@ -57,8 +57,11 @@ export interface Metric {
   note: string | null;
   /** 指标分类，数据页的数据地图按它排列。 */
   category: MetricCategory;
-  /** 同一组指标才算“同一个东西”；comparable 为 false 表示站内明确不把它们连成序列。 */
-  comparison: { group: string; comparable: boolean } | null;
+  /**
+   * 同一组指标才算“同一个东西”。comparable 为 false 表示站内明确不把它们连成序列；
+   * series 非空表示这几条是同一口径下的年度序列，可以按主来源连线。
+   */
+  comparison: { group: string; comparable: boolean; series: string | null; primary: boolean } | null;
 }
 
 export interface Role {

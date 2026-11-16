@@ -137,6 +137,28 @@ export function validateDataset(data: Dataset): string[] {
     if (list) list.push(metric);
     else groups.set(metric.comparison.group, [metric]);
   }
+  const series = new Map<string, Metric[]>();
+  for (const metric of data.metrics) {
+    const id = metric.comparison?.series;
+    if (!id) continue;
+    series.set(id, [...(series.get(id) ?? []), metric]);
+  }
+  for (const [id, members] of series) {
+    const suffixes = new Set(members.map((metric) => (metric.year ?? "").endsWith("年末")));
+    if (suffixes.size > 1) errors.push(`序列 ${id} 里混用了年度与年末时点`);
+    const primaries = members.filter((metric) => metric.comparison?.primary);
+    const byYear = new Map<string, number>();
+    for (const metric of primaries) {
+      byYear.set(metric.year ?? "", (byYear.get(metric.year ?? "") ?? 0) + 1);
+    }
+    for (const [year, count] of byYear) {
+      if (count > 1) errors.push(`序列 ${id} 在 ${year} 有多个主来源`);
+    }
+    if (members.some((metric) => metric.comparison?.primary && metric.availability !== "value")) {
+      errors.push(`序列 ${id} 有主来源不是数值状态`);
+    }
+  }
+
   for (const [group, members] of groups) {
     const units = new Set(members.map((metric) => metric.unit));
     const categories = new Set(members.map((metric) => metric.category));

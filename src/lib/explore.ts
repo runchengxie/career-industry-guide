@@ -1,5 +1,4 @@
 import type { Dataset, Industry, Metric, MetricCategory } from "./types.ts";
-import { yearNumber } from "./trend.ts";
 import { metricCategories } from "./types.ts";
 
 export interface Summary {
@@ -96,48 +95,44 @@ export function labelGroups(metrics: Metric[]): { name: string; years: string[];
 }
 export interface ComparisonGroup {
   name: string;
+  /** 数据里标为可比的组，才可能连线。 */
   comparable: boolean;
+  /** 组内共用的序列 id；为空表示只并列展示。 */
+  series: string | null;
   reasons: string[];
   metrics: Metric[];
 }
 
-/** 把标了 comparison 的指标按组聚合，供数据页的“可比性”一节使用。 */
+/** 把标了 comparison 的指标按组聚合，并给出能否连线的原因。 */
 export function comparisonGroups(data: Dataset): ComparisonGroup[] {
-  const groups = new Map<string, ComparisonGroup>();
+  const groups = new Map<string, Metric[]>();
   for (const metric of data.metrics) {
     if (!metric.comparison) continue;
-    const entry = groups.get(metric.comparison.group) ?? {
-      name: metric.comparison.group,
-      comparable: false,
-      reasons: [],
-      metrics: [],
-    };
-    entry.metrics.push(metric);
-    groups.set(metric.comparison.group, entry);
+    const list = groups.get(metric.comparison.group) ?? [];
+    list.push(metric);
+    groups.set(metric.comparison.group, list);
   }
-  return [...groups.values()].map((entry) => {
-    const members = entry.metrics;
+
+  return [...groups.entries()].map(([name, members]) => {
     const reasons: string[] = [];
-    if (!members.every((m) => m.comparison?.comparable)) reasons.push("含明确不可比或可比性标记不一致的条目");
+    const comparable = members.every((metric) => metric.comparison?.comparable === true);
+    if (!comparable) reasons.push("数据标记为不可比");
+
+    const seriesIds = new Set(members.map((metric) => metric.comparison?.series ?? null));
+    const series = seriesIds.size === 1 ? [...seriesIds][0] : null;
+    if (seriesIds.size > 1) reasons.push("组内序列标记不一致");
+    if (comparable && !series) reasons.push("未标记为同口径序列，只并列展示");
+
     for (const [field, label] of [
       ["unit", "单位"],
       ["category", "分类"],
       ["subjectId", "对象"],
-      ["geography", "地理范围"],
-      ["scope", "口径"],
     ] as const) {
-      if (new Set(members.map((m) => m[field])).size > 1) {
-        // 这几项是自由文本，字面不同不等于口径冲突，只说明需要人工确认
-        reasons.push(`${label}的表述不同，需人工确认是否同一口径`);
+      if (new Set(members.map((metric) => metric[field])).size > 1) {
+        reasons.push(`${label}不一致，不能画在同一条线上`);
       }
     }
-    if (new Set(members.map((m) => m.year?.endsWith("年末"))).size > 1) reasons.push("年度与年末时点不同，不直接连线");
-    const years = members.map((m) => yearNumber(m.year));
-    if (years.some((y) => y === null)) reasons.push("包含非年度或年份未明确的条目");
-    if (new Set(years).size < years.length) reasons.push("同年有多个来源或观测，保留并列值，不选择、平均或连线");
-    if (members.some((m) => m.availability !== "value" || m.value === null || !Number.isFinite(m.value)))
-      reasons.push("包含缺失或未核验数值");
-    if (members.length < 2) reasons.push("不足两个年度观测");
-    return { ...entry, comparable: reasons.length === 0, reasons };
+
+    return { name, comparable, series, reasons, metrics: members };
   });
 }
