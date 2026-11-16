@@ -1,27 +1,74 @@
 ---
 import { formatValue } from "../lib/format.ts";
 import { chartGeometry, annualSegments } from "../lib/trend.ts";
-interface Point { value: number; year: number; label: string; decimals: number; group: boolean; id: string; sources: string; }
-interface Props { label: string; unit: string | null; points: Point[]; connect: boolean; reasons: string[]; }
+interface Point {
+  value: number;
+  year: number;
+  label: string;
+  decimals: number;
+  group: boolean;
+  id: string;
+  sources: string;
+}
+interface Props {
+  label: string;
+  unit: string | null;
+  points: Point[];
+  connect: boolean;
+  reasons: string[];
+}
 const { label, unit, points, connect, reasons } = Astro.props;
 const chart = chartGeometry(points);
 // Never bridge an unobserved year, even for an otherwise comparable group.
 const segments = annualSegments(chart.points, connect);
-const summary = points.map(p=>`${p.label} ${formatValue(p.value,unit,p.decimals,p.group)}（${p.sources}）`).join("，");
+const summary = points
+  .map((p) => `${p.label} ${formatValue(p.value, unit, p.decimals, p.group)}（${p.sources}）`)
+  .join("，");
 ---
+
 <figure class="trend">
-  <figcaption>{label}（{unit}）</figcaption>
+  <figcaption>
+    {label}（{unit}）
+  </figcaption>
   <p class="field-note">{connect ? "同口径年度观测；缺年断线。" : `仅并列展示，不连线：${reasons.join("；")}。`}</p>
   <svg viewBox={`0 0 ${chart.width} ${chart.height}`} role="img" aria-label={`${label}，纵轴含零点：${summary}`}>
-    {chart.ticks.map(t => <>
-      <line x1={chart.left} x2={chart.width-chart.right} y1={t.y} y2={t.y} stroke="var(--muted)" stroke-opacity="0.3" />
-      <text x={chart.left-8} y={t.y+4} text-anchor="end" class="point-label">{new Intl.NumberFormat("zh-CN", {maximumFractionDigits:2}).format(t.value)}</text>
-    </>)}
-    {segments.map(s=><path d={`M${s.a.x},${s.a.y} L${s.b.x},${s.b.y}`} fill="none" stroke="var(--pine)" stroke-width="2" />)}
-    {chart.points.map((p,i)=><circle cx={p.x} cy={p.y} r="4" fill="none" stroke="var(--pine)" stroke-width="2"><title>{points[i].label}：{formatValue(p.value,unit,points[i].decimals,points[i].group)}（{points[i].sources}）</title></circle>)}
-    {chart.years.map(p=><text x={p.x} y={chart.height-8} text-anchor="middle" class="point-label">{p.year}</text>)}
+    {chart.ticks.map((t) => (
+      <>
+        <line
+          x1={chart.left}
+          x2={chart.width - chart.right}
+          y1={t.y}
+          y2={t.y}
+          stroke="var(--muted)"
+          stroke-opacity="0.3"
+        />
+        <text x={chart.left - 8} y={t.y + 4} text-anchor="end" class="point-label">
+          {new Intl.NumberFormat("zh-CN", { maximumFractionDigits: 2 }).format(t.value)}
+        </text>
+      </>
+    ))}
+    {segments.map((s) => (
+      <path d={`M${s.a.x},${s.a.y} L${s.b.x},${s.b.y}`} fill="none" stroke="var(--pine)" stroke-width="2" />
+    ))}
+    {chart.points.map((p, i) => (
+      <circle cx={p.x} cy={p.y} r="4" fill="none" stroke="var(--pine)" stroke-width="2">
+        <title>{points[i].label}：{formatValue(p.value,unit,points[i].decimals,points[i].group)}（{points[i].sources}）</title>
+      </circle>
+    ))}
+    {chart.years.map((p) => (
+      <text x={p.x} y={chart.height - 8} text-anchor="middle" class="point-label">
+        {p.year}
+      </text>
+    ))}
   </svg>
   <ul class="trend-values">
-    {points.map(p=><li><span>{p.label}：{formatValue(p.value,unit,p.decimals,p.group)}</span> <span class="scope">来源：{p.sources}</span></li>)}
+    {points.map((p) => (
+      <li>
+        <span>
+          {p.label}：{formatValue(p.value, unit, p.decimals, p.group)}
+        </span>{" "}
+        <span class="scope">来源：{p.sources}</span>
+      </li>
+    ))}
   </ul>
 </figure>

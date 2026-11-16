@@ -47,7 +47,9 @@ const toc = [
 ---
 
 <Base title={industry.name} description={`${industry.name}的定义、证据、岗位和缺口。`}>
-  <p><a href={base}>返回比较</a></p>
+  <p>
+    <a href={base}>返回比较</a>
+  </p>
   <h1>{industry.name}</h1>
   <p>{data.meta.sampleNote}</p>
 
@@ -61,15 +63,13 @@ const toc = [
       </Section>
       <Section id="roles" title="适合岗位">
         <ul>
-          {
-            roles.map((role) => (
-              <li>
-                <a href={`${base}roles/${role.slug}/`}>{role.name}</a>
-                <span class="tag">{verificationLabel[role.verification]}</span>
-                {role.humanitiesFit === "adjacent" ? <span class="tag">相邻而非对口</span> : null}
-              </li>
-            ))
-          }
+          {roles.map((role) => (
+            <li>
+              <a href={`${base}roles/${role.slug}/`}>{role.name}</a>
+              <span class="tag">{verificationLabel[role.verification]}</span>
+              {role.humanitiesFit === "adjacent" ? <span class="tag">相邻而非对口</span> : null}
+            </li>
+          ))}
         </ul>
         <p>护理、康复和医疗技术岗位如果出现在招聘材料里，只视为相邻工作，不列入上面的文科岗位。</p>
       </Section>
@@ -81,7 +81,9 @@ const toc = [
       </Section>
       <Section id="portfolio" title="可做的小作品或技能准备">
         <ul class="plain">
-          {industry.portfolio.map((item) => <li>{item}</li>)}
+          {industry.portfolio.map((item) => (
+            <li>{item}</li>
+          ))}
         </ul>
         <p>这些是练习方向，不是雇主公布的录用条件。</p>
       </Section>
@@ -96,7 +98,9 @@ const toc = [
       </Section>
       <Section id="questions" title="尚未证实的问题">
         <ul class="plain">
-          {industry.openQuestions.map((item) => <li>{item}</li>)}
+          {industry.openQuestions.map((item) => (
+            <li>{item}</li>
+          ))}
         </ul>
       </Section>
     </div>
@@ -106,7 +110,11 @@ const toc = [
         <summary>本页内容</summary>
         <nav class="toc" aria-label="本页目录">
           <ol>
-            {toc.map((item) => <li><a href={`#${item.id}`}>{item.title}</a></li>)}
+            {toc.map((item) => (
+              <li>
+                <a href={`#${item.id}`}>{item.title}</a>
+              </li>
+            ))}
           </ol>
         </nav>
       </details>

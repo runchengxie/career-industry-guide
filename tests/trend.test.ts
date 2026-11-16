@@ -41,14 +41,30 @@ test("year axis preserves duplicate positions and missing-year distances", () =>
   assert.equal(g.points[2].x, g.points[3].x);
   assert.ok(Math.abs((g.points[2].x - g.points[1].x) / (g.points[1].x - g.points[0].x) - 2) < 1e-10);
 });
-test("zero and constant series have finite geometry and a visible zero baseline", () => {
+test("vertical axis spans the data range with padding, not a forced zero", () => {
+  const g = chartGeometry([
+    { year: 2023, value: 823 },
+    { year: 2024, value: 799.3 },
+    { year: 2025, value: 767.9 },
+  ]);
+  // 轴区间必须包住数据，并留出空白；不再强制从零开始
+  assert.ok(g.min <= 767.9, `min ${g.min} 应不大于最小值`);
+  assert.ok(g.max >= 823, `max ${g.max} 应不小于最大值`);
+  assert.ok(g.min > 0, "这一组数据不需要把轴拉到 0");
+  assert.ok(g.points.every((p) => Number.isFinite(p.x) && Number.isFinite(p.y)));
+  for (const tick of g.ticks) {
+    assert.ok(tick.value >= g.min && tick.value <= g.max);
+    assert.ok(Number.isFinite(tick.y));
+  }
+});
+
+test("constant and zero series still get a usable range", () => {
   for (const value of [0, 5, -5]) {
     const g = chartGeometry([
       { year: 2024, value },
       { year: 2025, value },
     ]);
     assert.ok(g.points.every((p) => Number.isFinite(p.x) && Number.isFinite(p.y)));
-    assert.ok(g.ticks.some((t) => t.value === 0));
     assert.ok(g.max > g.min);
   }
 });

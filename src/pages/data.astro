@@ -15,7 +15,11 @@ const matrix = dataMatrix(data);
 const comparisonSets = comparisonGroups(data);
 const byYear = (a: string, b: string): number => a.localeCompare(b, "zh-CN", { numeric: true });
 const trendSets = comparisonSets
-  .filter((set) => set.metrics.every((m) => m.comparison?.comparable && m.availability === "value" && yearNumber(m.year) !== null) && new Set(set.metrics.map((m) => m.unit)).size === 1)
+  .filter(
+    (set) =>
+      set.metrics.every((m) => m.comparison?.comparable && m.availability === "value" && yearNumber(m.year) !== null) &&
+      new Set(set.metrics.map((m) => m.unit)).size === 1,
+  )
   .map((set) => ({
     ...set,
     points: set.metrics
@@ -60,16 +64,35 @@ const files = [
   </p>
 
   <ul class="stats">
-    <li><strong>{summary.total}</strong><span>条指标</span></li>
-    <li><strong>{summary.value}</strong><span>条有数值</span></li>
-    <li><strong>{summary.unavailable + summary.unverified}</strong><span>条暂时取不到</span></li>
-    <li><strong>{summary.sources}</strong><span>个来源</span></li>
-    <li><strong>{summary.verifiedRoles}/{summary.roles}</strong><span>岗位完成活页核验</span></li>
+    <li>
+      <strong>{summary.total}</strong>
+      <span>条指标</span>
+    </li>
+    <li>
+      <strong>{summary.value}</strong>
+      <span>条有数值</span>
+    </li>
+    <li>
+      <strong>{summary.unavailable + summary.unverified}</strong>
+      <span>条暂时取不到</span>
+    </li>
+    <li>
+      <strong>{summary.sources}</strong>
+      <span>个来源</span>
+    </li>
+    <li>
+      <strong>
+        {summary.verifiedRoles}/{summary.roles}
+      </strong>
+      <span>岗位完成活页核验</span>
+    </li>
   </ul>
 
   <Section id="map" title="数据地图">
     <p>
-      四类状态要分开看：<strong>有数值</strong>是录到了；<strong>另有缺口</strong>是这一类里有数、也有还取不到的关键项；<strong>记了缺口</strong>是知道该有这个数、但公开渠道取不到；<strong>未立项</strong>是还没有为这个类别建立指标。把第四种说成第三种，等于把“没去找”说成“找不到”。
+      四类状态要分开看：<strong>有数值</strong>是录到了；<strong>另有缺口</strong>是这一类里有数、也有还取不到的关键项；
+      <strong>记了缺口</strong>是知道该有这个数、但公开渠道取不到；<strong>未立项</strong>
+      是还没有为这个类别建立指标。把第四种说成第三种，等于把“没去找”说成“找不到”。
     </p>
     <div class="table-scroll">
       <table class="grid-table map-table">
@@ -77,51 +100,52 @@ const files = [
         <thead>
           <tr>
             <th scope="col">类别</th>
-            {data.industries.map((industry) => <th scope="col">{industry.name}</th>)}
+            {data.industries.map((industry) => (
+              <th scope="col">{industry.name}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          {
-            matrix.map((row) => (
-              <tr>
-                <th scope="row">{row.category}</th>
-                {row.cells.map((cell) => (
-                  <td data-label={cell.industry.name}>
-                    <span class={`state state-${cell.kind}`}>{stateLabel[cell.kind]}</span>
-                    {cell.values.length > 0 ? (
-                      <span class="scope">
-                        {labelGroups(cell.values).map((group, index) => (
-                          <>
-                            {index > 0 ? "、" : ""}
-                            <a href={`${base}industries/${cell.industry.slug}/#${group.firstId}`}>
-                              {group.name}
-                              {group.years.length > 0 ? `（${group.years.join("、")}）` : ""}
-                            </a>
-                          </>
-                        ))}
-                      </span>
-                    ) : null}
-                    {cell.gaps.length > 0 ? (
-                      <span class="scope">
-                        缺口：
-                        {labelGroups(cell.gaps).map((group, index) => (
-                          <>
-                            {index > 0 ? "、" : ""}
-                            <a href={`${base}industries/${cell.industry.slug}/#${group.firstId}`}>{group.name}</a>
-                          </>
-                        ))}
-                      </span>
-                    ) : null}
-                  </td>
-                ))}
-              </tr>
-            ))
-          }
+          {matrix.map((row) => (
+            <tr>
+              <th scope="row">{row.category}</th>
+              {row.cells.map((cell) => (
+                <td data-label={cell.industry.name}>
+                  <span class={`state state-${cell.kind}`}>{stateLabel[cell.kind]}</span>
+                  {cell.values.length > 0 ? (
+                    <span class="scope">
+                      {labelGroups(cell.values).map((group, index) => (
+                        <>
+                          {index > 0 ? "、" : ""}
+                          <a href={`${base}industries/${cell.industry.slug}/#${group.firstId}`}>
+                            {group.name}
+                            {group.years.length > 0 ? `（${group.years.join("、")}）` : ""}
+                          </a>
+                        </>
+                      ))}
+                    </span>
+                  ) : null}
+                  {cell.gaps.length > 0 ? (
+                    <span class="scope">
+                      缺口：
+                      {labelGroups(cell.gaps).map((group, index) => (
+                        <>
+                          {index > 0 ? "、" : ""}
+                          <a href={`${base}industries/${cell.industry.slug}/#${group.firstId}`}>{group.name}</a>
+                        </>
+                      ))}
+                    </span>
+                  ) : null}
+                </td>
+              ))}
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
     <p class="field-note">
-      分类是固定的，共 {metricCategories.length} 类；某个类别在某格是“未立项”，表示这个样本还没有为它建立指标，不代表不存在数据。
+      分类是固定的，共 {metricCategories.length}{" "}
+      类；某个类别在某格是“未立项”，表示这个样本还没有为它建立指标，不代表不存在数据。
     </p>
   </Section>
 
@@ -129,33 +153,46 @@ const files = [
     <fieldset>
       <legend>筛选指标</legend>
       <div class="choices">
-        <label><input type="radio" name="industry" value="all" checked /><span class="chip-name">全部行业</span></label>
-        {
-          data.industries.map((industry) => (
-            <label>
-              <input type="radio" name="industry" value={industry.id} />
-              <span class="chip-name">{industry.name}</span>
-            </label>
-          ))
-        }
+        <label>
+          <input type="radio" name="industry" value="all" checked />
+          <span class="chip-name">全部行业</span>
+        </label>
+        {data.industries.map((industry) => (
+          <label>
+            <input type="radio" name="industry" value={industry.id} />
+            <span class="chip-name">{industry.name}</span>
+          </label>
+        ))}
       </div>
       <div class="choices">
-        <label><input type="radio" name="nature" value="all" checked /><span class="chip-name">全部性质</span></label>
-        {
-          Object.entries(natureLabel).map(([value, label]) => (
-            <label>
-              <input type="radio" name="nature" value={value} />
-              <span class="chip-name">{label}</span>
-            </label>
-          ))
-        }
+        <label>
+          <input type="radio" name="nature" value="all" checked />
+          <span class="chip-name">全部性质</span>
+        </label>
+        {Object.entries(natureLabel).map(([value, label]) => (
+          <label>
+            <input type="radio" name="nature" value={value} />
+            <span class="chip-name">{label}</span>
+          </label>
+        ))}
       </div>
       <div class="choices">
-        <label><input type="radio" name="state" value="all" checked /><span class="chip-name">全部状态</span></label>
-        <label><input type="radio" name="state" value="value" /><span class="chip-name">有数值</span></label>
-        <label><input type="radio" name="state" value="missing" /><span class="chip-name">取不到</span></label>
+        <label>
+          <input type="radio" name="state" value="all" checked />
+          <span class="chip-name">全部状态</span>
+        </label>
+        <label>
+          <input type="radio" name="state" value="value" />
+          <span class="chip-name">有数值</span>
+        </label>
+        <label>
+          <input type="radio" name="state" value="missing" />
+          <span class="chip-name">取不到</span>
+        </label>
       </div>
-      <p class="field-note" data-count aria-live="polite">共 {summary.total} 条指标</p>
+      <p class="field-note" data-count aria-live="polite">
+        共 {summary.total} 条指标
+      </p>
     </fieldset>
 
     <div class="table-scroll">
@@ -170,41 +207,39 @@ const files = [
             <th scope="col">来源</th>
           </tr>
         </thead>
-        {
-          groups.map(({ industry, metrics }) => (
-            <tbody data-group={industry.id}>
-              <tr class="group-row">
-                <th scope="colgroup" colspan="5">
-                  <a href={`${base}industries/${industry.slug}/`}>{industry.name}</a>
-                </th>
-              </tr>
-              {metrics.map((metric) => {
-                const authors = metric.sourceIds
-                  .map((id) => data.sources.find((source) => source.id === id)?.author.split("，")[0] ?? id)
-                  .join("、");
-                return (
-                  <tr
-                    data-industry={industry.id}
-                    data-nature={metric.nature}
-                    data-state={metric.availability === "value" ? "value" : "missing"}
-                  >
-                    <th scope="row">{metric.name}</th>
-                    <td data-label="数值">
-                      {metric.availability === "value" ? (
-                        formatMetric(metric)
-                      ) : (
-                        <span class="missing">{formatMetric(metric)}</span>
-                      )}
-                    </td>
-                    <td data-label="年份">{metric.year ?? "—"}</td>
-                    <td data-label="性质">{natureLabel[metric.nature]}</td>
-                    <td data-label="来源">{authors || "—"}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          ))
-        }
+        {groups.map(({ industry, metrics }) => (
+          <tbody data-group={industry.id}>
+            <tr class="group-row">
+              <th scope="colgroup" colspan="5">
+                <a href={`${base}industries/${industry.slug}/`}>{industry.name}</a>
+              </th>
+            </tr>
+            {metrics.map((metric) => {
+              const authors = metric.sourceIds
+                .map((id) => data.sources.find((source) => source.id === id)?.author.split("，")[0] ?? id)
+                .join("、");
+              return (
+                <tr
+                  data-industry={industry.id}
+                  data-nature={metric.nature}
+                  data-state={metric.availability === "value" ? "value" : "missing"}
+                >
+                  <th scope="row">{metric.name}</th>
+                  <td data-label="数值">
+                    {metric.availability === "value" ? (
+                      formatMetric(metric)
+                    ) : (
+                      <span class="missing">{formatMetric(metric)}</span>
+                    )}
+                  </td>
+                  <td data-label="年份">{metric.year ?? "—"}</td>
+                  <td data-label="性质">{natureLabel[metric.nature]}</td>
+                  <td data-label="来源">{authors || "—"}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        ))}
       </table>
     </div>
     <p class="field-note">
@@ -214,7 +249,8 @@ const files = [
 
   <Section id="roles" title="岗位">
     <p>
-      {summary.roles} 个岗位里，完成官网活页核验的有 {summary.verifiedRoles} 个。核验状态沿用行业页的口径：招聘材料、年报业务词和招聘网站首页都不算已核验的职位。
+      {summary.roles} 个岗位里，完成官网活页核验的有 {summary.verifiedRoles}{" "}
+      个。核验状态沿用行业页的口径：招聘材料、年报业务词和招聘网站首页都不算已核验的职位。
     </p>
     <div class="table-scroll">
       <table class="grid-table">
@@ -229,30 +265,25 @@ const files = [
           </tr>
         </thead>
         <tbody>
-          {
-            data.roles.map((role) => (
-              <tr>
-                <th scope="row">
-                  <a href={`${base}roles/${role.slug}/`}>{role.name}</a>
-                </th>
-                <td data-label="方向">
-                  {data.meta.directions.find((direction) => direction.id === role.direction)?.label ??
-                    role.direction}
-                </td>
-                <td data-label="样本">
-                  {role.industryIds
-                    .map((id) => data.industries.find((industry) => industry.id === id)?.name ?? id)
-                    .join("、")}
-                </td>
-                <td data-label="核验状态">
-                  <span class={`state state-${role.verification}`}>
-                    {verificationLabel[role.verification]}
-                  </span>
-                </td>
-                <td data-label="材料中的雇主">{role.employer ?? "—"}</td>
-              </tr>
-            ))
-          }
+          {data.roles.map((role) => (
+            <tr>
+              <th scope="row">
+                <a href={`${base}roles/${role.slug}/`}>{role.name}</a>
+              </th>
+              <td data-label="方向">
+                {data.meta.directions.find((direction) => direction.id === role.direction)?.label ?? role.direction}
+              </td>
+              <td data-label="样本">
+                {role.industryIds
+                  .map((id) => data.industries.find((industry) => industry.id === id)?.name ?? id)
+                  .join("、")}
+              </td>
+              <td data-label="核验状态">
+                <span class={`state state-${role.verification}`}>{verificationLabel[role.verification]}</span>
+              </td>
+              <td data-label="材料中的雇主">{role.employer ?? "—"}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
@@ -260,14 +291,18 @@ const files = [
 
   <Section id="trend" title="趋势">
     <p>
-      同组年度值按真实年份定位；同年多来源共用横坐标，明细逐条保留。不满足保守可比条件时只画散点，不连线；缺失年份不跨年连线。纵轴包含零点，本站不选择、平均、平滑或预测来源值。
+      同组年度值按真实年份定位；同年多来源共用横坐标，明细逐条保留。不满足保守可比条件时只画散点，不连线；缺失年份不跨年连线。纵轴取数据区间并留白，不从零开始，读的是方向和相对变化，不是绝对涨幅；本站不选择、平均、平滑或预测来源值。
     </p>
     <div class="trends">
-      {
-        trendSets.map((set) => (
-          <TrendChart label={set.name} unit={set.metrics[0]?.unit ?? null} points={set.points} connect={set.comparable} reasons={set.reasons} />
-        ))
-      }
+      {trendSets.map((set) => (
+        <TrendChart
+          label={set.name}
+          unit={set.metrics[0]?.unit ?? null}
+          points={set.points}
+          connect={set.comparable}
+          reasons={set.reasons}
+        />
+      ))}
     </div>
   </Section>
 
@@ -276,25 +311,26 @@ const files = [
       数字放在一起看之前，先确认是不是同一个东西。下面每组是站内认为“同一个指标”的条目；标成不可比的，站点不把它们连成序列，也不计算变化幅度。
     </p>
     <ul class="plain">
-      {
-        comparisonSets.map((group) => (
-          <li>
-            <strong>{group.name}</strong>{" "}
-            <span class={`state ${group.comparable ? "state-tracked" : "state-missing"}`}>
-              {group.comparable ? "满足保守连线条件" : "不连线，需核验"}
-            </span>
-            <span class="scope">{group.reasons.join("；")}</span>
-            <span class="scope">
-              {group.metrics.map((metric) => `${metric.name}（${metric.year ?? "—"}）`).join("、")}
-            </span>
-          </li>
-        ))
-      }
+      {comparisonSets.map((group) => (
+        <li>
+          <strong>{group.name}</strong>{" "}
+          <span class={`state ${group.comparable ? "state-tracked" : "state-missing"}`}>
+            {group.comparable ? "满足保守连线条件" : "不连线，需核验"}
+          </span>
+          <span class="scope">{group.reasons.join("；")}</span>
+          <span class="scope">
+            {group.metrics.map((metric) => `${metric.name}（${metric.year ?? "—"}）`).join("、")}
+          </span>
+        </li>
+      ))}
     </ul>
   </Section>
 
   <Section id="files" title="数据文件">
-    <p>站点数据是仓库里的结构化 JSON，页面由它构建，不是另一份拷贝。字段定义见 <a href={`${repo}/blob/main/src/lib/types.ts`}>src/lib/types.ts</a>。</p>
+    <p>
+      站点数据是仓库里的结构化 JSON，页面由它构建，不是另一份拷贝。字段定义见{" "}
+      <a href={`${repo}/blob/main/src/lib/types.ts`}>src/lib/types.ts</a>。
+    </p>
     <ul>
       <li>
         <a href={`${base}data/metrics.csv`}>metrics.csv</a>
@@ -304,15 +340,15 @@ const files = [
         <a href={`${base}data/roles.csv`}>roles.csv</a>
         <span class="scope">扁平表，{summary.roles} 个岗位，含核验状态与材料性质</span>
       </li>
-      {
-        files.map((file) => (
-          <li>
-            <a href={`${repo}/blob/main/${file}`}>{file}</a>
-          </li>
-        ))
-      }
+      {files.map((file) => (
+        <li>
+          <a href={`${repo}/blob/main/${file}`}>{file}</a>
+        </li>
+      ))}
     </ul>
-    <p class="field-note">研究版本 {data.meta.researchVersion}（{data.meta.timezone}）。</p>
+    <p class="field-note">
+      研究版本 {data.meta.researchVersion}（{data.meta.timezone}）。
+    </p>
   </Section>
 
   <script>
