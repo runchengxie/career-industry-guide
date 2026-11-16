@@ -32,6 +32,17 @@ npm run build
 npm run preview
 ```
 
+### 浏览器冒烟测试
+
+`npm run check:browser` 在真实 Chrome 里跑一遍：方向筛选、`?direction=` 链接、420px 下是否横向溢出、深色模式，以及 CSV 导出。它不进 CI，因为依赖本机的 Chrome。
+
+```bash
+npm run build && npm run preview
+npm run check:browser
+```
+
+默认连 `http://127.0.0.1:4321`、用 `/usr/bin/google-chrome`，截图写到系统临时目录；可以用 `PREVIEW_URL`、`CHROME_PATH`、`SMOKE_OUT` 覆盖。
+
 `npm run verify` 与 CI 同一条链：数据校验、测试、类型检查、构建、产物检查（断链与必须出现/必须缺失的内容）和 HTML/WCAG 检查。
 
 ## 部署

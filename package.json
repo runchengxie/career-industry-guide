@@ -14,7 +14,8 @@
     "check:html": "html-validate dist",
     "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\" \"tests/**/*.ts\" \"*.{json,mjs}\"",
     "format:check": "prettier --check \"src/**/*.ts\" \"scripts/**/*.ts\" \"tests/**/*.ts\" \"*.{json,mjs}\"",
-    "verify": "npm run format:check && npm test && npm run typecheck && npm run build && npm run check:dist && npm run check:html"
+    "verify": "npm run format:check && npm test && npm run typecheck && npm run build && npm run check:dist && npm run check:html",
+    "check:browser": "node scripts/browser-smoke.mjs"
   },
   "dependencies": {
     "astro": "7.4.12"
@@ -24,6 +25,7 @@
     "@astrojs/sitemap": "^3.7.5",
     "@types/node": "26.6.6",
     "html-validate": "11.21.1",
+    "playwright-core": "^1.65.1",
     "prettier": "^3.10.1",
     "tsx": "^4.20.6",
     "typescript": "6.0.3"
