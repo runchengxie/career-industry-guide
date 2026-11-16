@@ -1,0 +1,56 @@
+---
+import { formatValue } from "../lib/format.ts";
+
+interface Point {
+  value: number;
+  label: string;
+  decimals: number;
+  group: boolean;
+}
+
+interface Props {
+  label: string;
+  unit: string | null;
+  points: Point[];
+}
+
+const { label, unit, points } = Astro.props;
+
+const width = 320;
+const height = 120;
+const padX = 26;
+const padTop = 16;
+const padBottom = 28;
+
+const values = points.map((point) => point.value);
+const min = Math.min(...values);
+const max = Math.max(...values);
+const span = max - min === 0 ? Math.max(Math.abs(max), 1) : max - min;
+const x = (index: number): number =>
+  points.length === 1 ? width / 2 : padX + (index * (width - padX * 2)) / (points.length - 1);
+const y = (value: number): number => padTop + (1 - (value - min) / span) * (height - padTop - padBottom);
+const path = points.map((point, index) => `${index === 0 ? "M" : "L"}${x(index)},${y(point.value)}`).join(" ");
+const summary = points
+  .map((point) => `${point.label} ${formatValue(point.value, unit, point.decimals, point.group)}`)
+  .join("，");
+---
+
+<figure class="trend">
+  <figcaption>{label}</figcaption>
+  <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={`${label}：${summary}`}>
+    <path d={path} fill="none" stroke="var(--pine)" stroke-width="2" />
+    {
+      points.map((point, index) => (
+        <>
+          <circle cx={x(index)} cy={y(point.value)} r="3.5" fill="var(--pine)" />
+          <text x={x(index)} y={y(point.value) - 8} text-anchor="middle" class="point-value">
+            {formatValue(point.value, null, point.decimals, point.group)}
+          </text>
+          <text x={x(index)} y={height - 8} text-anchor="middle" class="point-label">
+            {point.label}
+          </text>
+        </>
+      ))
+    }
+  </svg>
+</figure>

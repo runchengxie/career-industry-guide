@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import Section from "../components/Section.astro";
+import TrendChart from "../components/TrendChart.astro";
 import { formatMetric } from "../lib/format.ts";
 import { comparisonGroups, dataMatrix, labelGroups, metricsByIndustry, summarize } from "../lib/explore.ts";
 import { metricCategories } from "../lib/types.ts";
@@ -11,6 +12,23 @@ const data = loadDataset();
 const summary = summarize(data);
 const matrix = dataMatrix(data);
 const comparisonSets = comparisonGroups(data);
+const byYear = (a: string, b: string): number => a.localeCompare(b, "zh-CN", { numeric: true });
+const trendSets = comparisonSets
+  .filter((set) => set.comparable)
+  .map((set) => ({
+    ...set,
+    points: set.metrics
+      .filter((metric) => metric.value != null)
+      .slice()
+      .sort((a, b) => byYear(a.year ?? "", b.year ?? ""))
+      .map((metric) => ({
+        value: metric.value as number,
+        label: metric.year ?? "—",
+        decimals: metric.decimals,
+        group: metric.group,
+      })),
+  }))
+  .filter((set) => set.points.length >= 2);
 const groups = metricsByIndustry(data);
 const base = import.meta.env.BASE_URL;
 const repo = "https://github.com/runchengxie/career-industry-guide";
@@ -233,6 +251,19 @@ const files = [
           }
         </tbody>
       </table>
+    </div>
+  </Section>
+
+  <Section id="trend" title="趋势">
+    <p>
+      只把同组、同单位、标记为可比的数据画在一起。点上的数字直接来自公报，本站没有做平滑、插值或预测。
+    </p>
+    <div class="trends">
+      {
+        trendSets.map((set) => (
+          <TrendChart label={set.name} unit={set.metrics[0]?.unit ?? null} points={set.points} />
+        ))
+      }
     </div>
   </Section>
 

@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { formatMetric } from "../../lib/format.ts";
 import { natureLabel } from "../../lib/labels.ts";
+import { metricCategories } from "../../lib/types.ts";
 import { loadDataset } from "../../lib/load.ts";
 
 function cell(value: string | number | null | undefined): string {
@@ -13,8 +14,20 @@ export const GET: APIRoute = () => {
   const names = new Map(data.industries.map((industry) => [industry.id, industry.name]));
   const sources = new Map(data.sources.map((source) => [source.id, source.author]));
 
+  const industryOrder = new Map(data.industries.map((industry, index) => [industry.id, index]));
+  const categoryOrder = new Map(metricCategories.map((category, index) => [category, index]));
+  const byYear = (a: string, b: string): number => a.localeCompare(b, "zh-CN", { numeric: true });
+
+  // 与数据页表格一致：先行业，再分类，最后年份
+  const ordered = [...data.metrics].sort(
+    (a, b) =>
+      (industryOrder.get(a.subjectId) ?? 99) - (industryOrder.get(b.subjectId) ?? 99) ||
+      (categoryOrder.get(a.category) ?? 99) - (categoryOrder.get(b.category) ?? 99) ||
+      byYear(a.year ?? "", b.year ?? ""),
+  );
+
   const header = ["行业", "指标", "分类", "显示值", "数值", "单位", "年份", "地区", "性质", "口径", "来源", "备注"];
-  const rows = data.metrics.map((metric) => [
+  const rows = ordered.map((metric) => [
     names.get(metric.subjectId) ?? metric.subjectId,
     metric.name,
     metric.category,

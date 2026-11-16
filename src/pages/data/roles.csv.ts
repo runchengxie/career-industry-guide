@@ -10,8 +10,12 @@ function cell(value: string | null | undefined): string {
 export const GET: APIRoute = () => {
   const data = loadDataset();
   const names = new Map(data.industries.map((industry) => [industry.id, industry.name]));
+  const directionOrder = new Map(data.meta.directions.map((direction, index) => [direction.id, index]));
+  const ordered = [...data.roles].sort(
+    (a, b) => (directionOrder.get(a.direction) ?? 99) - (directionOrder.get(b.direction) ?? 99),
+  );
   const header = ["岗位", "方向", "行业", "核验状态", "雇主", "材料性质", "职位链接", "核验日期", "限制", "来源"];
-  const rows = data.roles.map((role) => [
+  const rows = ordered.map((role) => [
     role.name,
     role.direction,
     role.industryIds.map((id) => names.get(id) ?? id).join("、"),
