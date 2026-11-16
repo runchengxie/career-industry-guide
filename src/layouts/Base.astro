@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import "../styles/editorial.css";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { loadDataset } from "../lib/load.ts";
@@ -7,6 +8,7 @@ import { loadDataset } from "../lib/load.ts";
 interface Props {
   title: string;
   description?: string;
+  compactNotice?: boolean;
 }
 
 const { title, description = "三个行业样本的比较研究，不是就业保证，也不是排名。" } = Astro.props;
@@ -50,9 +52,11 @@ const siteName = meta.title;
     <a class="skip" href="#content">
       跳到正文
     </a>
-    <p class="banner">
+    <p class:list={["banner", { "banner-compact": Astro.props.compactNotice }]}>
       <span class="wrap">
-        {meta.disclaimer}网站{meta.publicationStatus}。{meta.verificationLimit}
+        {Astro.props.compactNotice
+          ? meta.disclaimer
+          : `${meta.disclaimer}网站${meta.publicationStatus}。${meta.verificationLimit}`}
       </span>
     </p>
     <SiteHeader />

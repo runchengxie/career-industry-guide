@@ -8,6 +8,7 @@ import { emptyFilterMessage, matchingRoles } from "../lib/filter.ts";
 import { loadDataset } from "../lib/load.ts";
 
 const data = loadDataset();
+const verifiedCount = data.roles.filter((role) => role.verification === "verified").length;
 const citations = createCitations(data.sources);
 const metrics = new Map(data.metrics.map((metric) => [metric.id, metric]));
 
@@ -25,11 +26,56 @@ const rolesByIndustry = new Map(
 );
 ---
 
-<Base title={data.meta.title}>
-  <h1>{data.meta.title}</h1>
-  <p class="lede">{data.meta.sampleNote}</p>
-  <p>比较只覆盖已经录入的样本和岗位。筛选不会补充名单之外的行业，也不给出综合评分。</p>
-
+<Base title={data.meta.title} compactNotice>
+  <header class="editorial-hero">
+    <p class="eyebrow">中国大陆 · 职业探索 / 研究版本 {data.meta.researchVersion}</p>
+    <h1>先看清行业，再探索岗位。</h1>
+    <p class="lede">从业务、工作线索和证据缺口出发，找到值得继续了解的职业方向。</p>
+    <div class="editorial-actions">
+      <a href="#industry-guide">从行业开始</a>
+      <a href="#comparison">查看完整对照 ↓</a>
+      <a href={`${import.meta.env.BASE_URL}methods/`}>了解研究方法</a>
+    </div>
+  </header>
+  <aside class="evidence-note" aria-label="研究边界">
+    <strong>研究线索，不是在招职位库</strong>
+    <p>
+      官网在招活页核验：{verifiedCount} / {data.roles.length} 个岗位类型。行业增长不等于个人就业机会。
+    </p>
+    <details>
+      <summary>研究范围与限制</summary>
+      <p>{data.meta.sampleNote}</p>
+      <p>
+        网站{data.meta.publicationStatus}。{data.meta.verificationLimit}
+      </p>
+    </details>
+  </aside>
+  <section id="industry-guide" class="industry-guide" aria-labelledby="guide-title">
+    <div class="section-heading">
+      <h2 id="guide-title">先选一个行业了解</h2>
+      <p>样本导读 · 不作排名</p>
+    </div>
+    <div class="industry-cards">
+      {data.industries.map((industry) => (
+        <article class="industry-card">
+          <h3>
+            <a href={`${import.meta.env.BASE_URL}industries/${industry.slug}/`}>{industry.name}</a>
+          </h3>
+          <p>{industry.comparison.definition}</p>
+          <p class="card-boundary">
+            <strong>证据缺口</strong> {industry.comparison.gaps}
+          </p>
+          <a class="read-link" href={`${import.meta.env.BASE_URL}industries/${industry.slug}/`}>
+            了解岗位与证据 →
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+  <div class="section-heading" id="comparison">
+    <h2>按方向，进一步比较</h2>
+    <p>比较只覆盖已录入的样本和岗位，不给出综合评分。</p>
+  </div>
   <fieldset>
     <legend>按岗位方向筛选</legend>
     <div class="choices">

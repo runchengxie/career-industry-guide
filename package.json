@@ -14,9 +14,10 @@
     "check:html": "html-validate dist",
     "format": "prettier --write \"src/**/*.{ts,astro}\" \"scripts/**/*.ts\" \"tests/**/*.ts\" \"*.{json,mjs}\"",
     "format:check": "prettier --check \"src/**/*.{ts,astro}\" \"scripts/**/*.ts\" \"tests/**/*.ts\" \"*.{json,mjs}\"",
-    "verify": "npm run format:check && npm test && npm run typecheck && npm run build && npm run check:dist && npm run check:html",
+    "verify": "npm run format:check && npm test && npm run typecheck && npm run build && npm run check:dist && npm run check:html && npm run check:editorial",
     "check:browser": "node scripts/browser-smoke.mjs",
-    "check:links": "node scripts/check-links.mjs"
+    "check:links": "node scripts/check-links.mjs",
+    "check:editorial": "node scripts/check-editorial.mjs"
   },
   "dependencies": {
     "astro": "7.4.12"
