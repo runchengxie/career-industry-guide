@@ -15,8 +15,8 @@ function current(href: string): "page" | undefined {
     <a class="brand" href={base}>
       {data.meta.title}
     </a>
-    <a href={base} aria-current={current(base)}>
-      比较
+    <a href={`${base}compare/`} aria-current={current(`${base}compare/`)}>
+      对照
     </a>
     {data.industries.map((industry) => {
       const href = `${base}industries/${industry.slug}/`;

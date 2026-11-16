@@ -14,7 +14,8 @@ It is not an employment guarantee, not a ranking, and not a recruiting service. 
 
 | Path | Content |
 | --- | --- |
-| `/` | the three samples side by side, filterable by job direction |
+| `/` | editorial overview with links into each sample |
+| `/compare/` | the three samples side by side, filterable by job direction |
 | `/industries/<slug>/` | one sample: definition, demand evidence, roles, thresholds, risks, sources |
 | `/roles/<slug>/` | one role: what it involves, what to prepare, verification status |
 | `/data/` | every recorded metric, a map of what is tracked or missing, and the data files |

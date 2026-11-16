@@ -40,19 +40,22 @@ function hrefToFile(href: string): string | null {
 }
 
 const home = readFileSync("dist/index.html", "utf8");
+const compare = readFileSync("dist/compare/index.html", "utf8");
 const phrases = [
   "不是最佳行业名单",
   "不是就业保证",
   "现为公开的初步研究版本",
   "尚未完整",
-  "当前方向在已录入的三个样本中没有匹配岗位",
   "广告营销服务",
   "养老服务",
   "国内旅游服务",
-  "暂无可靠数据",
-  "不计算床位使用率",
-  "不是可比序列",
 ];
+for (const phrase of ["当前方向在已录入的三个样本中没有匹配岗位", "暂无可靠数据", "不计算床位使用率", "不是可比序列"]) {
+  if (!compare.includes(phrase)) {
+    console.error(`对照页缺少：${phrase}`);
+    process.exit(1);
+  }
+}
 for (const phrase of phrases) {
   if (!home.includes(phrase)) {
     console.error(`首页缺少：${phrase}`);
