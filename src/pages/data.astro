@@ -34,6 +34,7 @@ const trendSets = comparisonSets
         label: metric.year ?? "—",
         decimals: metric.decimals,
         group: metric.group,
+        primary: metric.comparison?.primary ?? false,
       })),
   }))
   .filter((set) => set.points.length >= 2);
@@ -291,7 +292,7 @@ const files = [
 
   <Section id="trend" title="趋势">
     <p>
-      同组年度值按真实年份定位；同年多来源共用横坐标，明细逐条保留。不满足保守可比条件时只画散点，不连线；缺失年份不跨年连线。纵轴取数据区间并留白，不从零开始，读的是方向和相对变化，不是绝对涨幅；本站不选择、平均、平滑或预测来源值。
+      标为同口径序列的组，连线只穿过每年标记为主来源的点；同年的其他来源照常并列显示，不参与连线，也不做平均。没有标记为序列、或年份不连续的组只画散点。纵轴取数据区间并留白，不从零开始，读的是方向和相对变化；本站不选择、平均、平滑或预测来源值。
     </p>
     <div class="trends">
       {trendSets.map((set) => (

@@ -1,6 +1,7 @@
 ---
 import { formatValue } from "../lib/format.ts";
-import { chartGeometry, annualSegments } from "../lib/trend.ts";
+import { chartGeometry, seriesSegments } from "../lib/trend.ts";
+
 interface Point {
   value: number;
   year: number;
@@ -9,7 +10,9 @@ interface Point {
   group: boolean;
   id: string;
   sources: string;
+  primary: boolean;
 }
+
 interface Props {
   label: string;
   unit: string | null;
@@ -17,57 +20,82 @@ interface Props {
   connect: boolean;
   reasons: string[];
 }
+
 const { label, unit, points, connect, reasons } = Astro.props;
 const chart = chartGeometry(points);
-// Never bridge an unobserved year, even for an otherwise comparable group.
-const segments = annualSegments(chart.points, connect);
+// 连线只穿过每年标记为主来源的点，且不跨年补线
+const segments = seriesSegments(chart.points, connect);
 const summary = points
-  .map((p) => `${p.label} ${formatValue(p.value, unit, p.decimals, p.group)}（${p.sources}）`)
+  .map(
+    (point) =>
+      `${point.label} ${formatValue(point.value, unit, point.decimals, point.group)}（${point.sources}）${point.primary ? "" : "，并列来源"}`,
+  )
   .join("，");
+const note = !connect
+  ? `仅并列展示，不连线：${reasons.join("；")}。`
+  : segments.length > 0
+    ? "连线只穿过每年标记为主来源的点；缺年断线，并列来源不参与连线。"
+    : "同组年份不连续，只画散点，不跨年补线。";
 ---
 
 <figure class="trend">
   <figcaption>
     {label}（{unit}）
   </figcaption>
-  <p class="field-note">{connect ? "同口径年度观测；缺年断线。" : `仅并列展示，不连线：${reasons.join("；")}。`}</p>
-  <svg viewBox={`0 0 ${chart.width} ${chart.height}`} role="img" aria-label={`${label}，纵轴含零点：${summary}`}>
-    {chart.ticks.map((t) => (
+  <p class="field-note">{note}</p>
+  <svg viewBox={`0 0 ${chart.width} ${chart.height}`} role="img" aria-label={`${label}，纵轴取数据区间：${summary}`}>
+    {chart.ticks.map((tick) => (
       <>
         <line
           x1={chart.left}
           x2={chart.width - chart.right}
-          y1={t.y}
-          y2={t.y}
+          y1={tick.y}
+          y2={tick.y}
           stroke="var(--muted)"
           stroke-opacity="0.3"
         />
-        <text x={chart.left - 8} y={t.y + 4} text-anchor="end" class="point-label">
-          {new Intl.NumberFormat("zh-CN", { maximumFractionDigits: 2 }).format(t.value)}
+        <text x={chart.left - 8} y={tick.y + 4} text-anchor="end" class="point-label">
+          {new Intl.NumberFormat("zh-CN", { maximumFractionDigits: 1 }).format(tick.value)}
         </text>
       </>
     ))}
-    {segments.map((s) => (
-      <path d={`M${s.a.x},${s.a.y} L${s.b.x},${s.b.y}`} fill="none" stroke="var(--pine)" stroke-width="2" />
+    {segments.map((segment) => (
+      <path
+        d={`M${segment.a.x},${segment.a.y} L${segment.b.x},${segment.b.y}`}
+        fill="none"
+        stroke="var(--pine)"
+        stroke-width="2"
+      />
     ))}
-    {chart.points.map((p, i) => (
-      <circle cx={p.x} cy={p.y} r="4" fill="none" stroke="var(--pine)" stroke-width="2">
-        <title>{points[i].label}：{formatValue(p.value,unit,points[i].decimals,points[i].group)}（{points[i].sources}）</title>
+    {chart.points.map((point, index) => (
+      <circle
+        cx={point.x}
+        cy={point.y}
+        r="4"
+        fill={points[index].primary ? "var(--pine)" : "var(--card)"}
+        stroke="var(--pine)"
+        stroke-width="2"
+      >
+        <title>
+            {points[index].label}：{formatValue(point.value, unit, points[index].decimals, points[index].group)}（
+            {points[index].sources}）
+          </title>
       </circle>
     ))}
-    {chart.years.map((p) => (
-      <text x={p.x} y={chart.height - 8} text-anchor="middle" class="point-label">
-        {p.year}
+    {chart.years.map((year) => (
+      <text x={year.x} y={chart.height - 8} text-anchor="middle" class="point-label">
+        {year.year}
       </text>
     ))}
   </svg>
   <ul class="trend-values">
-    {points.map((p) => (
+    {points.map((point) => (
       <li>
         <span>
-          {p.label}：{formatValue(p.value, unit, p.decimals, p.group)}
+          {point.label}：{formatValue(point.value, unit, point.decimals, point.group)}
+          {point.primary ? "" : "（并列来源，不参与连线）"}
         </span>{" "}
-        <span class="scope">来源：{p.sources}</span>
+        <span class="scope">来源：{point.sources}</span>
       </li>
     ))}
   </ul>

@@ -21,7 +21,9 @@
     "group": false,
     "comparison": {
       "group": "广告业务收入",
-      "comparable": false
+      "comparable": false,
+      "series": null,
+      "primary": false
     }
   },
   {
@@ -67,7 +69,9 @@
     "group": false,
     "comparison": {
       "group": "互联网广告发布占比",
-      "comparable": true
+      "comparable": true,
+      "series": "ad-internet-share",
+      "primary": true
     }
   },
   {
@@ -113,7 +117,9 @@
     "group": false,
     "comparison": {
       "group": "广告业务收入",
-      "comparable": false
+      "comparable": false,
+      "series": null,
+      "primary": false
     }
   },
   {
@@ -322,7 +328,9 @@
     "group": false,
     "comparison": {
       "group": "六十岁以上人口",
-      "comparable": true
+      "comparable": true,
+      "series": "elder-pop",
+      "primary": true
     }
   },
   {
@@ -368,7 +376,9 @@
     "group": false,
     "comparison": {
       "group": "养老床位",
-      "comparable": true
+      "comparable": true,
+      "series": "elder-beds",
+      "primary": true
     }
   },
   {
@@ -414,7 +424,9 @@
     "group": false,
     "comparison": {
       "group": "养老床位",
-      "comparable": true
+      "comparable": true,
+      "series": "elder-beds",
+      "primary": false
     }
   },
   {
@@ -481,7 +493,9 @@
     "group": false,
     "comparison": {
       "group": "养老床位",
-      "comparable": true
+      "comparable": true,
+      "series": "elder-beds",
+      "primary": true
     }
   },
   {
@@ -626,7 +640,9 @@
     "group": false,
     "comparison": {
       "group": "国内出游人次",
-      "comparable": true
+      "comparable": true,
+      "series": "tour-trips",
+      "primary": true
     }
   },
   {
@@ -651,7 +667,9 @@
     "group": false,
     "comparison": {
       "group": "国内出游花费",
-      "comparable": true
+      "comparable": true,
+      "series": "tour-spend",
+      "primary": true
     }
   },
   {
@@ -676,7 +694,9 @@
     "group": false,
     "comparison": {
       "group": "国内出游人次",
-      "comparable": true
+      "comparable": true,
+      "series": "tour-trips",
+      "primary": true
     }
   },
   {
@@ -701,7 +721,9 @@
     "group": false,
     "comparison": {
       "group": "国内出游花费",
-      "comparable": true
+      "comparable": true,
+      "series": "tour-spend",
+      "primary": true
     }
   },
   {
@@ -726,7 +748,9 @@
     "group": false,
     "comparison": {
       "group": "国内出游人次",
-      "comparable": true
+      "comparable": true,
+      "series": "tour-trips",
+      "primary": false
     }
   },
   {
@@ -751,7 +775,9 @@
     "group": false,
     "comparison": {
       "group": "国内出游花费",
-      "comparable": true
+      "comparable": true,
+      "series": "tour-spend",
+      "primary": false
     }
   },
   {
@@ -779,7 +805,9 @@
     "group": false,
     "comparison": {
       "group": "旅游人均花费",
-      "comparable": false
+      "comparable": false,
+      "series": null,
+      "primary": false
     }
   },
   {
@@ -807,7 +835,9 @@
     "group": false,
     "comparison": {
       "group": "旅游人均花费",
-      "comparable": false
+      "comparable": false,
+      "series": null,
+      "primary": false
     }
   },
   {
@@ -1057,7 +1087,9 @@
     "category": "需求规模",
     "comparison": {
       "group": "广告业务收入",
-      "comparable": false
+      "comparable": false,
+      "series": null,
+      "primary": false
     }
   },
   {
@@ -1104,7 +1136,9 @@
     "category": "结构",
     "comparison": {
       "group": "互联网广告发布占比",
-      "comparable": true
+      "comparable": true,
+      "series": "ad-internet-share",
+      "primary": true
     }
   },
   {
@@ -1129,7 +1163,9 @@
     "category": "需求规模",
     "comparison": {
       "group": "六十岁以上人口",
-      "comparable": true
+      "comparable": true,
+      "series": "elder-pop",
+      "primary": true
     }
   },
   {
@@ -1176,7 +1212,9 @@
     "category": "结构",
     "comparison": {
       "group": "养老床位",
-      "comparable": true
+      "comparable": true,
+      "series": "elder-beds",
+      "primary": true
     }
   },
   {
@@ -1223,7 +1261,9 @@
     "category": "需求规模",
     "comparison": {
       "group": "国内出游人次",
-      "comparable": true
+      "comparable": true,
+      "series": "tour-trips",
+      "primary": true
     }
   },
   {
@@ -1248,7 +1288,9 @@
     "category": "需求规模",
     "comparison": {
       "group": "国内出游花费",
-      "comparable": true
+      "comparable": true,
+      "series": "tour-spend",
+      "primary": true
     }
   }
 ]

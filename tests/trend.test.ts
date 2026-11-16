@@ -2,33 +2,49 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { comparisonGroups } from "../src/lib/explore.ts";
 import { loadDataset } from "../src/lib/load.ts";
-import { chartGeometry, yearNumber } from "../src/lib/trend.ts";
+import { chartGeometry, seriesSegments, yearNumber } from "../src/lib/trend.ts";
 
-test("real duplicate-year groups are preserved but never treated as a sequence", () => {
+test("标为同口径序列的组保留同年并列来源，并只给一个主来源", () => {
   const data = loadDataset();
   for (const name of ["养老床位", "国内出游人次", "国内出游花费"]) {
     const group = comparisonGroups(data).find((g) => g.name === name)!;
-    assert.equal(group.comparable, false);
-    assert.ok(group.reasons.some((r) => r.includes("同年")));
-    assert.equal(group.metrics.length, data.metrics.filter((m) => m.comparison?.group === name).length);
+    assert.equal(group.comparable, true);
+    assert.ok(group.series, `${name} 应有序列 id`);
+    const byYear = new Map<number, number>();
+    for (const metric of group.metrics) {
+      if (!metric.comparison?.primary) continue;
+      const year = Number((metric.year ?? "").slice(0, 4));
+      byYear.set(year, (byYear.get(year) ?? 0) + 1);
+    }
+    assert.ok(
+      [...byYear.values()].every((count) => count === 1),
+      `${name} 每年至多一个主来源`,
+    );
   }
 });
-test("comparability considers every flag and scope, independent of record order", () => {
+test("可比性看数据标记：任一条为不可比即整组不可比", () => {
   const data = loadDataset();
   const seed = data.metrics.find((m) => m.comparison)!;
-  const a = { ...seed, year: "2023", comparison: { group: "test", comparable: true } };
-  const b = { ...a, year: "2024", comparison: { group: "test", comparable: false } };
-  for (const metrics of [
-    [a, b],
-    [b, a],
-  ])
-    assert.equal(comparisonGroups({ ...data, metrics })[0].comparable, false);
+  const a = { ...seed, year: "2023", comparison: { group: "t", comparable: true, series: "t", primary: true } };
+  const b = { ...a, year: "2024" };
+  assert.equal(comparisonGroups({ ...data, metrics: [a, b] })[0].comparable, true);
   assert.equal(
-    comparisonGroups({ ...data, metrics: [a, { ...a, year: "2024", scope: "different" }] })[0].comparable,
+    comparisonGroups({ ...data, metrics: [a, { ...b, comparison: { ...b.comparison!, comparable: false } }] })[0]
+      .comparable,
     false,
   );
-  assert.equal(comparisonGroups({ ...data, metrics: [a, { ...a, year: "2024" }] })[0].comparable, true);
 });
+
+test("没有序列标记的组只并列展示，不连线", () => {
+  const data = loadDataset();
+  const seed = data.metrics.find((m) => m.comparison)!;
+  const a = { ...seed, year: "2023", comparison: { group: "t", comparable: true, series: null, primary: false } };
+  const group = comparisonGroups({ ...data, metrics: [a, { ...a, year: "2024" }] })[0];
+  assert.equal(group.comparable, true);
+  assert.equal(group.series, null);
+  assert.ok(group.reasons.some((reason) => reason.includes("未标记为同口径序列")));
+});
+
 test("year axis preserves duplicate positions and missing-year distances", () => {
   assert.equal(yearNumber("2025年末"), 2025);
   assert.equal(yearNumber("2025Q1"), null);
@@ -69,23 +85,21 @@ test("constant and zero series still get a usable range", () => {
   }
 });
 
-test("annual and year-end observations are not joined merely because their years differ", () => {
-  const data = loadDataset();
-  const seed = data.metrics.find((m) => m.comparison)!;
-  const a = { ...seed, year: "2023", comparison: { group: "test", comparable: true } };
-  assert.equal(comparisonGroups({ ...data, metrics: [a, { ...a, year: "2024年末" }] })[0].comparable, false);
-});
-
-test("missing years break lines instead of bridging unavailable observations", async () => {
-  const { annualSegments } = await import("../src/lib/trend.ts");
+test("缺年不连线，并列来源也不参与连线", () => {
   const points = chartGeometry([
-    { year: 2021, value: 1 },
-    { year: 2022, value: 2 },
-    { year: 2024, value: 3 },
+    { year: 2023, value: 1, primary: true },
+    { year: 2024, value: 2, primary: true },
+    { year: 2025, value: 3, primary: true },
+    { year: 2025, value: 3.2, primary: false },
+    { year: 2027, value: 4, primary: true },
   ]).points;
-  assert.equal(annualSegments(points, false).length, 0);
+  assert.equal(seriesSegments(points, false).length, 0);
   assert.deepEqual(
-    annualSegments(points, true).map((s) => [s.a.year, s.b.year]),
-    [[2021, 2022]],
+    seriesSegments(points, true).map((segment) => [segment.a.year, segment.b.year]),
+    [
+      [2023, 2024],
+      [2024, 2025],
+    ],
+    "2025→2027 缺 2026，不补线；并列来源不参与",
   );
 });
