@@ -22,14 +22,15 @@ const base = import.meta.env.BASE_URL;
 
 <Base title={role.name} description={`${role.name}的工作线索、准备材料和核验状态。`}>
   <p class="links">
-    {
-      industries.map((industry) => (
-        <a href={`${base}industries/${industry.slug}/`}>{industry.name}</a>
-      ))
-    }
+    {industries.map((industry) => (
+      <a href={`${base}industries/${industry.slug}/`}>{industry.name}</a>
+    ))}
   </p>
   <h1>{role.name}</h1>
-  <p><span class="tag">{verificationLabel[role.verification]}</span>{role.humanitiesFit === "adjacent" ? <span class="tag">相邻而非对口</span> : <span class="tag">文科相关入口</span>}</p>
+  <p>
+    <span class="tag">{verificationLabel[role.verification]}</span>
+    {role.humanitiesFit === "adjacent" ? <span class="tag">相邻而非对口</span> : <span class="tag">文科相关入口</span>}
+  </p>
   <p>{data.meta.verificationLimit}</p>
 
   <section class="section">
@@ -40,18 +41,20 @@ const base = import.meta.env.BASE_URL;
   <section class="section">
     <h2>可准备的材料</h2>
     <ul class="plain">
-      {role.preparation.map((item) => <li>{item}</li>)}
+      {role.preparation.map((item) => (
+        <li>{item}</li>
+      ))}
     </ul>
     <p>这些是练习，不是已核验的雇主要求。</p>
   </section>
   <section class="section">
     <h2>出现在哪些样本</h2>
     <ul>
-      {
-        industries.map((industry) => (
-          <li><a href={`${base}industries/${industry.slug}/`}>{industry.name}</a></li>
-        ))
-      }
+      {industries.map((industry) => (
+        <li>
+          <a href={`${base}industries/${industry.slug}/`}>{industry.name}</a>
+        </li>
+      ))}
     </ul>
   </section>
   <section class="section">
@@ -60,45 +63,45 @@ const base = import.meta.env.BASE_URL;
     <p>{role.limits}</p>
     {role.employer ? <p>材料中的雇主：{role.employer}</p> : null}
     {role.postingTitle ? <p>材料中的标题：{role.postingTitle}</p> : null}
-    {
-      role.postingUrl ? (
-        <p>
-          <a href={role.postingUrl}>转载或年报材料链接，不是在招活页</a>
-          {role.verifiedOn ? <span>，核验日期 {role.verifiedOn}</span> : <span>。本站没有把它核对成雇主官网正在发布的职位。</span>}
-        </p>
-      ) : (
-        <p>没有可标成已核验职位的链接。</p>
-      )
-    }
+    {role.postingUrl ? (
+      <p>
+        <a href={role.postingUrl}>转载或年报材料链接，不是在招活页</a>
+        {role.verifiedOn ? (
+          <span>，核验日期 {role.verifiedOn}</span>
+        ) : (
+          <span>。本站没有把它核对成雇主官网正在发布的职位。</span>
+        )}
+      </p>
+    ) : (
+      <p>没有可标成已核验职位的链接。</p>
+    )}
   </section>
   <section class="section">
     <h2>同方向的其他岗位</h2>
     <ul>
-      {
-        siblings.length > 0 ? (
-          siblings.map((item) => (
-            <li>
-              <a href={`${base}roles/${item.slug}/`}>{item.name}</a>
-              <span class="tag">{verificationLabel[item.verification]}</span>
-            </li>
-          ))
-        ) : (
-          <li>这个方向目前只录入了这一个岗位。</li>
-        )
-      }
+      {siblings.length > 0 ? (
+        siblings.map((item) => (
+          <li>
+            <a href={`${base}roles/${item.slug}/`}>{item.name}</a>
+            <span class="tag">{verificationLabel[item.verification]}</span>
+          </li>
+        ))
+      ) : (
+        <li>这个方向目前只录入了这一个岗位。</li>
+      )}
     </ul>
   </section>
   <section class="section">
     <h2>来源</h2>
     <ul>
-      {
-        sources.map((source) => (
-          <li>
-            <a href={source.url}>{source.author}：{source.title}</a>
-            <span class="scope">访问日期 {source.accessed}</span>
-          </li>
-        ))
-      }
+      {sources.map((source) => (
+        <li>
+          <a href={source.url}>
+            {source.author}：{source.title}
+          </a>
+          <span class="scope">访问日期 {source.accessed}</span>
+        </li>
+      ))}
     </ul>
   </section>
 </Base>

@@ -9,16 +9,18 @@ const { entries } = Astro.props;
 ---
 
 <ol class="source-list">
-  {
-    entries.map(({ number, source }) => (
-      <li id={`src-${number}`}>
-        <a href={source.url}>{source.author}：{source.title}</a>
-        <span class="scope">
-          访问日期 {source.accessed}
-          {source.published ? `，公布或发布日期 ${source.published}` : "，材料页没有可靠发布日期"}
-        </span>
-        <a class="backref" href={`#ref-${number}`} aria-label={`回到第 ${number} 条引用`}>↩</a>
-      </li>
-    ))
-  }
+  {entries.map(({ number, source }) => (
+    <li id={`src-${number}`}>
+      <a href={source.url}>
+        {source.author}：{source.title}
+      </a>
+      <span class="scope">
+        访问日期 {source.accessed}
+        {source.published ? `，公布或发布日期 ${source.published}` : "，材料页没有可靠发布日期"}
+      </span>
+      <a class="backref" href={`#ref-${number}`} aria-label={`回到第 ${number} 条引用`}>
+        ↩
+      </a>
+    </li>
+  ))}
 </ol>

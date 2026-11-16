@@ -13,15 +13,13 @@ const kindLabel = { evidence: "证据", judgment: "判断", gap: "缺口" };
 ---
 
 <ul class="claims">
-  {
-    claims.map((claim) => (
-      <li id={claim.id}>
-        <span class="kind">{kindLabel[claim.kind]}</span>
-        <p>
-          {claim.text}
-          <CitationRefs sourceIds={claim.sourceIds} citations={citations} />
-        </p>
-      </li>
-    ))
-  }
+  {claims.map((claim) => (
+    <li id={claim.id}>
+      <span class="kind">{kindLabel[claim.kind]}</span>
+      <p>
+        {claim.text}
+        <CitationRefs sourceIds={claim.sourceIds} citations={citations} />
+      </p>
+    </li>
+  ))}
 </ul>

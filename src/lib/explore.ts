@@ -123,10 +123,13 @@ export function comparisonGroups(data: Dataset): ComparisonGroup[] {
       ["unit", "单位"],
       ["category", "分类"],
       ["subjectId", "对象"],
-      ["geography", "地域"],
-      ["scope", "口径描述"],
+      ["geography", "地理范围"],
+      ["scope", "口径"],
     ] as const) {
-      if (new Set(members.map((m) => m[field])).size > 1) reasons.push(`${label}不一致，尚未核验为同口径`);
+      if (new Set(members.map((m) => m[field])).size > 1) {
+        // 这几项是自由文本，字面不同不等于口径冲突，只说明需要人工确认
+        reasons.push(`${label}的表述不同，需人工确认是否同一口径`);
+      }
     }
     if (new Set(members.map((m) => m.year?.endsWith("年末"))).size > 1) reasons.push("年度与年末时点不同，不直接连线");
     const years = members.map((m) => yearNumber(m.year));

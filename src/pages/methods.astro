@@ -29,37 +29,45 @@ for (const claim of allClaims(data)) {
 
 <Base title="来源与方法" description="研究范围、口径、引用和未核实问题。">
   <h1>来源与方法</h1>
-  <p>地理范围是{data.meta.geography}。研究版本日期是 {data.meta.researchVersion}（{data.meta.timezone}）。</p>
-  {
-    methodSections.map((group) => (
-      <section class="section">
-        <h2>{group.title}</h2>
-        <ClaimList claims={group.claims} citations={citations} />
-      </section>
-    ))
-  }
+  <p>
+    地理范围是{data.meta.geography}。研究版本日期是 {data.meta.researchVersion}（{data.meta.timezone}）。
+  </p>
+  {methodSections.map((group) => (
+    <section class="section">
+      <h2>{group.title}</h2>
+      <ClaimList claims={group.claims} citations={citations} />
+    </section>
+  ))}
 
   <section class="section">
     <h2>当前未核实清单</h2>
     <ul class="plain">
-      {data.meta.unverifiedItems.map((item) => <li>{item}</li>)}
+      {data.meta.unverifiedItems.map((item) => (
+        <li>{item}</li>
+      ))}
     </ul>
   </section>
 
   <section class="section">
     <h2>来源记录</h2>
     <ul>
-      {
-        data.sources.map((source) => (
-          <li>
-            <a href={source.url}>{source.author}：{source.title}</a>
-            <span class="scope">
-              {source.published ? `发布或公布日期 ${source.published}` : "页面没有可靠发布日期"}，访问日期 {source.accessed}
-            </span>
-            <span class="note">支持：{supportOf(supports, source).map((id) => names.get(id) ?? id).join("、")}</span>
-          </li>
-        ))
-      }
+      {data.sources.map((source) => (
+        <li>
+          <a href={source.url}>
+            {source.author}：{source.title}
+          </a>
+          <span class="scope">
+            {source.published ? `发布或公布日期 ${source.published}` : "页面没有可靠发布日期"}，访问日期{" "}
+            {source.accessed}
+          </span>
+          <span class="note">
+            支持：
+            {supportOf(supports, source)
+              .map((id) => names.get(id) ?? id)
+              .join("、")}
+          </span>
+        </li>
+      ))}
     </ul>
   </section>
 </Base>

@@ -20,56 +20,52 @@ const rest = limit != null ? metrics.slice(limit) : [];
 ---
 
 <ul class="metrics">
-  {
-    shown.map((metric) => {
-      const text = formatMetric(metric);
-      const meta = (
-        <>
-          {metric.geography ? <span class="scope">地理范围：{metric.geography}</span> : null}
-          {metric.scope ? <span class="scope">口径：{metric.scope}</span> : null}
-          {metric.formula ? <span class="note">公式：{metric.formula}</span> : null}
-          {metric.note ? <span class="note">{metric.note}</span> : null}
-        </>
-      );
-      const hasMeta = Boolean(metric.geography || metric.scope || metric.formula || metric.note);
-      return (
-        <li id={metric.id}>
-          <span class="metric-name">{metric.name}</span>
-          {metric.availability === "value" ? <span>{text}</span> : <span class="missing">{text}</span>}
-          {metric.availability === "value" ? <span class="tag">{natureLabel[metric.nature]}</span> : null}
-          <CitationRefs sourceIds={metric.sourceIds} citations={citations} />
-          {compact && hasMeta ? (
-            <details class="meta">
-              <summary>口径与说明</summary>
-              {meta}
-            </details>
-          ) : (
-            meta
-          )}
-        </li>
-      );
-    })
-  }
+  {shown.map((metric) => {
+    const text = formatMetric(metric);
+    const meta = (
+      <>
+        {metric.geography ? <span class="scope">地理范围：{metric.geography}</span> : null}
+        {metric.scope ? <span class="scope">口径：{metric.scope}</span> : null}
+        {metric.formula ? <span class="note">公式：{metric.formula}</span> : null}
+        {metric.note ? <span class="note">{metric.note}</span> : null}
+      </>
+    );
+    const hasMeta = Boolean(metric.geography || metric.scope || metric.formula || metric.note);
+    return (
+      <li id={metric.id}>
+        <span class="metric-name">{metric.name}</span>
+        {metric.availability === "value" ? <span>{text}</span> : <span class="missing">{text}</span>}
+        {metric.availability === "value" ? <span class="tag">{natureLabel[metric.nature]}</span> : null}
+        <CitationRefs sourceIds={metric.sourceIds} citations={citations} />
+        {compact && hasMeta ? (
+          <details class="meta">
+            <summary>口径与说明</summary>
+            {meta}
+          </details>
+        ) : (
+          meta
+        )}
+      </li>
+    );
+  })}
 </ul>
 
-{
-  rest.length > 0 ? (
-    <details class="more">
-      <summary>另有 {rest.length} 条指标</summary>
-      <ul class="metrics">
-        {rest.map((metric) => (
-          <li id={metric.id}>
-            <span class="metric-name">{metric.name}</span>
-            {metric.availability === "value" ? (
-              <span>{formatMetric(metric)}</span>
-            ) : (
-              <span class="missing">{formatMetric(metric)}</span>
-            )}
-            {metric.availability === "value" ? <span class="tag">{natureLabel[metric.nature]}</span> : null}
-            <CitationRefs sourceIds={metric.sourceIds} citations={citations} />
-          </li>
-        ))}
-      </ul>
-    </details>
-  ) : null
-}
+{rest.length > 0 ? (
+  <details class="more">
+    <summary>另有 {rest.length} 条指标</summary>
+    <ul class="metrics">
+      {rest.map((metric) => (
+        <li id={metric.id}>
+          <span class="metric-name">{metric.name}</span>
+          {metric.availability === "value" ? (
+            <span>{formatMetric(metric)}</span>
+          ) : (
+            <span class="missing">{formatMetric(metric)}</span>
+          )}
+          {metric.availability === "value" ? <span class="tag">{natureLabel[metric.nature]}</span> : null}
+          <CitationRefs sourceIds={metric.sourceIds} citations={citations} />
+        </li>
+      ))}
+    </ul>
+  </details>
+) : null}

@@ -11,9 +11,16 @@ export function chartGeometry(points: { year: number; value: number }[]) {
     top = 20,
     bottom = 32;
   const years = [...new Set(points.map((p) => p.year))].sort((a, b) => a - b);
-  const min = Math.min(0, ...points.map((p) => p.value));
-  const max = Math.max(0, ...points.map((p) => p.value)) || (min === 0 ? 1 : 0);
-  const span = max - min;
+  const values = points.map((p) => p.value);
+  const rawMin = Math.min(...values);
+  const rawMax = Math.max(...values);
+  const spread = rawMax - rawMin;
+  // 纵轴从数据区间出发，留 8% 空白；常数列给一个可见的区间，不让线压在边框上。
+  const pad = spread === 0 ? Math.max(Math.abs(rawMax) * 0.05, 1) : spread * 0.08;
+  const round = (value: number): number => (Math.abs(value) >= 1000 ? Math.round(value) : Math.round(value * 10) / 10);
+  const min = round(rawMin - pad);
+  const max = round(rawMax + pad);
+  const span = max - min || 1;
   const x = (year: number) =>
     years.length < 2
       ? (left + width - right) / 2
@@ -28,7 +35,7 @@ export function chartGeometry(points: { year: number; value: number }[]) {
     max,
     points: points.map((p) => ({ ...p, x: x(p.year), y: y(p.value) })),
     years: years.map((year) => ({ year, x: x(year) })),
-    ticks: [min, (min + max) / 2, max].map((value) => ({ value, y: y(value) })),
+    ticks: [max, (min + max) / 2, min].map((value) => ({ value, y: y(value) })),
   };
 }
 
