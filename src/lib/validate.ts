@@ -82,8 +82,8 @@ export function validateDataset(data: Dataset): string[] {
   walkKeys(data, banned);
   for (const key of banned) errors.push(`数据含有排名字段 ${key}`);
 
-  if (data.meta.researchVersion !== "2026-11-15") {
-    errors.push("研究版本日期必须是 2026-11-15");
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(data.meta.researchVersion)) {
+    errors.push("研究版本日期必须是 YYYY-MM-DD");
   }
   if (data.meta.timezone !== "Asia/Shanghai") {
     errors.push("研究时区必须是 Asia/Shanghai");
