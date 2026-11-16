@@ -65,9 +65,9 @@ try {
   {
     const context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
     const page = await context.newPage();
-    const response = await page.goto(`${base}/`, { waitUntil: "domcontentloaded" });
-    check(response?.status() === 200, `首页返回 200（实际 ${response?.status()}）`);
-    check((await page.title()).includes("职业行业研究指南"), "首页标题正确");
+    const response = await page.goto(`${base}/compare/`, { waitUntil: "domcontentloaded" });
+    check(response?.status() === 200, `对照页返回 200（实际 ${response?.status()}）`);
+    check((await page.title()).includes("职业行业研究指南"), "对照页标题正确");
 
     check((await visibleIndustries(page)).length === 3, "默认显示三个样本");
 
@@ -80,7 +80,7 @@ try {
     const status = await page.locator("[data-status]").textContent();
     check(/已显示 1 \/ 3/.test(status ?? ""), `筛选状态可播报（实际 ${status}）`);
 
-    await page.goto(`${base}/?direction=marketing`, { waitUntil: "domcontentloaded" });
+    await page.goto(`${base}/compare/?direction=marketing`, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(200);
     const marketing = await visibleIndustries(page);
     check(marketing.length === 2, `带 ?direction= 的链接直接显示两个样本（实际 ${marketing.join(",")}）`);
@@ -92,7 +92,7 @@ try {
   {
     const context = await browser.newContext({ viewport: { width: 420, height: 900 } });
     const page = await context.newPage();
-    for (const path of ["/", "/data/", "/industries/advertising/", "/roles/social-worker/"]) {
+    for (const path of ["/", "/compare/", "/data/", "/industries/advertising/", "/roles/social-worker/"]) {
       await page.goto(`${base}${path}`, { waitUntil: "domcontentloaded" });
       check(!(await overflow(page)), `420px 下 ${path} 没有横向溢出`);
     }

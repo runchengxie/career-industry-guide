@@ -6,14 +6,18 @@ const roles = JSON.parse(readFileSync("src/data/roles.json", "utf8"));
 const industries = JSON.parse(readFileSync("src/data/industries.json", "utf8"));
 const verified = roles.filter((role) => role.verification === "verified").length;
 
-// 首页：导读入口、完整对照、筛选与来源都在
+// 首页：导读入口与边界；筛选与完整对照在 /compare/
 const home = read("");
-assert.ok(home.includes("id=\"industry-guide\""), "首页缺少行业导读入口");
-assert.ok(home.includes("id=\"comparison\""), "首页缺少对照区锚点");
+assert.ok(home.includes('id="industry-guide"'), "首页缺少行业导读入口");
 assert.ok(home.includes(`官网在招活页核验：${verified} / ${roles.length}`), "首页的核验计数应与数据一致");
 assert.ok(home.includes("不是最佳行业名单"), "首页缺少范围声明");
-assert.ok(home.includes('name="direction"'), "首页缺少方向筛选");
-assert.ok(home.includes("data-status"), "首页缺少筛选结果播报");
+assert.ok(home.includes('href="/compare/"') || home.includes("compare/"), "首页缺少对照页入口");
+
+const compare = read("compare/");
+assert.ok(compare.includes("<table"), "对照页缺少对照表");
+assert.ok(compare.includes('name="direction"'), "对照页缺少方向筛选");
+assert.ok(compare.includes("data-status"), "对照页缺少筛选结果播报");
+assert.ok(compare.includes("不是排名"), "对照页缺少非排名声明");
 
 // 三个行业页都要有速读区与阅读路径，不能只有样本页有
 for (const industry of industries) {
