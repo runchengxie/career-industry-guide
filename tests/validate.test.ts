@@ -137,6 +137,18 @@ test("研究版本日期来自 meta，不写死在代码里", () => {
   assert.throws(() => assertValid(broken), /YYYY-MM-DD/);
 });
 
+test("方法段落必须有分组", () => {
+  const base0 = base();
+  const broken = {
+    ...base0,
+    meta: {
+      ...base0.meta,
+      method: [{ id: "m1", text: "示例", kind: "judgment" as const, sourceIds: [] }],
+    },
+  };
+  assert.throws(() => assertValid(broken), /缺少分组/);
+});
+
 test("排名字段被拒绝", () => {
   const data = base();
   (data as Dataset & { score?: number }).score = 90;

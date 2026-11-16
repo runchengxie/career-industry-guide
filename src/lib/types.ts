@@ -86,6 +86,8 @@ export interface Claim {
   text: string;
   kind: "evidence" | "judgment" | "gap";
   sourceIds: string[];
+  /** 只有方法页的段落分组用到；行业段落为 null。 */
+  section?: string | null;
 }
 
 export interface Industry {
